@@ -1,0 +1,244 @@
+@import "@fontsource/dm-serif-display/400.css";
+@import "@fontsource/dm-serif-display/400-italic.css";
+@import "@fontsource-variable/inter/index.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --midnight: #08121f;
+  --navy: #0c2038;
+  --gold: #b8985a;
+  --paper: #f6f3ee;
+  --safe-top: env(safe-area-inset-top, 0px);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background: var(--paper);
+  color: #1d2228;
+  font-family: "Inter Variable", Inter, system-ui, sans-serif;
+  font-feature-settings: "cv11", "ss03";
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+::selection {
+  background: var(--gold);
+  color: var(--midnight);
+}
+
+@layer base {
+  h1,
+  h2,
+  h3 {
+    font-family: "DM Serif Display", Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.012em;
+  }
+  :focus-visible {
+    outline: 2px solid #d2b97f;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  .wrap {
+    @apply mx-auto w-full max-w-page px-5 sm:px-8 lg:px-14;
+  }
+  .label {
+    @apply font-mono text-[11px] uppercase tracking-[0.16em];
+  }
+  .rule {
+    @apply h-px w-full bg-current opacity-15;
+  }
+  .btn {
+    @apply inline-flex items-center gap-3 px-6 py-3.5 text-[13px] font-medium tracking-wide transition-colors duration-300;
+  }
+  .btn-gold {
+    @apply bg-gold text-midnight hover:bg-gold-light;
+  }
+  .btn-ghost {
+    @apply border border-white/40 text-white hover:border-white hover:bg-white/10;
+  }
+  .btn-navy {
+    @apply bg-navy text-white hover:bg-navy-800;
+  }
+  .btn-line {
+    @apply border border-navy/30 text-navy hover:border-navy hover:bg-navy hover:text-white;
+  }
+  .link-arrow {
+    @apply inline-flex items-center gap-2 text-[14px] font-medium decoration-gold/60 underline-offset-[6px] hover:underline;
+  }
+  .prose-jj p {
+    @apply mb-5 text-[17px] leading-[1.75] text-graphite;
+  }
+  .prose-jj h2 {
+    @apply mb-4 mt-12 text-3xl text-navy;
+  }
+  .prose-jj ul {
+    @apply mb-6 space-y-2 border-l border-gold/60 pl-5 text-[17px] leading-relaxed text-graphite;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 8px;
+  z-index: 100;
+  background: var(--gold);
+  color: var(--midnight);
+  padding: 10px 16px;
+  font-weight: 600;
+}
+.skip-link:focus {
+  left: 8px;
+}
+
+/* Blueprint grid used on dark surfaces */
+.blueprint {
+  background-image:
+    linear-gradient(rgba(143, 176, 214, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(143, 176, 214, 0.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Hero fallback: shown until (or instead of) video */
+.hero-fallback {
+  background:
+    radial-gradient(1200px 600px at 78% 12%, rgba(62, 111, 168, 0.35), transparent 60%),
+    radial-gradient(900px 500px at 10% 90%, rgba(184, 152, 90, 0.18), transparent 60%), linear-gradient(180deg, #0c2038 0%, #08121f 100%);
+}
+/* Homepage hero ONLY: show the poster image beneath the video until playback starts.
+   Deliberately its own class (not the shared .hero-fallback/.blueprint combo, which is reused
+   as generic styling all over the site — e.g. PageHero's fallback, SlotImage's "not yet
+   supplied" placeholder, and the Beazley/RenaissanceRe hero backgrounds). Those must show a
+   plain gradient with no photo; giving this rule its own class stops it leaking the homepage's
+   London photo into any of them. */
+.site-hero-poster {
+  background-image:
+    url("/images/hero-poster.jpg"), radial-gradient(1200px 600px at 78% 12%, rgba(62, 111, 168, 0.35), transparent 60%),
+    linear-gradient(180deg, #0c2038 0%, #08121f 100%);
+  background-size: cover;
+  background-position: center bottom;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+@keyframes nudge {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 1;
+  }
+}
+.nudge {
+  animation: nudge 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Logo marquee */
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 45s linear infinite;
+}
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    overflow-x: auto;
+  }
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* Animated data-flow connector (MetLife data journey). Respects reduced motion. */
+.flow {
+  position: relative;
+  margin: 0 auto;
+  height: 56px;
+  width: 2px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.16);
+}
+.flow::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -45%;
+  height: 45%;
+  width: 2px;
+  background: linear-gradient(180deg, transparent, #7ed6c5);
+  animation: flow 2.4s linear infinite;
+  animation-delay: var(--d, 0s);
+}
+@keyframes flow {
+  to {
+    top: 110%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .flow::after {
+    animation: none;
+    top: 25%;
+  }
+}
+
+/* Light-background variant of the animated connector, and dashed flow for SVG lines */
+.flow-light {
+  background: rgba(12, 32, 56, 0.16);
+}
+.flow-light::after {
+  background: linear-gradient(180deg, transparent, #3e6fa8);
+}
+/* Touch devices have no hover: show tile glossary text as a static state instead of hidden-until-hover. */
+@media (hover: none) {
+  .tile-glossary {
+    max-height: 5rem;
+    opacity: 1;
+    margin-top: 0.5rem;
+  }
+}

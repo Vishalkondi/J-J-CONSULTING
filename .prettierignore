@@ -1,0 +1,6 @@
+.next
+node_modules
+assets-source
+package-lock.json
+data/world-dots.ts
+public

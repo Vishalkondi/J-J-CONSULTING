@@ -1,0 +1,146 @@
+/**
+ * AXA XL / XL Group / Catlin Group — Senior Business Analyst, October 2010 – August 2014.
+ * Source: the master resume (Pradeep Jella). Only stated facts are used; no invented outcomes,
+ * combined totals, or regulatory ownership. Catlin Group was later acquired by XL Group (2015),
+ * itself later acquired by AXA (2018) to form AXA XL — the employer name here reflects that
+ * history, not a claim that "AXA XL" existed throughout 2010–2014.
+ */
+export const axaXl = {
+  slug: "axa-xl",
+  role: "Senior Business Analyst",
+  clientLabel: "AXA XL / XL Group / Catlin Group",
+  period: "October 2010 – August 2014",
+  about:
+    "Catlin Group is a leading global specialty insurer and reinsurer with assets worth 15+ billion USD and 2,400+ employees worldwide. Catlin was later acquired by XL Group, which was in turn acquired by AXA to form AXA XL.",
+  history: [
+    { year: "2010", label: "Catlin Group", note: "Engagement begins" },
+    { year: "2015", label: "XL Group", note: "Acquisition of Catlin Group" },
+    { year: "2018", label: "AXA", note: "Acquisition of XL Group" },
+    { year: "Present", label: "AXA XL", note: "" },
+  ],
+  logos: {
+    axa: "/images/axa-logo.png",
+    xl: "/images/xl-insurance-reinsurance-logo.png",
+  },
+  stats: [
+    { value: "3", label: "Transformation programmes" },
+    { value: "12–16", label: "Team sizes across programmes" },
+    { value: "2010–2014", label: "Engagement period" },
+  ],
+  domains: [
+    "Finance",
+    "Underwriting",
+    "Actuarial",
+    "Reinsurance",
+    "Recoveries",
+    "Enterprise Risk Management",
+    "Claims",
+    "Regulatory & Compliance",
+  ],
+  projects: [
+    {
+      index: "01",
+      title: "BI Solution Implementation & Support",
+      period: "October 2010 – June 2012",
+      domains: ["Finance", "Underwriting", "Actuarial", "Reinsurance", "Recoveries", "Enterprise Risk Management"],
+      technology: ["MS SQL Server 2008", "SSIS", "SSRS", "Excel 2010", "Power Pivot"],
+      team: "12",
+      value: "£1.4M per year",
+      flow: ["Source systems", "Data extraction", "Transformation", "Data warehouse", "SSRS / BI reporting", "Business users"],
+      achievements: [
+        "Senior BA for the ongoing implementation and support of a BI solution on Microsoft SQL Server 2008.",
+        "Handled all vital stages within the project, from requirements gathering, data analysis and technical specifications documentation through to test case preparation, testing and release to production.",
+        "Data extraction and transformation from transactional Underwriting, Insurance and Finance systems.",
+        "Identified segregated data sets in the business; suggested a snapshot schedule for individual data sets to be brought into the warehouse, and job scheduling for the automatic running of scheduled jobs.",
+        "Exchange of data between third-party systems in multiple formats, such as CSV, flat files and JSON.",
+        "Excel 2010 and Power Pivot roll-out for usage by end users.",
+      ],
+    },
+    {
+      index: "02",
+      title: "Cognos / Netezza Implementation; Report Standardisation",
+      period: "May 2013 – March 2014",
+      domains: [] as string[],
+      technology: ["Cognos", "Netezza", "SQL Server"],
+      team: "16",
+      value: "£1.6M",
+      flow: ["Source systems", "Netezza", "Operational data store", "Cognos framework", "Standardised reports", "Business users"],
+      achievements: [
+        "Analysis, design and development approach towards implementing a Framework Model in Cognos.",
+        "Netezza implementation, testing and analysis to support Cognos reporting requirements.",
+        "Standardisation of reports and data attributes in the data warehouse and for reports across the business.",
+        "Designed and implemented a combined operational data store for all source systems at Catlin.",
+        "Decommissioning of legacy and old transactional and data warehouse databases.",
+        "Training for end users on the Cognos tools and generating user-created reports.",
+      ],
+    },
+    {
+      index: "03",
+      title: "Data Standardisation, Business Change & Compliance",
+      period: "June 2012 – August 2014",
+      domains: ["Finance", "Actuarial", "Claims", "Underwriting", "Reinsurance", "Recoveries", "Enterprise Risk Management"],
+      technology: ["Cognos", "SAP BusinessObjects", "SQL Server", "Netezza", "Excel"],
+      team: "14",
+      value: "£1.8M",
+      flow: [
+        "Insurance functions",
+        "Data governance",
+        "Data quality",
+        "Standardised data",
+        "Central data warehouse",
+        "Enterprise reporting",
+      ],
+      achievements: [
+        "Built and delivered a central data warehouse platform and mini Finance & Actuarial data marts.",
+        "Standardised data and measures across the business to establish a single source of truth for every data item.",
+        "Improved data quality in the data warehouse and source systems; established a process for data governance.",
+        "Designed and implemented a uniform approach for data transformation, data quality and data governance across all insurance business departments at Catlin, including Finance, Actuarial, Claims, Underwriting, Reinsurance, Recoveries and Enterprise Risk Management.",
+        "Implemented a solution to process USM and SCM Bordereaux data from Lloyd's and the London market into internal Underwriting and Finance systems, as well as the data warehouse.",
+        "Established business process around controls, checks and standards to follow within BAU for Bordereau processing within Claims, Compliance and Risk teams.",
+        "Laid the foundation and groundwork for meeting various compliance and regulatory requirements, which led to the initiation of wider projects to meet Solvency II, IFRS, PRA and Lloyd's regulatory requirements.",
+        "Improved existing reports and developed new ones to meet insurance directives requirements.",
+        "Fulfilled the role of primary bridge between business users and the technical team for the successful delivery of the project.",
+      ],
+    },
+  ],
+  regulatory: {
+    terms: ["Solvency II", "IFRS", "PRA", "Lloyd's"],
+    text: "Laid the foundation and groundwork for meeting various compliance and regulatory requirements, which led to the initiation of wider projects to meet Solvency II, IFRS, PRA and Lloyd's regulatory requirements. This was foundation and groundwork, not direct ownership of those regulatory programmes.",
+  },
+  lifecycle: [
+    { stage: "Discover", items: ["Requirements", "Stakeholders", "Business processes"] },
+    { stage: "Analyse", items: ["Data", "Systems", "Processes", "Dependencies"] },
+    { stage: "Design", items: ["Functional specifications", "Data models", "Reporting requirements"] },
+    { stage: "Validate", items: ["Test cases", "Testing", "Data quality", "UAT"] },
+    { stage: "Deliver", items: ["Release", "Production", "User adoption"] },
+    { stage: "Improve", items: ["Support", "Reporting enhancement", "Governance", "Business change"] },
+  ],
+  bridge: {
+    business: ["Finance", "Underwriting", "Actuarial", "Claims", "Reinsurance", "Risk", "Compliance"],
+    role: ["Requirements", "Analysis", "Data", "Process", "Testing", "Governance", "Change"],
+    technology: ["Developers", "Data engineers", "BI teams", "Database teams", "Reporting teams", "Technical delivery"],
+  },
+  techGroups: [
+    { group: "Data platform", items: ["SQL Server 2008", "Netezza"] },
+    { group: "ETL & integration", items: ["SSIS", "CSV", "Flat files", "JSON"] },
+    { group: "Business intelligence", items: ["SSRS", "Cognos", "SAP BusinessObjects"] },
+    { group: "Analytics", items: ["Excel 2010", "Power Pivot"] },
+    {
+      group: "Business analysis",
+      items: [
+        "Requirements Engineering",
+        "Data Analysis",
+        "Functional Specifications",
+        "Testing",
+        "UAT",
+        "Release Management",
+        "Stakeholder Management",
+      ],
+    },
+  ],
+  seo: {
+    title: "Senior Business Analyst | AXA XL, XL Group & Catlin Group",
+    description:
+      "Senior Business Analyst experience across insurance BI, data warehousing, reporting standardisation and data governance for Catlin Group, later XL Group and AXA XL, October 2010 – August 2014.",
+  },
+} as const;
