@@ -11,13 +11,29 @@ export const company = {
   established: 2010,
   yearsInExistence: "16+",
   tagline: "Technology. Transformation. Talent.",
-  strapline: "Consulting, technology and talent solutions for complex business environments.",
+  strapline:
+    "Consulting, technology and talent solutions for complex business environments.",
   address: {
-    lines: ["Hamilton House", "87–89 Bell Street", "Reigate", "Surrey", "RH2 7AN", "United Kingdom"],
-    oneLine: "Hamilton House, 87–89 Bell Street, Reigate, Surrey, RH2 7AN, United Kingdom",
+    lines: [
+      "Hamilton House",
+      "87–89 Bell Street",
+      "Reigate",
+      "Surrey",
+      "RH2 7AN",
+      "United Kingdom",
+    ],
+    oneLine:
+      "Hamilton House, 87–89 Bell Street, Reigate, Surrey, RH2 7AN, United Kingdom",
   },
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.jjconsulting.example",
+
+  // Use the configured production URL when available.
+  // `||` also handles an empty environment variable.
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    "https://www.jjconsulting.example",
+
   corporateVideoId: "ZSKtvO5OKvk", // company YouTube video (click-to-play, privacy-enhanced embed)
+
   // No phone / email supplied. Do not invent. Add here when confirmed.
   phone: null as string | null,
   email: null as string | null,
@@ -104,7 +120,8 @@ export const services: Service[] = [
     node: "CONSULTING",
     title: "Management Consultancy",
     short: "Management Consultancy",
-    description: "Supporting organizations with strategic thinking, operational improvement and technology-enabled transformation.",
+    description:
+      "Supporting organizations with strategic thinking, operational improvement and technology-enabled transformation.",
     items: [
       "Business Strategy",
       "Technology Strategy",
@@ -145,7 +162,8 @@ export const services: Service[] = [
     node: "TRAINING",
     title: "IT & Technology Training",
     short: "Technology Training",
-    description: "Technology training across software engineering, cloud, DevOps, data, AI and quality engineering.",
+    description:
+      "Technology training across software engineering, cloud, DevOps, data, AI and quality engineering.",
     items: [
       "Full Stack Development",
       "Cloud Computing",
@@ -167,7 +185,8 @@ export const services: Service[] = [
     node: "WORKFORCE",
     title: "Manpower Resourcing & Placements",
     short: "Workforce Solutions",
-    description: "Resourcing and placement support, from individual specialists to dedicated project teams.",
+    description:
+      "Resourcing and placement support, from individual specialists to dedicated project teams.",
     items: [
       "IT Staffing",
       "Contract Staffing",
@@ -207,26 +226,82 @@ export const insuranceExpertise = [
 ];
 
 export const capabilities = [
-  { title: "Business Change", text: "Framing change so it is understood, owned and adopted by the people who run the business." },
-  { title: "Requirements", text: "Turning business needs into clear, testable requirements that delivery teams can build against." },
-  { title: "Transformation", text: "Connecting strategy, process and technology into a single, sequenced change programme." },
-  { title: "Business Process Re-engineering", text: "Mapping how work really flows, then redesigning it around outcomes." },
-  { title: "Data Management", text: "Bringing structure to how data is sourced, held, mapped and used." },
-  { title: "Data Governance", text: "Defining ownership, quality standards and controls around critical data." },
-  { title: "Analytics", text: "Reporting and analysis that give decision-makers a dependable view." },
-  { title: "Project Management", text: "Planning, tracking and steering delivery across teams and vendors." },
-  { title: "Stakeholder Management", text: "Aligning business areas, technology teams and third parties around shared objectives." },
-  { title: "Architecture", text: "Understanding system landscapes and how components connect." },
-  { title: "Testing", text: "Verifying that solutions behave as the business intended." },
-  { title: "Regulatory & Compliance", text: "Keeping change aligned with regulatory and compliance obligations." },
+  {
+    title: "Business Change",
+    text: "Framing change so it is understood, owned and adopted by the people who run the business.",
+  },
+  {
+    title: "Requirements",
+    text: "Turning business needs into clear, testable requirements that delivery teams can build against.",
+  },
+  {
+    title: "Transformation",
+    text: "Connecting strategy, process and technology into a single, sequenced change programme.",
+  },
+  {
+    title: "Business Process Re-engineering",
+    text: "Mapping how work really flows, then redesigning it around outcomes.",
+  },
+  {
+    title: "Data Management",
+    text: "Bringing structure to how data is sourced, held, mapped and used.",
+  },
+  {
+    title: "Data Governance",
+    text: "Defining ownership, quality standards and controls around critical data.",
+  },
+  {
+    title: "Analytics",
+    text: "Reporting and analysis that give decision-makers a dependable view.",
+  },
+  {
+    title: "Project Management",
+    text: "Planning, tracking and steering delivery across teams and vendors.",
+  },
+  {
+    title: "Stakeholder Management",
+    text: "Aligning business areas, technology teams and third parties around shared objectives.",
+  },
+  {
+    title: "Architecture",
+    text: "Understanding system landscapes and how components connect.",
+  },
+  {
+    title: "Testing",
+    text: "Verifying that solutions behave as the business intended.",
+  },
+  {
+    title: "Regulatory & Compliance",
+    text: "Keeping change aligned with regulatory and compliance obligations.",
+  },
 ];
 
 export const techGroups = [
   { group: "Cloud", items: ["AWS", "Microsoft Azure"] },
-  { group: "Data & Analytics", items: ["SQL Server", "Power BI", "Qlik", "Tableau", "Databricks", "Informatica", "Alteryx"] },
-  { group: "Enterprise", items: ["Guidewire", "Salesforce", "Pega", "Oracle", "SAP"] },
-  { group: "Engineering", items: ["APIs", "Docker", "Kubernetes", "CI/CD", "Cloud Infrastructure"] },
-  { group: "AI", items: ["Generative AI", "LLMs", "Prompt Engineering", "Agentic AI"] },
+  {
+    group: "Data & Analytics",
+    items: [
+      "SQL Server",
+      "Power BI",
+      "Qlik",
+      "Tableau",
+      "Databricks",
+      "Informatica",
+      "Alteryx",
+    ],
+  },
+  {
+    group: "Enterprise",
+    items: ["Guidewire", "Salesforce", "Pega", "Oracle", "SAP"],
+  },
+  {
+    group: "Engineering",
+    items: ["APIs", "Docker", "Kubernetes", "CI/CD", "Cloud Infrastructure"],
+  },
+  {
+    group: "AI",
+    items: ["Generative AI", "LLMs", "Prompt Engineering", "Agentic AI"],
+  },
 ];
 
 /**
@@ -248,7 +323,8 @@ export const currentClients = [
     logo: "/images/westfield-specialty-logo.png",
     role: "Business Analyst",
     period: "April 2025 – February 2026",
-    project: "New Company Market Entity Setup in Luxembourg — Project Goldcrest",
+    project:
+      "New Company Market Entity Setup in Luxembourg — Project Goldcrest",
     areas: [
       "Underwriting",
       "Claims",
@@ -292,23 +368,88 @@ export const currentClients = [
  * To add a logo: drop the file in /public/images/clients/ (SVG preferred) and set its path here.
  * These are organisations within the experience history — NOT all current clients.
  */
-export type ExperienceOrg = { slug: string; name: string; logo: string | null };
+export type ExperienceOrg = {
+  slug: string;
+  name: string;
+  logo: string | null;
+};
+
 export const insuranceExperience: ExperienceOrg[] = [
-  { slug: "westfield-specialty", name: "Westfield Specialty", logo: "/images/westfield-specialty-logo.png" },
-  { slug: "ascot-group", name: "Ascot Group", logo: "/images/ascot-group-logo.png" },
-  { slug: "beazley-group", name: "Beazley Group", logo: "/images/beazley-logo.png" },
-  { slug: "renaissancere", name: "RenaissanceRe", logo: "/images/renaissance-re-logo.png" },
-  { slug: "tokio-marine-hcc", name: "Tokio Marine HCC", logo: "/images/tokio-marine-hcc-logo.png" },
-  { slug: "howden-group", name: "Howden Group", logo: null },
-  { slug: "hyperion-x", name: "Hyperion X (HX) InsurTech", logo: null },
-  { slug: "ms-amlin", name: "MS Amlin", logo: "/images/ms-amlin-logo.png" },
-  { slug: "metlife-uk", name: "MetLife UK", logo: "/images/metlife-logo.png" },
-  { slug: "collinson-group", name: "Collinson Group", logo: "/images/collinson-logo.png" },
-  { slug: "brit-insurance", name: "BRIT Insurance", logo: "/images/brit-logo.png" },
-  { slug: "hastings-insurance-group", name: "Hastings Insurance Group", logo: "/images/hastings-direct-logo.png" },
-  { slug: "axa-xl", name: "AXA XL", logo: "/images/axa-logo.png" },
-  { slug: "xl-group", name: "XL Group", logo: null },
-  { slug: "catlin-group", name: "Catlin Group", logo: null },
+  {
+    slug: "westfield-specialty",
+    name: "Westfield Specialty",
+    logo: "/images/westfield-specialty-logo.png",
+  },
+  {
+    slug: "ascot-group",
+    name: "Ascot Group",
+    logo: "/images/ascot-group-logo.png",
+  },
+  {
+    slug: "beazley-group",
+    name: "Beazley Group",
+    logo: "/images/beazley-logo.png",
+  },
+  {
+    slug: "renaissancere",
+    name: "RenaissanceRe",
+    logo: "/images/renaissance-re-logo.png",
+  },
+  {
+    slug: "tokio-marine-hcc",
+    name: "Tokio Marine HCC",
+    logo: "/images/tokio-marine-hcc-logo.png",
+  },
+  {
+    slug: "howden-group",
+    name: "Howden Group",
+    logo: null,
+  },
+  {
+    slug: "hyperion-x",
+    name: "Hyperion X (HX) InsurTech",
+    logo: null,
+  },
+  {
+    slug: "ms-amlin",
+    name: "MS Amlin",
+    logo: "/images/ms-amlin-logo.png",
+  },
+  {
+    slug: "metlife-uk",
+    name: "MetLife UK",
+    logo: "/images/metlife-logo.png",
+  },
+  {
+    slug: "collinson-group",
+    name: "Collinson Group",
+    logo: "/images/collinson-logo.png",
+  },
+  {
+    slug: "brit-insurance",
+    name: "BRIT Insurance",
+    logo: "/images/brit-logo.png",
+  },
+  {
+    slug: "hastings-insurance-group",
+    name: "Hastings Insurance Group",
+    logo: "/images/hastings-direct-logo.png",
+  },
+  {
+    slug: "axa-xl",
+    name: "AXA XL",
+    logo: "/images/axa-logo.png",
+  },
+  {
+    slug: "xl-group",
+    name: "XL Group",
+    logo: null,
+  },
+  {
+    slug: "catlin-group",
+    name: "Catlin Group",
+    logo: null,
+  },
 ];
 
 /** Order and selection for the homepage marquee. */
@@ -333,7 +474,15 @@ export const previousClients = [
     project: "Systems Integration for BI / Data Warehouse & ERP Solutions",
     team: 22,
     value: "US$3.2 million",
-    areas: ["BI", "Data Warehouse", "ERP", "Oracle OBIEE", "Oracle E-Business Suite", "Data Integration", "Data Governance"],
+    areas: [
+      "BI",
+      "Data Warehouse",
+      "ERP",
+      "Oracle OBIEE",
+      "Oracle E-Business Suite",
+      "Data Integration",
+      "Data Governance",
+    ],
   },
   {
     name: "Mercury Marine Group",
@@ -380,7 +529,13 @@ export const previousClients = [
     project: "BI Reporting Solution Implementation",
     team: 14,
     value: "US$1.4 million",
-    areas: ["Supply Chain", "Distribution", "CRM", "Business Intelligence", "Reporting"],
+    areas: [
+      "Supply Chain",
+      "Distribution",
+      "CRM",
+      "Business Intelligence",
+      "Reporting",
+    ],
   },
   {
     name: "Primo Group",
@@ -389,7 +544,13 @@ export const previousClients = [
     project: "Oracle EBS Finance & Accounting Rollout",
     team: 8,
     value: "US$0.8 million",
-    areas: ["Invoicing", "Payments", "Billing", "Accounting", "General Ledger"],
+    areas: [
+      "Invoicing",
+      "Payments",
+      "Billing",
+      "Accounting",
+      "General Ledger",
+    ],
   },
   {
     name: "Molecular Devices Corp.",
@@ -399,7 +560,14 @@ export const previousClients = [
     project: "Oracle EBS Finance & Supply Chain Rollout",
     team: 9,
     value: "US$0.9 million",
-    areas: ["Supply Chain Planning", "Order Management", "Procurement", "Payables", "Receivables", "General Ledger"],
+    areas: [
+      "Supply Chain Planning",
+      "Order Management",
+      "Procurement",
+      "Payables",
+      "Receivables",
+      "General Ledger",
+    ],
   },
   {
     name: "Telex Communications Inc.",
@@ -408,7 +576,7 @@ export const previousClients = [
     location: "Hyderabad, India",
     project: "Oracle EBS ERP & CRM Implementation",
     team: 15,
-    value: null as string | null, // value not supplied — do not invent
+    value: null as string | null,
     areas: ["Marketing", "Sales", "Service", "Order Capture", "Shipping"],
   },
 ];
@@ -440,17 +608,43 @@ export const cities = [
     note: "The centre of the London Market and the home ground for much of our insurance and financial-services experience.",
     compulsory: true,
   },
-  { name: "Frankfurt", note: "A leading European banking and insurance centre." },
-  { name: "Paris", note: "One of Europe's principal corporate and financial capitals." },
-  { name: "Zurich", note: "A global centre for insurance, reinsurance and private banking." },
-  { name: "Geneva", note: "An international hub for finance, trade and professional services." },
-  { name: "Dublin", note: "A European centre for financial services and technology." },
-  { name: "Amsterdam", note: "A financial and technology gateway to continental Europe." },
+  {
+    name: "Frankfurt",
+    note: "A leading European banking and insurance centre.",
+  },
+  {
+    name: "Paris",
+    note: "One of Europe's principal corporate and financial capitals.",
+  },
+  {
+    name: "Zurich",
+    note: "A global centre for insurance, reinsurance and private banking.",
+  },
+  {
+    name: "Geneva",
+    note: "An international hub for finance, trade and professional services.",
+  },
+  {
+    name: "Dublin",
+    note: "A European centre for financial services and technology.",
+  },
+  {
+    name: "Amsterdam",
+    note: "A financial and technology gateway to continental Europe.",
+  },
 ];
 
 export const deliveryNetwork = [
-  { name: "Shreynor", location: "Hyderabad", website: null as string | null },
-  { name: "Data Master", location: "Solapur", website: "https://www.thedatamaster.in/" },
+  {
+    name: "Shreynor",
+    location: "Hyderabad",
+    website: null as string | null,
+  },
+  {
+    name: "Data Master",
+    location: "Solapur",
+    website: "https://www.thedatamaster.in/",
+  },
 ];
 
 export const serviceOptions = [
@@ -480,18 +674,36 @@ export const footerColumns = [
   {
     title: "Services",
     links: [
-      { label: "IT Consultancy", href: "/services/it-consultancy" },
-      { label: "Management Consultancy", href: "/services/management-consultancy" },
-      { label: "Recruitment", href: "/services/recruitment" },
-      { label: "Technology Training", href: "/services/technology-training" },
-      { label: "Manpower Resourcing", href: "/services/workforce-solutions" },
+      {
+        label: "IT Consultancy",
+        href: "/services/it-consultancy",
+      },
+      {
+        label: "Management Consultancy",
+        href: "/services/management-consultancy",
+      },
+      {
+        label: "Recruitment",
+        href: "/services/recruitment",
+      },
+      {
+        label: "Technology Training",
+        href: "/services/technology-training",
+      },
+      {
+        label: "Manpower Resourcing",
+        href: "/services/workforce-solutions",
+      },
     ],
   },
   {
     title: "Expertise",
     links: [
       { label: "Insurance", href: "/industries#insurance" },
-      { label: "Financial Services", href: "/industries#financial-services" },
+      {
+        label: "Financial Services",
+        href: "/industries#financial-services",
+      },
       { label: "Technology", href: "/expertise#technology" },
       { label: "Data & Analytics", href: "/expertise#data" },
       { label: "Transformation", href: "/expertise#transformation" },
@@ -503,7 +715,10 @@ export const footerColumns = [
       { label: "Case Studies", href: "/case-studies" },
       { label: "Insights", href: "/insights" },
       { label: "News", href: "/insights" },
-      { label: "Training", href: "/services/technology-training" },
+      {
+        label: "Training",
+        href: "/services/technology-training",
+      },
     ],
   },
 ];
