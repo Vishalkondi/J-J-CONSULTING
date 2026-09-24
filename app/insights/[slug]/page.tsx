@@ -49,7 +49,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   };
   return (
     <>
-      <PageHero eyebrow={`${a.type} · ${a.category}`} title={a.title} intro={a.excerpt}>
+      <PageHero eyebrow={`${a.type} · ${a.category}`} title={a.title} intro={a.excerpt} image={{ src: a.image, alt: "" }}>
         <p className="mt-8 font-mono text-[12px] text-white/55">
           {formatDate(a.date)} · {a.readMinutes} min read · J &amp; J Consulting
         </p>

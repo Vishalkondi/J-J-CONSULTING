@@ -3,7 +3,9 @@ import { SectionHeading } from "../SectionHeading";
 import { SlotImage } from "../SlotImage";
 import { Reveal } from "../Reveal";
 import { TechCarousel } from "./TechCarousel";
-import { capabilities, industries, insuranceExpertise } from "@/data/site";
+import { CapabilityCards } from "../CapabilityCards";
+import { industryIcons } from "../IndustryIcons";
+import { industries, insuranceExpertise } from "@/data/site";
 
 export function InsuranceFinancial() {
   return (
@@ -22,8 +24,9 @@ export function InsuranceFinancial() {
               {industries.map((i) => (
                 <li
                   key={i}
-                  className="group border border-navy/15 bg-white/60 px-5 py-4 font-display text-[20px] leading-tight text-navy transition duration-300 hover:-translate-y-0.5 hover:border-navy/30 hover:bg-white motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+                  className="group flex items-center gap-4 border border-navy/15 bg-white/60 px-5 py-4 font-display text-[19px] leading-tight text-navy transition duration-300 hover:-translate-y-0.5 hover:border-navy/30 hover:bg-white motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                 >
+                  <span className="shrink-0 text-gold-dark [&_svg]:h-6 [&_svg]:w-6">{industryIcons[i] ?? industryIcons.default}</span>
                   {i}
                 </li>
               ))}
@@ -68,14 +71,7 @@ export function Capabilities() {
             intro="What sits behind successful change: clear requirements, well-understood processes, governed data and aligned stakeholders."
           />
         </div>
-        <ul className="mt-16 grid gap-x-16 border-t border-navy/20 md:grid-cols-2">
-          {capabilities.map((c) => (
-            <li key={c.title} className="grid grid-cols-[1fr] gap-2 border-b border-navy/15 py-7 sm:grid-cols-[0.8fr_1.2fr] sm:gap-8">
-              <h3 className="text-[24px] leading-tight text-navy">{c.title}</h3>
-              <p className="text-[15px] leading-relaxed text-graphite">{c.text}</p>
-            </li>
-          ))}
-        </ul>
+        <CapabilityCards className="mt-14" />
       </div>
     </section>
   );

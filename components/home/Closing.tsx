@@ -1,16 +1,12 @@
 import Link from "next/link";
+import { InsightCard } from "../InsightCard";
 import { SectionHeading } from "../SectionHeading";
 import { CorporateVideo } from "../CorporateVideo";
 import { ContactForm } from "../ContactForm";
 import { articles, spotlight } from "@/data/insights";
 import { company } from "@/data/site";
-import { formatDate } from "@/lib/utils";
 
 export function NewsInsights() {
-  const list = [
-    { href: spotlight.href, type: spotlight.type, category: spotlight.category, title: spotlight.title, date: null as string | null },
-    ...articles.slice(0, 3).map((a) => ({ href: `/insights/${a.slug}`, type: a.type, category: a.category, title: a.title, date: a.date })),
-  ];
   return (
     <section className="bg-paper py-24 md:py-36" aria-labelledby="news-title">
       <div className="wrap">
@@ -22,16 +18,13 @@ export function NewsInsights() {
             All insights <span aria-hidden>→</span>
           </Link>
         </div>
-        <ul className="mt-14 border-t border-navy/20">
-          {list.map((a) => (
-            <li key={a.href} className="group border-b border-navy/20">
-              <Link href={a.href} className="grid gap-3 py-8 md:grid-cols-[220px_1fr_140px] md:items-baseline md:gap-10">
-                <span className="label text-gold-dark">{a.type}</span>
-                <span className="font-display text-[clamp(22px,2.4vw,32px)] leading-snug text-navy transition-colors group-hover:text-steel">
-                  {a.title}
-                </span>
-                <span className="font-mono text-[12px] text-graphite md:text-right">{a.date ? formatDate(a.date) : a.category}</span>
-              </Link>
+        <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <li>
+            <InsightCard {...spotlight} />
+          </li>
+          {articles.slice(0, 3).map((a) => (
+            <li key={a.slug}>
+              <InsightCard href={`/insights/${a.slug}`} {...a} />
             </li>
           ))}
         </ul>

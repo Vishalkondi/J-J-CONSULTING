@@ -263,7 +263,12 @@ export const capabilities = [
 ];
 
 export const techGroups = [
-  { group: "Cloud", image: "/images/sunset-skyline-terrace.jpg", items: ["AWS", "Microsoft Azure"] },
+  {
+    group: "Cloud",
+    // Photo: Albert Stoynov on Unsplash (Unsplash License), https://unsplash.com/photos/dyUp7WPu5q4
+    image: "/images/cloud-infrastructure.jpg",
+    items: ["AWS", "Microsoft Azure"],
+  },
   {
     group: "Data & Analytics",
     image: "/images/presenter-data-wall.jpg",
@@ -588,6 +593,7 @@ export const cities: { name: string; note: string; compulsory?: boolean; video?:
     note: "A European centre for financial services and technology.",
   },
   {
+    // Photo: mana5280 on Unsplash (Unsplash License), https://unsplash.com/photos/Ut5cOTszz_A
     name: "Amsterdam",
     note: "A financial and technology gateway to continental Europe.",
   },

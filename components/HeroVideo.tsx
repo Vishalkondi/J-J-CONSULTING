@@ -16,7 +16,7 @@ const POSTER = "/images/hero-poster.jpg";
  * Behaviour
  *  - Video 1 autoplays (muted, inline). On end → crossfade into Video 2, then back. Loops forever.
  *  - Never black: a branded gradient sits under the videos and is what visitors see until playback starts.
- *  - If autoplay is refused (or reduced-motion is on): poster/fallback + "Enter Experience".
+ *  - If autoplay is refused (or reduced-motion is on): poster/fallback + a small "Play film" control.
  *  - If a video file is missing/broken: that slot is skipped; the other loops on its own.
  */
 export function HeroVideo() {
@@ -206,11 +206,16 @@ export function HeroVideo() {
 
       {/* Autoplay blocked / reduced motion */}
       {blocked && !allFailed && !anyPlaying && (
-        <div className="absolute inset-x-0 top-1/2 z-10 flex -translate-y-1/2 justify-center">
-          <button type="button" onClick={enter} className="btn btn-ghost bg-black/30 backdrop-blur-sm">
-            Enter Experience <span aria-hidden>→</span>
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={enter}
+          className="absolute bottom-6 right-5 z-10 flex items-center gap-2 border border-white/30 bg-black/20 px-3 py-2 font-mono text-[10px] tracking-[0.18em] text-white/80 backdrop-blur-sm transition-colors hover:border-white hover:text-white sm:right-8 lg:right-14"
+        >
+          <svg viewBox="0 0 24 24" className="h-3 w-3 fill-current" aria-hidden>
+            <path d="M8 5v14l11-7z" />
+          </svg>
+          PLAY FILM
+        </button>
       )}
     </section>
   );

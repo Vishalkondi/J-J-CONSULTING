@@ -231,7 +231,24 @@ export function FeaturedCaseStudies({ limit }: { limit?: number }) {
                       }
                     />
                   ) : (
-                    <ClientMark name={v.name} logo={v.logo} className="aspect-[16/9] w-full border border-navy/10" />
+                    // Logo-only case studies get a branded panel (matching the RenaissanceRe banner) instead of a bare white box.
+                    <div className="relative flex aspect-[16/9] w-full flex-col justify-between overflow-hidden bg-gradient-to-br from-navy-700 via-navy to-midnight p-7 text-white sm:p-10">
+                      {/* Grid on its own layer: .blueprint is a background-image and would replace the gradient. */}
+                      <div className="blueprint pointer-events-none absolute inset-0" aria-hidden />
+                      <p className="label relative text-gold-light">Selected project experience</p>
+                      <ClientMark
+                        name={v.name}
+                        logo={v.logo}
+                        pad="p-4"
+                        className="relative h-24 w-56 self-center shadow-[0_20px_50px_-20px_rgba(0,0,0,0.6)] transition-transform duration-700 group-hover:scale-[1.03] sm:h-28 sm:w-64"
+                      />
+                      <div className="relative flex items-end justify-between gap-4 border-t border-white/15 pt-4">
+                        <span className="font-display text-[22px] leading-tight">{v.name}</span>
+                        <span className="font-mono text-[11px] tracking-[0.2em] text-white/60">
+                          J<span className="text-gold">&amp;</span>J CONSULTING
+                        </span>
+                      </div>
+                    </div>
                   )}
                 </Link>
                 <div className={flip ? "lg:order-2" : ""}>
