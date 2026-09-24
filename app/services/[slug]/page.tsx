@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/PageHero";
@@ -6,29 +7,7 @@ import { CtaBand } from "@/components/CtaBand";
 import { Reveal } from "@/components/Reveal";
 import { pageMeta } from "@/lib/seo";
 import { services } from "@/data/site";
-
-/**
- * Hero background per service — every page below has its own distinct photo (no repeats among
- * these five, and none reuse the homepage's London aerial video). This is the page's only photo;
- * an earlier version also had a second "below-hero strip" image, which was removed because it
- * duplicated two of these five photos on their own pages.
- */
-const heroImages: Record<string, { src: string; alt: string }> = {
-  "it-consultancy": {
-    src: "/images/analyst-dashboards-desk.jpg",
-    alt: "An analyst reviewing multi-monitor dashboards at a desk overlooking Tower Bridge",
-  },
-  "technology-training": { src: "/images/engineering-team.jpg", alt: "A team reviewing code together in an open-plan office" },
-  recruitment: {
-    src: "/images/boardroom-team-london.jpg",
-    alt: "A boardroom meeting with St Paul's Cathedral and the City skyline behind",
-  },
-  "workforce-solutions": { src: "/images/operations-team.jpg", alt: "A team gathered around screens in a modern office" },
-  "management-consultancy": {
-    src: "/images/headset-call-meeting.jpg",
-    alt: "A colleague on a headset call with the team in a meeting behind, City of London skyline through the window",
-  },
-};
+import { serviceCoverImages, serviceHeroImages } from "@/data/service-images";
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -53,27 +32,48 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         eyebrow={`${s.index} · ${s.node.charAt(0) + s.node.slice(1).toLowerCase()}`}
         title={s.title}
         intro={s.description}
-        image={heroImages[s.slug]}
+        image={serviceHeroImages[s.slug]}
       >
         <Link href="/contact" className="btn btn-gold mt-10">
           {ctaText} <span aria-hidden>→</span>
         </Link>
       </PageHero>
       <section className="bg-paper py-24 md:py-32">
-        <div className="wrap grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
+        <div className="wrap grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
           <div className="lg:sticky lg:top-28 lg:self-start">
             <p className="label text-gold-dark">{s.short}</p>
             <h2 className="mt-5 text-[clamp(30px,3.6vw,48px)] leading-[1.08] text-navy">
               {s.slug === "technology-training" ? "Training areas" : "What this covers"}
             </h2>
+            <p className="mt-5 max-w-md text-[16px] leading-relaxed text-graphite">
+              {s.items.length} {s.slug === "technology-training" ? "training areas" : "areas of focus"}, delivered as one joined-up service.
+            </p>
+            {serviceCoverImages[s.slug] && (
+              <div className="relative mt-10 aspect-[4/3] overflow-hidden">
+                <Image
+                  src={serviceCoverImages[s.slug].src}
+                  alt={serviceCoverImages[s.slug].alt}
+                  fill
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-midnight/45 to-transparent" aria-hidden />
+              </div>
+            )}
+            <Link href="/contact" className="link-arrow mt-8 text-navy">
+              Discuss your requirements <span aria-hidden>→</span>
+            </Link>
           </div>
-          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="grid content-start gap-4 sm:grid-cols-2">
             {s.items.map((i, idx) => (
-              <li key={i}>
+              <li key={i} className="sm:[&:last-child:nth-child(odd)]:col-span-2">
                 <Reveal delay={(idx % 6) * 0.05} className="h-full">
-                  <article className="group h-full border border-navy/15 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:border-navy/30 hover:shadow-[0_18px_40px_-20px_rgba(12,32,56,0.35)] motion-reduce:transition-none motion-reduce:hover:translate-y-0">
-                    <span aria-hidden className="block h-px w-8 bg-gold transition-all duration-500 group-hover:w-14" />
-                    <p className="mt-5 font-display text-[19px] leading-snug text-navy">{i}</p>
+                  <article className="group flex h-full items-start gap-5 border border-navy/15 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:border-navy/30 hover:shadow-[0_18px_40px_-20px_rgba(12,32,56,0.35)] motion-reduce:transition-none motion-reduce:hover:translate-y-0">
+                    <span className="pt-1 font-mono text-[12px] text-gold-dark">{String(idx + 1).padStart(2, "0")}</span>
+                    <div className="flex-1">
+                      <p className="font-display text-[20px] leading-snug text-navy">{i}</p>
+                      <span aria-hidden className="mt-4 block h-px w-8 bg-gold transition-all duration-500 group-hover:w-14" />
+                    </div>
                   </article>
                 </Reveal>
               </li>

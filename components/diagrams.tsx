@@ -17,16 +17,16 @@ export function ConceptualNote({ children, tone = "light" }: { children: string;
   );
 }
 
-/** Sequential chain: horizontal from md, vertical on mobile. */
+/** Sequential chain: horizontal from lg, vertical below (six steps don't fit side by side on tablets). */
 export function FlowChain({ steps, tone = "light", numbered = true }: { steps: string[]; tone?: Tone; numbered?: boolean }) {
   const reduce = useReducedMotion();
   return (
-    <ol className="flex flex-col gap-0 md:flex-row md:items-stretch">
+    <ol className="flex flex-col gap-0 lg:flex-row lg:items-stretch">
       {steps.map((s, i) => (
-        <li key={s} className="flex flex-col items-stretch md:flex-1 md:flex-row md:items-center">
+        <li key={s} className="flex flex-col items-stretch lg:min-w-0 lg:flex-1 lg:flex-row lg:items-center">
           <motion.div
             className={cn(
-              "flex flex-1 flex-col justify-between gap-6 border px-4 py-4 md:min-h-[112px]",
+              "flex flex-1 flex-col justify-between gap-6 border px-4 py-4 lg:min-h-[112px] lg:min-w-0",
               tone === "dark" ? "border-white/20 text-white" : "border-navy/20 bg-white text-navy",
             )}
             initial={{ opacity: 0, y: 12 }}
@@ -35,12 +35,12 @@ export function FlowChain({ steps, tone = "light", numbered = true }: { steps: s
             transition={reduce ? { duration: 0 } : { duration: 0.6, delay: i * 0.08 }}
           >
             {numbered && <span className="font-mono text-[11px] text-gold">{String(i + 1).padStart(2, "0")}</span>}
-            <span className="font-display text-[20px] leading-tight">{s}</span>
+            <span className="hyphens-auto font-display text-[20px] leading-tight lg:text-[17px] xl:text-[20px]">{s}</span>
           </motion.div>
           {i < steps.length - 1 && (
-            <span aria-hidden className={cn("flex items-center justify-center py-1 text-gold md:px-1.5 md:py-0")}>
-              <span className="md:hidden">↓</span>
-              <span className="hidden md:inline">→</span>
+            <span aria-hidden className={cn("flex items-center justify-center py-1 text-gold lg:px-1.5 lg:py-0")}>
+              <span className="lg:hidden">↓</span>
+              <span className="hidden lg:inline">→</span>
             </span>
           )}
         </li>

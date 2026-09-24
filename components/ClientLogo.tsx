@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { cn } from "@/lib/utils";
 
 /**
@@ -9,11 +9,16 @@ import { cn } from "@/lib/utils";
 export function ClientLogo({ name, logo, className }: { name: string; logo: string | null; className?: string }) {
   const [failed, setFailed] = useState(false);
   const showImage = logo && !failed;
+  // A server-rendered <img> can fail before hydration attaches onError, so also check on mount.
+  const checkLoaded = useCallback((img: HTMLImageElement | null) => {
+    if (img?.complete && img.naturalWidth === 0) setFailed(true);
+  }, []);
   return (
     <span className={cn("flex h-full w-full items-center justify-center", className)}>
       {showImage ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
+          ref={checkLoaded}
           src={logo}
           alt={`${name} logo`}
           loading="lazy"

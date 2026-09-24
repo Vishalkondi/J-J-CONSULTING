@@ -22,6 +22,7 @@ export default function Clients() {
         eyebrow="Clients"
         title="Client experience."
         intro="Current and recent engagements are shown separately from historical ones."
+        image={{ src: "/images/boardroom-team-london.jpg", alt: "" }}
       />
       <CurrentClients />
       <section id="insurance" className="scroll-mt-24 bg-paper py-24 md:py-28" aria-labelledby="ins-title">

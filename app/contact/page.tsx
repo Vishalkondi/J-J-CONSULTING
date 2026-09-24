@@ -15,9 +15,14 @@ export default function Contact() {
   const q = encodeURIComponent("Hamilton House, 87-89 Bell Street, Reigate, RH2 7AN, United Kingdom");
   return (
     <>
-      <PageHero eyebrow="Contact" title="Speak with J & J Consulting." intro="Tell us what you need and we will respond." />
+      <PageHero
+        eyebrow="Contact"
+        title="Speak with J & J Consulting."
+        intro="Tell us what you need and we will respond."
+        image={{ src: "/images/analyst-video-call-desk.jpg", alt: "" }}
+      />
       <ContactSection />
-      <section className="bg-bone pb-24 pt-4" aria-labelledby="loc">
+      <section className="bg-bone py-20 md:py-24" aria-labelledby="loc">
         <div className="wrap">
           <div className="mb-8 flex flex-col justify-between gap-3 md:flex-row md:items-end">
             <h2 id="loc" className="text-[clamp(28px,3.4vw,44px)] text-navy">

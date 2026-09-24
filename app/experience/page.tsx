@@ -20,6 +20,7 @@ export default function Experience() {
         eyebrow="Experience"
         title="A career timeline across technology and insurance."
         intro="25+ years of professional experience, 16+ of them in insurance and financial services."
+        image={{ src: "/images/office-team.jpg", alt: "" }}
       />
       <section className="bg-paper py-24 md:py-32">
         <div className="wrap">

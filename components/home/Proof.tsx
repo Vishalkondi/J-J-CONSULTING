@@ -77,7 +77,89 @@ export function CurrentClients() {
   );
 }
 
+type PreviousClient = (typeof previousClients)[number];
+
+const initials = (name: string) =>
+  name
+    .replace(/(Corp|Inc|Group)\.?$/i, "")
+    .split(/\s+/)
+    .filter((w) => /^[A-Z]/.test(w))
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join("");
+
+const country = (location: string) => location.split(",").pop()!.trim();
+
+/** Headline figures derived from the data, so they stay correct when a client is added or edited. */
+function summarise(clients: PreviousClient[]) {
+  const millions = clients.reduce((sum, c) => sum + (c.value ? parseFloat(c.value.replace(/[^\d.]/g, "")) : 0), 0);
+  const undisclosed = clients.some((c) => !c.value);
+  return [
+    { label: "Programmes", value: String(clients.length) },
+    { label: "Consultants deployed", value: String(clients.reduce((sum, c) => sum + c.team, 0)) },
+    { label: "Combined value", value: `US$${millions.toFixed(1)}m${undisclosed ? "+" : ""}` },
+    { label: "Countries", value: String(new Set(clients.map((c) => country(c.location))).size) },
+  ];
+}
+
+function PreviousClientCard({ client: c, featured }: { client: PreviousClient; featured: boolean }) {
+  const mark = (
+    <span className="absolute inset-0 flex items-center justify-center font-display text-[17px] text-navy" aria-hidden>
+      {initials(c.name)}
+    </span>
+  );
+  return (
+    <li className={featured ? "sm:col-span-2" : undefined}>
+      <article className="group flex h-full flex-col border border-navy/15 bg-paper/70 p-6 transition duration-300 hover:-translate-y-0.5 hover:border-navy/30 hover:bg-white hover:shadow-[0_18px_40px_-24px_rgba(12,32,56,0.35)] md:p-7">
+        <div className="flex items-start justify-between gap-4">
+          {"logo" in c && c.logo ? (
+            <SlotImage
+              src={c.logo}
+              alt={`${c.name} logo`}
+              fit="contain"
+              className="h-12 w-24 shrink-0 border border-navy/10 bg-white"
+              imgClassName="p-2"
+              fallback={mark}
+            />
+          ) : (
+            <span className="relative h-12 w-12 shrink-0 border border-navy/10 bg-white">{mark}</span>
+          )}
+          <span className="label pt-1 text-right text-gold-dark">{country(c.location)}</span>
+        </div>
+
+        <h3 className={`mt-6 font-display leading-tight text-navy ${featured ? "text-[30px] md:text-[34px]" : "text-[23px]"}`}>{c.name}</h3>
+        <p className="mt-1.5 text-[13px] text-graphite">{c.location}</p>
+        <p className={`mt-4 leading-relaxed text-charcoal ${featured ? "max-w-md text-[16px]" : "text-[14.5px]"}`}>{c.project}</p>
+
+        {featured && (
+          <ul className="mt-5 flex flex-wrap gap-2" aria-label="Delivery areas">
+            {c.areas.map((a) => (
+              <li key={a} className="border border-navy/15 px-2.5 py-1 font-mono text-[11px] text-graphite">
+                {a}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <dl className="mt-auto flex gap-8 border-t border-navy/15 pt-5 [&:not(:first-child)]:mt-8">
+          <div>
+            <dt className="label text-graphite">Team</dt>
+            <dd className="mt-1 font-display text-[22px] text-navy">{c.team}</dd>
+          </div>
+          <div>
+            <dt className="label text-graphite">Value</dt>
+            <dd className="mt-1 font-display text-[22px] text-navy">{c.value ?? "—"}</dd>
+          </div>
+        </dl>
+        <span className="mt-5 block h-px w-8 bg-gold transition-all duration-500 group-hover:w-16" aria-hidden />
+      </article>
+    </li>
+  );
+}
+
 export function PreviousClients() {
+  // Lead with the largest programme; spanning two columns also closes the gap a 7-card grid would leave.
+  const [lead, ...rest] = [...previousClients].sort((a, b) => b.team - a.team);
   return (
     <section className="bg-bone py-24 md:py-32" aria-labelledby="prev-title">
       <div className="wrap">
@@ -88,15 +170,23 @@ export function PreviousClients() {
             intro="Historical engagements across business intelligence, data warehousing and Oracle E-Business Suite."
           />
         </div>
-        <ul className="mt-14 grid border-l border-t border-navy/20 sm:grid-cols-2 lg:grid-cols-4">
-          {previousClients.map((c) => (
-            <li key={c.name} className="group border-b border-r border-navy/20 p-7 transition-colors hover:bg-white">
-              <p className="font-display text-[26px] leading-tight text-navy">{c.name}</p>
-              <p className="mt-3 text-[13px] text-graphite">{c.location}</p>
-              <span className="mt-6 block h-px w-8 bg-gold transition-all duration-500 group-hover:w-16" aria-hidden />
-            </li>
+
+        <dl className="mt-12 grid grid-cols-2 gap-px border border-navy/15 bg-navy/15 lg:grid-cols-4">
+          {summarise(previousClients).map((s) => (
+            <div key={s.label} className="bg-bone px-5 py-5 md:px-7">
+              <dt className="label text-graphite">{s.label}</dt>
+              <dd className="mt-2 font-display text-[30px] leading-none text-navy md:text-[36px]">{s.value}</dd>
+            </div>
+          ))}
+        </dl>
+
+        <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <PreviousClientCard client={lead} featured />
+          {rest.map((c) => (
+            <PreviousClientCard key={c.name} client={c} featured={false} />
           ))}
         </ul>
+
         <Link href="/clients#previous" className="link-arrow mt-10 text-navy">
           Project details <span aria-hidden>→</span>
         </Link>

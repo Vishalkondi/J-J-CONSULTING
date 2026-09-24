@@ -13,7 +13,8 @@ import { slugify, cn } from "@/lib/utils";
 export function CityShowcase() {
   const reduce = useReducedMotion();
   const [i, setI] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [paused, setPaused] = useState(false); // hover or keyboard focus inside
+  const [chosen, setChosen] = useState(false); // a visitor picked a city: stop auto-rotating for good
   const [videoOk, setVideoOk] = useState<Record<string, boolean>>({});
   // The city video is only rendered once mounted=true, so the server and the client's first
   // paint agree (neither renders it) and only reveal/hide it after we know the real
@@ -23,16 +24,24 @@ export function CityShowcase() {
   useEffect(() => setMounted(true), []);
 
   useEffect(() => {
-    if (reduce || paused) return;
+    if (reduce || paused || chosen) return;
     const t = setInterval(() => setI((v) => (v + 1) % cities.length), 6500);
     return () => clearInterval(t);
-  }, [reduce, paused]);
+  }, [reduce, paused, chosen]);
 
   const c = cities[i];
   const slug = slugify(c.name);
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[280px_1fr]" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+    <div
+      className="grid gap-8 lg:grid-cols-[280px_1fr]"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) setPaused(false);
+      }}
+    >
       <ul
         className="no-scrollbar -mx-5 flex gap-2 overflow-x-auto px-5 lg:mx-0 lg:flex-col lg:gap-0 lg:overflow-visible lg:px-0"
         role="tablist"
@@ -43,7 +52,10 @@ export function CityShowcase() {
             <button
               role="tab"
               aria-selected={k === i}
-              onClick={() => setI(k)}
+              onClick={() => {
+                setI(k);
+                setChosen(true);
+              }}
               className={cn(
                 "flex w-full items-baseline gap-3 border-white/15 py-3 text-left font-display text-[26px] transition-colors lg:border-b lg:text-[32px]",
                 k === i ? "text-white" : "text-white/40 hover:text-white/75",
@@ -56,7 +68,7 @@ export function CityShowcase() {
         ))}
       </ul>
 
-      <div className="relative aspect-[4/3] overflow-hidden sm:aspect-[16/9]" role="tabpanel" aria-live="polite">
+      <div className="relative aspect-[4/3] overflow-hidden sm:aspect-[16/9]" role="tabpanel" aria-live={chosen ? "polite" : "off"}>
         <AnimatePresence mode="sync">
           <motion.div
             key={c.name}

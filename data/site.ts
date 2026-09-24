@@ -11,26 +11,15 @@ export const company = {
   established: 2010,
   yearsInExistence: "16+",
   tagline: "Technology. Transformation. Talent.",
-  strapline:
-    "Consulting, technology and talent solutions for complex business environments.",
+  strapline: "Consulting, technology and talent solutions for complex business environments.",
   address: {
-    lines: [
-      "Hamilton House",
-      "87–89 Bell Street",
-      "Reigate",
-      "Surrey",
-      "RH2 7AN",
-      "United Kingdom",
-    ],
-    oneLine:
-      "Hamilton House, 87–89 Bell Street, Reigate, Surrey, RH2 7AN, United Kingdom",
+    lines: ["Hamilton House", "87–89 Bell Street", "Reigate", "Surrey", "RH2 7AN", "United Kingdom"],
+    oneLine: "Hamilton House, 87–89 Bell Street, Reigate, Surrey, RH2 7AN, United Kingdom",
   },
 
   // Use the configured production URL when available.
   // `||` also handles an empty environment variable.
-  url:
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    "https://www.jjconsulting.example",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.jjconsulting.example",
 
   corporateVideoId: "ZSKtvO5OKvk", // company YouTube video (click-to-play, privacy-enhanced embed)
 
@@ -120,8 +109,7 @@ export const services: Service[] = [
     node: "CONSULTING",
     title: "Management Consultancy",
     short: "Management Consultancy",
-    description:
-      "Supporting organizations with strategic thinking, operational improvement and technology-enabled transformation.",
+    description: "Supporting organizations with strategic thinking, operational improvement and technology-enabled transformation.",
     items: [
       "Business Strategy",
       "Technology Strategy",
@@ -162,8 +150,7 @@ export const services: Service[] = [
     node: "TRAINING",
     title: "IT & Technology Training",
     short: "Technology Training",
-    description:
-      "Technology training across software engineering, cloud, DevOps, data, AI and quality engineering.",
+    description: "Technology training across software engineering, cloud, DevOps, data, AI and quality engineering.",
     items: [
       "Full Stack Development",
       "Cloud Computing",
@@ -185,8 +172,7 @@ export const services: Service[] = [
     node: "WORKFORCE",
     title: "Manpower Resourcing & Placements",
     short: "Workforce Solutions",
-    description:
-      "Resourcing and placement support, from individual specialists to dedicated project teams.",
+    description: "Resourcing and placement support, from individual specialists to dedicated project teams.",
     items: [
       "IT Staffing",
       "Contract Staffing",
@@ -277,29 +263,25 @@ export const capabilities = [
 ];
 
 export const techGroups = [
-  { group: "Cloud", items: ["AWS", "Microsoft Azure"] },
+  { group: "Cloud", image: "/images/sunset-skyline-terrace.jpg", items: ["AWS", "Microsoft Azure"] },
   {
     group: "Data & Analytics",
-    items: [
-      "SQL Server",
-      "Power BI",
-      "Qlik",
-      "Tableau",
-      "Databricks",
-      "Informatica",
-      "Alteryx",
-    ],
+    image: "/images/presenter-data-wall.jpg",
+    items: ["SQL Server", "Power BI", "Qlik", "Tableau", "Databricks", "Informatica", "Alteryx"],
   },
   {
     group: "Enterprise",
+    image: "/images/boardroom-team-london.jpg",
     items: ["Guidewire", "Salesforce", "Pega", "Oracle", "SAP"],
   },
   {
     group: "Engineering",
+    image: "/images/developer-coding-desk.jpg",
     items: ["APIs", "Docker", "Kubernetes", "CI/CD", "Cloud Infrastructure"],
   },
   {
     group: "AI",
+    image: "/images/operations-team.jpg",
     items: ["Generative AI", "LLMs", "Prompt Engineering", "Agentic AI"],
   },
 ];
@@ -323,8 +305,7 @@ export const currentClients = [
     logo: "/images/westfield-specialty-logo.png",
     role: "Business Analyst",
     period: "April 2025 – February 2026",
-    project:
-      "New Company Market Entity Setup in Luxembourg — Project Goldcrest",
+    project: "New Company Market Entity Setup in Luxembourg — Project Goldcrest",
     areas: [
       "Underwriting",
       "Claims",
@@ -474,15 +455,7 @@ export const previousClients = [
     project: "Systems Integration for BI / Data Warehouse & ERP Solutions",
     team: 22,
     value: "US$3.2 million",
-    areas: [
-      "BI",
-      "Data Warehouse",
-      "ERP",
-      "Oracle OBIEE",
-      "Oracle E-Business Suite",
-      "Data Integration",
-      "Data Governance",
-    ],
+    areas: ["BI", "Data Warehouse", "ERP", "Oracle OBIEE", "Oracle E-Business Suite", "Data Integration", "Data Governance"],
   },
   {
     name: "Mercury Marine Group",
@@ -529,13 +502,7 @@ export const previousClients = [
     project: "BI Reporting Solution Implementation",
     team: 14,
     value: "US$1.4 million",
-    areas: [
-      "Supply Chain",
-      "Distribution",
-      "CRM",
-      "Business Intelligence",
-      "Reporting",
-    ],
+    areas: ["Supply Chain", "Distribution", "CRM", "Business Intelligence", "Reporting"],
   },
   {
     name: "Primo Group",
@@ -544,13 +511,7 @@ export const previousClients = [
     project: "Oracle EBS Finance & Accounting Rollout",
     team: 8,
     value: "US$0.8 million",
-    areas: [
-      "Invoicing",
-      "Payments",
-      "Billing",
-      "Accounting",
-      "General Ledger",
-    ],
+    areas: ["Invoicing", "Payments", "Billing", "Accounting", "General Ledger"],
   },
   {
     name: "Molecular Devices Corp.",
@@ -560,14 +521,7 @@ export const previousClients = [
     project: "Oracle EBS Finance & Supply Chain Rollout",
     team: 9,
     value: "US$0.9 million",
-    areas: [
-      "Supply Chain Planning",
-      "Order Management",
-      "Procurement",
-      "Payables",
-      "Receivables",
-      "General Ledger",
-    ],
+    areas: ["Supply Chain Planning", "Order Management", "Procurement", "Payables", "Receivables", "General Ledger"],
   },
   {
     name: "Telex Communications Inc.",

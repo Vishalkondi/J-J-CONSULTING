@@ -28,7 +28,7 @@ export function HeroVideo() {
   const [blocked, setBlocked] = useState(false);
   const [muted, setMuted] = useState(true);
 
-  const allFailed = failed[0] && failed[1];
+  const allFailed = SOURCES.every((_, i) => failed[i]); // only the configured slots count
   const anyPlaying = playing[0] || playing[1];
 
   const tryPlay = useCallback(async (i: number) => {
@@ -132,11 +132,15 @@ export function HeroVideo() {
         />
       ))}
 
-      {/* Cinematic overlay: 0.20 → 0.30 → 0.75 */}
+      {/* Cinematic overlay: darker at the top (navbar) and bottom, plus a navy wash on the left so the
+          logo, headline and buttons stay legible over bright footage. */}
       <div
         className="absolute inset-0 -z-10"
         aria-hidden
-        style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0.30) 45%, rgba(0,0,0,0.75) 100%)" }}
+        style={{
+          background:
+            "linear-gradient(90deg, rgba(8,18,31,0.72) 0%, rgba(8,18,31,0.45) 45%, rgba(8,18,31,0.05) 80%), linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.15) 22%, rgba(0,0,0,0.25) 55%, rgba(0,0,0,0.8) 100%)",
+        }}
       />
 
       {/* Content */}
@@ -144,7 +148,7 @@ export function HeroVideo() {
         <motion.h1 {...fadeIn(0.35)} className="!font-sans">
           <span className="sr-only">J &amp; J Consulting</span>
           <span aria-hidden>
-            <Logo variant="full" size="hero" />
+            <Logo variant="full" size="hero" className="drop-shadow-[0_10px_30px_rgba(0,0,0,0.55)]" />
           </span>
         </motion.h1>
 

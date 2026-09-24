@@ -20,7 +20,7 @@ export function PageHero({
     <section className="relative overflow-hidden bg-midnight text-white">
       {image ? (
         <>
-          <Image quality={92} src={image.src} alt="" fill sizes="100vw" className="object-cover" />
+          <Image quality={92} src={image.src} alt="" fill priority sizes="100vw" className="object-cover" />
           <div
             className="absolute inset-0"
             aria-hidden

@@ -19,6 +19,7 @@ export default function Insights() {
         eyebrow="News & insights"
         title="Perspectives from the field."
         intro="Industry and technology insight, project spotlights and business analyst perspectives."
+        image={{ src: "/images/analyst-dashboards-desk.jpg", alt: "" }}
       />
       <section className="bg-paper py-24 md:py-32">
         <div className="wrap grid gap-16 lg:grid-cols-[1fr_260px] lg:gap-24">

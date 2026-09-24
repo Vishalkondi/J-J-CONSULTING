@@ -18,6 +18,7 @@ export default function Careers() {
         eyebrow="Careers"
         title="Talent connects everything we do."
         intro="If you are looking for your next role in technology, business or professional services, speak with our recruitment team."
+        image={{ src: "/images/headset-call-meeting.jpg", alt: "" }}
       />
       <section className="bg-paper py-24 md:py-32">
         <div className="wrap grid items-center gap-14 lg:grid-cols-2 lg:gap-24">

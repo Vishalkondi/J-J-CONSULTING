@@ -31,15 +31,8 @@ export function InsuranceFinancial() {
           </div>
           <div className="flex flex-col gap-12">
             <Reveal>
-              {/* Deliberately a different filename from the /industries page's photo below, even
-                  though neither is supplied yet — so when photos do arrive, this section and
-                  /industries naturally get two distinct images instead of accidentally sharing one. */}
-              <SlotImage
-                src="/images/financial-services-team.jpg"
-                alt="A financial services team at work"
-                className="aspect-[16/10] w-full"
-                label="/public/images/financial-services-team.jpg"
-              />
+              {/* Deliberately a different photo from the /industries insurance section. */}
+              <SlotImage src="/images/team-desk-dashboards.jpg" alt="A financial services team at work" className="aspect-[16/10] w-full" />
             </Reveal>
             <div>
               <p className="label text-gold-dark">Insurance expertise</p>
