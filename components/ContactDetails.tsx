@@ -22,7 +22,8 @@ const svg = (children: ReactNode) => (
  * Contact details as icon tiles. Email and phone appear automatically once they are set on
  * `company` in data/site.ts (they are null until confirmed, so nothing is invented).
  */
-export function ContactDetails({ className }: { className?: string }) {
+export function ContactDetails({ className, tone = "light" }: { className?: string; tone?: "light" | "dark" }) {
+  const dark = tone === "dark";
   const rows: { label: string; value: ReactNode; icon: ReactNode }[] = [
     {
       label: "Office",
@@ -70,10 +71,17 @@ export function ContactDetails({ className }: { className?: string }) {
     <address className={cn("space-y-4 not-italic", className)}>
       {rows.map((r) => (
         <div key={r.label} className="flex items-start gap-4">
-          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-navy text-gold-light">{r.icon}</span>
+          <span
+            className={cn(
+              "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-gold-light",
+              dark ? "border border-white/10 bg-white/5" : "bg-navy",
+            )}
+          >
+            {r.icon}
+          </span>
           <div>
-            <p className="label text-graphite">{r.label}</p>
-            <p className="mt-1 max-w-xs text-[15.5px] leading-relaxed text-charcoal">{r.value}</p>
+            <p className={cn("label", dark ? "text-white/45" : "text-graphite")}>{r.label}</p>
+            <p className={cn("mt-1 max-w-xs text-[15px] leading-relaxed", dark ? "text-white/80" : "text-charcoal")}>{r.value}</p>
           </div>
         </div>
       ))}

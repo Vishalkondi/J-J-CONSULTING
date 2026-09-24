@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ClientMark } from "../ClientMark";
 import { SectionHeading } from "../SectionHeading";
@@ -278,23 +279,67 @@ export function FeaturedCaseStudies({ limit }: { limit?: number }) {
 
 export function ProjectSpotlight() {
   return (
-    <section className="blueprint relative bg-midnight py-24 text-white md:py-32" aria-labelledby="spot-title">
+    <section className="blueprint relative overflow-hidden bg-midnight py-24 text-white md:py-32" aria-labelledby="spot-title">
       <div className="wrap">
-        <div id="spot-title">
-          <SectionHeading tone="dark" eyebrow="Project spotlight" title="From assessment to action" intro={rre.impact.text} />
+        <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
+          <div>
+            <div id="spot-title">
+              <SectionHeading tone="dark" eyebrow="Project spotlight" title="From assessment to action" intro={rre.impact.text} />
+            </div>
+            <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t border-white/10 pt-6">
+              {[
+                ["Client", rre.client],
+                ["Role", rre.role],
+                ["Period", rre.period],
+              ].map(([k, v]) => (
+                <div key={k}>
+                  <dt className="label text-white/45">{k}</dt>
+                  <dd className="mt-1.5 font-display text-[19px] text-white">{v}</dd>
+                </div>
+              ))}
+            </dl>
+            <Link href="/case-studies/renaissance-re" className="btn btn-gold mt-10">
+              Explore the RenaissanceRe case study <span aria-hidden>→</span>
+            </Link>
+          </div>
+
+          <div className="relative">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10">
+              <Image
+                src="/images/team-lobby.jpg"
+                alt="A delivery team gathered in a modern office with data dashboards on the walls"
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-midnight/70 via-transparent to-transparent" aria-hidden />
+            </div>
+            <div className="absolute -bottom-6 left-4 max-w-[80%] rounded-2xl border border-white/15 bg-midnight/85 px-5 py-4 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.9)] backdrop-blur-md sm:left-8">
+              <p className="label text-gold-light">{rre.title}</p>
+              <p className="mt-1.5 text-[14px] text-white/75">{rre.areas.join(" · ")}</p>
+            </div>
+          </div>
         </div>
-        <ol className="mt-14 grid gap-px border border-white/15 bg-white/15 sm:grid-cols-2 lg:grid-cols-4">
+
+        {/* four steps as a connected sequence */}
+        <ol className="relative mt-20 grid gap-x-5 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+          <span
+            className="absolute left-[12.5%] right-[12.5%] top-0 hidden h-px bg-gradient-to-r from-gold/0 via-gold/50 to-gold/0 lg:block"
+            aria-hidden
+          />
           {rre.achievements.map((a, i) => (
-            <li key={a.title} className="bg-midnight p-7">
-              <span className="font-mono text-[12px] text-gold-light">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="mt-5 text-[24px] leading-tight text-white">{a.title}</h3>
-              <p className="mt-4 text-[14.5px] leading-relaxed text-white/65">{a.text}</p>
+            <li
+              key={a.title}
+              className="relative flex flex-col rounded-2xl border border-white/10 bg-white/[0.035] p-7 pt-0 transition duration-300 hover:-translate-y-1 hover:border-gold/40 hover:bg-white/[0.06] motion-reduce:hover:translate-y-0"
+            >
+              <span className="-mt-[1px] flex h-14 w-14 -translate-y-1/2 items-center justify-center self-start rounded-full border border-gold/60 bg-midnight font-mono text-[13px] text-gold-light shadow-[0_0_24px_-6px_rgba(184,152,90,0.6)]">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="-mt-2 text-[22px] leading-tight text-white">{a.title}</h3>
+              <p className="mt-3 text-[14.5px] leading-relaxed text-white/65">{a.text}</p>
             </li>
           ))}
         </ol>
-        <Link href="/case-studies/renaissance-re" className="btn btn-gold mt-12">
-          Explore the RenaissanceRe case study <span aria-hidden>→</span>
-        </Link>
       </div>
     </section>
   );

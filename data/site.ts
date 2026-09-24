@@ -51,7 +51,7 @@ export const heroCategories = [
 /** Verified figures only. */
 /**
  * Leadership team shown on /about. Leave empty until real details are supplied: the section is
- * hidden while this list is empty. `photo` is a path in /public/images (e.g. "/images/team/name.jpg").
+ * hidden while this list is empty. `photo` is a path in /public/images, e.g. a file saved in public/images/team/.
  */
 export const leadership: { name: string; role: string; bio: string; photo?: string; highlights?: string[] }[] = [];
 
@@ -685,7 +685,6 @@ export const footerColumns = [
     links: [
       { label: "Case Studies", href: "/case-studies" },
       { label: "Insights", href: "/insights" },
-      { label: "News", href: "/insights" },
       {
         label: "Training",
         href: "/services/technology-training",
