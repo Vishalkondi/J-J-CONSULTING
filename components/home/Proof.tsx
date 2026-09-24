@@ -110,7 +110,7 @@ function PreviousClientCard({ client: c, featured }: { client: PreviousClient; f
   );
   return (
     <li className={featured ? "sm:col-span-2" : undefined}>
-      <article className="group flex h-full flex-col border border-navy/15 bg-paper/70 p-6 transition duration-300 hover:-translate-y-0.5 hover:border-navy/30 hover:bg-white hover:shadow-[0_18px_40px_-24px_rgba(12,32,56,0.35)] md:p-7">
+      <article className="group flex h-full flex-col rounded-2xl border border-navy/10 bg-paper/70 p-6 shadow-[0_10px_30px_-22px_rgba(12,32,56,0.35)] transition duration-300 hover:-translate-y-0.5 hover:border-navy/30 hover:bg-white hover:shadow-[0_18px_40px_-24px_rgba(12,32,56,0.35)] md:p-7">
         <div className="flex items-start justify-between gap-4">
           {"logo" in c && c.logo ? (
             <SlotImage
@@ -171,7 +171,7 @@ export function PreviousClients() {
           />
         </div>
 
-        <dl className="mt-12 grid grid-cols-2 gap-px border border-navy/15 bg-navy/15 lg:grid-cols-4">
+        <dl className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-navy/15 bg-navy/15 lg:grid-cols-4">
           {summarise(previousClients).map((s) => (
             <div key={s.label} className="bg-bone px-5 py-5 md:px-7">
               <dt className="label text-graphite">{s.label}</dt>
@@ -232,7 +232,7 @@ export function FeaturedCaseStudies({ limit }: { limit?: number }) {
                     />
                   ) : (
                     // Logo-only case studies get a branded panel (matching the RenaissanceRe banner) instead of a bare white box.
-                    <div className="relative flex aspect-[16/9] w-full flex-col justify-between overflow-hidden bg-gradient-to-br from-navy-700 via-navy to-midnight p-7 text-white sm:p-10">
+                    <div className="relative flex aspect-[16/9] w-full flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br from-navy-700 via-navy to-midnight p-7 text-white sm:p-10">
                       {/* Grid on its own layer: .blueprint is a background-image and would replace the gradient. */}
                       <div className="blueprint pointer-events-none absolute inset-0" aria-hidden />
                       <p className="label relative text-gold-light">Selected project experience</p>

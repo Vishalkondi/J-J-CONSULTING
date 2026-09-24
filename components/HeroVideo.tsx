@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Logo } from "./Logo";
-import { company, heroCategories } from "@/data/site";
+import { company, heroCategories, stats } from "@/data/site";
 import { cn } from "@/lib/utils";
 
 // One hero video today. To enable the two-video crossfade, add public/videos/hero-video-02.mp4
@@ -166,6 +166,25 @@ export function HeroVideo() {
           <Link href="/contact" className="btn btn-ghost">
             Talk to Us <span aria-hidden>→</span>
           </Link>
+        </motion.div>
+
+        {/* Floating stat card (desktop): the headline figures, from the same data as the counters. */}
+        <motion.div
+          {...fadeIn(1.5)}
+          className="absolute right-14 top-[30%] hidden w-[300px] rounded-2xl border border-white/15 bg-midnight/55 p-6 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.8)] backdrop-blur-md xl:block"
+        >
+          <p className="pill bg-white/5 text-gold-light">Since {company.established}</p>
+          <dl className="mt-5 space-y-4">
+            {stats.slice(0, 3).map((s) => (
+              <div key={s.label} className="flex items-baseline gap-4 border-b border-white/10 pb-4 last:border-0 last:pb-0">
+                <dd className="w-16 shrink-0 font-display text-[30px] leading-none text-white">
+                  {s.value}
+                  {s.suffix}
+                </dd>
+                <dt className="order-last text-[13px] leading-snug text-white/70">{s.label}</dt>
+              </div>
+            ))}
+          </dl>
         </motion.div>
 
         <motion.ul

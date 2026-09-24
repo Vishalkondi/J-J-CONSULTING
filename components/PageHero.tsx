@@ -32,7 +32,7 @@ export function PageHero({
         <div className="hero-fallback blueprint absolute inset-0" aria-hidden />
       )}
       <div className="wrap relative pb-20 pt-40 md:pb-28 md:pt-52">
-        {eyebrow && <p className="label mb-6 text-gold-light">{eyebrow}</p>}
+        {eyebrow && <p className="pill mb-6 bg-white/5 text-gold-light backdrop-blur-sm">{eyebrow}</p>}
         <h1 className="max-w-4xl text-[clamp(38px,6vw,84px)] leading-[1.02]">{title}</h1>
         {intro && <p className="mt-8 max-w-2xl text-[18px] leading-relaxed text-white/70">{intro}</p>}
         {children}

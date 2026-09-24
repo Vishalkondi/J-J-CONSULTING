@@ -3,36 +3,110 @@ import Link from "next/link";
 import { Reveal } from "../Reveal";
 import { Counter } from "../Counter";
 import { TimelineBar } from "./TimelineBar";
-import { countries, stats } from "@/data/site";
+import { company, countries, stats } from "@/data/site";
+
+const why = [
+  {
+    title: "Proven delivery",
+    text: "25+ international projects and 8 full-cycle solution implementations across the UK, US and Asia.",
+    icon: <path d="M4 12.5l5 5L20 6.5" />,
+  },
+  {
+    title: "Insurance depth",
+    text: "16+ years in insurance and financial services, including the London Market.",
+    icon: <path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z" />,
+  },
+  {
+    title: "One connected firm",
+    text: "Technology, consulting, talent, training and workforce solutions working around a single client need.",
+    icon: (
+      <>
+        <circle cx="12" cy="12" r="3" />
+        <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
+      </>
+    ),
+  },
+];
 
 export function Introduction() {
   return (
     <section id="introduction" className="scroll-mt-20 bg-paper py-24 md:py-36">
       <div className="wrap">
-        <div className="grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-24">
+        <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
           <div>
             <Reveal>
-              <h2 className="text-[clamp(38px,5.6vw,84px)] leading-[1.02] text-navy">Established Experience. Forward Thinking.</h2>
-            </Reveal>
-            <Reveal delay={0.12}>
-              <p className="mt-8 max-w-lg text-[19px] leading-[1.7] text-graphite">
+              <p className="pill bg-white text-gold-dark">Why J &amp; J Consulting</p>
+              <h2 className="mt-6 text-[clamp(38px,5vw,72px)] leading-[1.02] text-navy">Established Experience. Forward Thinking.</h2>
+              <p className="mt-7 max-w-lg text-[18px] leading-[1.7] text-graphite">
                 Established in 2010, J &amp; J Consulting combines technology consultancy, management consulting, specialist recruitment,
                 technology training and workforce solutions.
               </p>
-              <Link href="/about" className="link-arrow mt-9 text-navy">
-                Discover J &amp; J <span aria-hidden>→</span>
-              </Link>
             </Reveal>
+            <ul className="mt-10 space-y-5">
+              {why.map((w, i) => (
+                <li key={w.title}>
+                  <Reveal delay={0.08 + i * 0.06} className="flex gap-5">
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-navy text-gold-light">
+                      <svg
+                        width="22"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        aria-hidden
+                      >
+                        {w.icon}
+                      </svg>
+                    </span>
+                    <div>
+                      <h3 className="font-display text-[21px] leading-tight text-navy">{w.title}</h3>
+                      <p className="mt-1.5 max-w-md text-[15px] leading-relaxed text-graphite">{w.text}</p>
+                    </div>
+                  </Reveal>
+                </li>
+              ))}
+            </ul>
+            <Link href="/about" className="btn btn-navy mt-10">
+              Discover J &amp; J <span aria-hidden>→</span>
+            </Link>
           </div>
           <Reveal delay={0.08}>
-            <div className="relative aspect-[4/3] overflow-hidden lg:aspect-auto lg:h-full">
-              <Image
-                src="/images/team-launch-meeting.jpg"
-                alt="A project team meeting around a launch-plan dashboard, with the City of London skyline behind"
-                fill
-                sizes="(min-width: 1024px) 45vw, 100vw"
-                className="object-cover object-[70%_center]"
-              />
+            <div className="relative">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl sm:aspect-[5/4] lg:aspect-[4/5]">
+                <Image
+                  src="/images/team-launch-meeting.jpg"
+                  alt="A project team meeting around a launch-plan dashboard, with the City of London skyline behind"
+                  fill
+                  sizes="(min-width: 1024px) 45vw, 100vw"
+                  className="object-cover object-[62%_center]"
+                />
+              </div>
+              {/* floating badge */}
+              <div className="absolute -bottom-6 left-4 flex items-center gap-4 rounded-2xl border border-navy/10 bg-white px-5 py-4 shadow-[0_20px_50px_-20px_rgba(12,32,56,0.45)] sm:left-8">
+                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/15 text-gold-dark">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.7"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden
+                  >
+                    <circle cx="12" cy="12" r="8.5" />
+                    <path d="M12 7.5V12l3 2" />
+                  </svg>
+                </span>
+                <div>
+                  <p className="font-display text-[22px] leading-none text-navy">{company.yearsInExistence} years</p>
+                  <p className="mt-1 text-[12.5px] text-graphite">Established {company.established}, Reigate, UK</p>
+                </div>
+              </div>
             </div>
           </Reveal>
         </div>
@@ -96,7 +170,7 @@ export function ExperienceCounters() {
         </div>
 
         {/* gap-px over a tinted background draws even 1px dividers with no overhanging borders */}
-        <dl className="mt-12 grid grid-cols-2 gap-px overflow-hidden border border-white/10 bg-white/10 lg:grid-cols-3">
+        <dl className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 lg:grid-cols-3">
           {stats.map((s, i) => (
             <div key={s.label} className="group flex flex-col bg-navy p-5 transition-colors duration-300 hover:bg-navy-800 sm:p-7 md:p-9">
               <span className="flex h-9 w-9 items-center justify-center rounded-full border border-gold/40 text-gold-light transition-colors group-hover:border-gold sm:h-11 sm:w-11">

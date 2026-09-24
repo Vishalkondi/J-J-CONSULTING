@@ -15,7 +15,7 @@ export function ServiceCards({ className }: { className?: string }) {
           <li key={s.slug} className={i < 2 ? "md:col-span-3" : "md:col-span-2"}>
             <Link
               href={`/services/${s.slug}`}
-              className={`group relative flex overflow-hidden bg-navy ${i < 2 ? "h-[380px]" : "h-[340px]"}`}
+              className={`group relative flex overflow-hidden rounded-2xl bg-navy ${i < 2 ? "h-[380px]" : "h-[340px]"}`}
             >
               {img && (
                 <Image

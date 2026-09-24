@@ -6,6 +6,7 @@ import { ExperienceCounters } from "@/components/home/Intro";
 import { CtaBand } from "@/components/CtaBand";
 import { pageMeta } from "@/lib/seo";
 import { ServiceCards } from "@/components/ServiceCards";
+import { Leadership } from "@/components/Leadership";
 
 export const metadata: Metadata = pageMeta({
   title: "About",
@@ -49,6 +50,7 @@ export default function About() {
           <ServiceCards className="mt-14" />
         </div>
       </section>
+      <Leadership />
       <CtaBand />
     </>
   );

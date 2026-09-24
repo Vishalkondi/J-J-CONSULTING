@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { InsightCard } from "../InsightCard";
+import { ContactDetails } from "../ContactDetails";
 import { SectionHeading } from "../SectionHeading";
 import { CorporateVideo } from "../CorporateVideo";
 import { ContactForm } from "../ContactForm";
 import { articles, spotlight } from "@/data/insights";
-import { company } from "@/data/site";
 
 export function NewsInsights() {
   return (
@@ -60,18 +60,13 @@ export function ContactSection() {
             Whether you are looking for technology expertise, specialist talent, workforce solutions, management consulting or professional
             technology training, speak with J &amp; J Consulting.
           </p>
-          <address className="mt-12 border-l-2 border-gold pl-6 not-italic">
-            <p className="label text-graphite">J &amp; J Consulting</p>
-            <p className="mt-3 text-[16px] leading-[1.8] text-charcoal">
-              {company.address.lines.map((l) => (
-                <span key={l} className="block">
-                  {l}
-                </span>
-              ))}
-            </p>
-          </address>
+          <ContactDetails className="mt-12" />
         </div>
-        <ContactForm />
+        <div className="rounded-2xl border border-navy/10 bg-white p-6 shadow-[0_24px_60px_-30px_rgba(12,32,56,0.4)] sm:p-10">
+          <p className="font-display text-[26px] leading-tight text-navy">Send us a message</p>
+          <p className="mb-8 mt-2 text-[14.5px] text-graphite">Tell us what you need and we will respond.</p>
+          <ContactForm />
+        </div>
       </div>
     </section>
   );

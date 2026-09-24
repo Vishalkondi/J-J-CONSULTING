@@ -24,7 +24,7 @@ export function InsightCard({ href, image, type, category, title, excerpt, date,
     <Link
       href={href}
       className={cn(
-        "group flex flex-col overflow-hidden border border-navy/15 bg-white transition duration-300 hover:-translate-y-1 hover:border-navy/30 hover:shadow-[0_18px_40px_-20px_rgba(12,32,56,0.35)] motion-reduce:transition-none motion-reduce:hover:translate-y-0",
+        "group flex flex-col overflow-hidden rounded-2xl border border-navy/10 bg-white shadow-[0_10px_30px_-22px_rgba(12,32,56,0.35)] transition duration-300 hover:-translate-y-1 hover:border-navy/30 hover:shadow-[0_18px_40px_-20px_rgba(12,32,56,0.35)] motion-reduce:transition-none motion-reduce:hover:translate-y-0",
         featured ? "lg:grid lg:grid-cols-[1.15fr_1fr]" : "h-full",
       )}
     >
@@ -39,7 +39,7 @@ export function InsightCard({ href, image, type, category, title, excerpt, date,
           className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-midnight/50 to-transparent" aria-hidden />
-        <span className="absolute left-4 top-4 bg-midnight/80 px-2.5 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.14em] text-gold-light backdrop-blur-sm">
+        <span className="absolute left-4 top-4 rounded-full bg-midnight/80 px-2.5 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.14em] text-gold-light backdrop-blur-sm">
           {type}
         </span>
       </div>

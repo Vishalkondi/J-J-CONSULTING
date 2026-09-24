@@ -2,37 +2,8 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
+import { ArrowButton } from "../ArrowButton";
 import { techGroups, techLinks } from "@/data/site";
-
-/** Hidden on phones, where the track is swiped. */
-function ArrowButton({ dir, onClick, tone }: { dir: "left" | "right"; onClick: () => void; tone: "dark" | "light" }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label={dir === "left" ? "Scroll left" : "Scroll right"}
-      className={
-        tone === "dark"
-          ? "hidden h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-white hover:bg-white/10 sm:flex"
-          : "hidden h-11 w-11 shrink-0 items-center justify-center rounded-full border border-navy/25 text-navy transition-colors hover:border-navy hover:bg-navy/5 sm:flex"
-      }
-    >
-      <svg
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden
-      >
-        {dir === "left" ? <path d="M15 6l-6 6 6 6" /> : <path d="M9 6l6 6-6 6" />}
-      </svg>
-    </button>
-  );
-}
 
 export function TechCarousel({ tone = "dark" }: { tone?: "dark" | "light" }) {
   const dark = tone === "dark";
@@ -54,7 +25,7 @@ export function TechCarousel({ tone = "dark" }: { tone?: "dark" | "light" }) {
             <li key={g.group} className="w-[min(300px,82vw)] shrink-0 snap-start">
               <article
                 className={cn(
-                  "group flex h-full flex-col border transition-colors duration-300",
+                  "group flex h-full flex-col overflow-hidden rounded-2xl border transition-colors duration-300",
                   dark ? "border-white/15 bg-white/[0.04] hover:border-white/35" : "border-navy/15 bg-white hover:border-navy/30",
                 )}
               >

@@ -55,11 +55,19 @@ body {
   .label {
     @apply font-mono text-[11px] uppercase tracking-[0.16em];
   }
+  /* Pill eyebrow: small rounded badge with a gold dot, used above section and page headings. */
+  .pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-gold/40 px-3.5 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.16em];
+  }
+  .pill::before {
+    content: "";
+    @apply h-1.5 w-1.5 rounded-full bg-gold;
+  }
   .rule {
     @apply h-px w-full bg-current opacity-15;
   }
   .btn {
-    @apply inline-flex items-center gap-3 px-6 py-3.5 text-[13px] font-medium tracking-wide transition-colors duration-300;
+    @apply inline-flex items-center gap-3 rounded-md px-6 py-3.5 text-[13px] font-medium tracking-wide transition-colors duration-300;
   }
   .btn-gold {
     @apply bg-gold text-midnight hover:bg-gold-light;
@@ -160,38 +168,6 @@ body {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
-  }
-}
-
-/* Logo marquee */
-.marquee {
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-}
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee 45s linear infinite;
-}
-.marquee:hover .marquee-track,
-.marquee:focus-within .marquee-track {
-  animation-play-state: paused;
-}
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .marquee {
-    overflow-x: auto;
-  }
-  .marquee-track {
-    animation: none;
   }
 }
 
