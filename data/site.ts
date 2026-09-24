@@ -276,7 +276,7 @@ export const techGroups = [
   },
   {
     group: "Enterprise",
-    image: "/images/boardroom-team-london.jpg",
+    image: "/images/city-skyline-dusk.jpg",
     items: ["Guidewire", "Salesforce", "Pega", "Oracle", "SAP"],
   },
   {
@@ -286,7 +286,7 @@ export const techGroups = [
   },
   {
     group: "AI",
-    image: "/images/operations-team.jpg",
+    image: "/images/london-office-developers.jpg",
     items: ["Generative AI", "LLMs", "Prompt Engineering", "Agentic AI"],
   },
 ];

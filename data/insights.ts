@@ -36,7 +36,7 @@ export type Article = {
 export const articles: Article[] = [
   {
     slug: "why-enterprise-integration-assessments-matter",
-    image: "/images/developer-coding-desk.jpg",
+    image: "/images/analyst-video-call-desk.jpg",
     title: "Why Enterprise Integration Assessments Matter",
     type: "Industry Insight",
     category: "Insurance",
@@ -196,5 +196,5 @@ export const spotlight = {
   excerpt:
     "Business Analyst experience assessing systems architecture, integrations, process flows and ImageRight document storage across Policy & Claims and Finance.",
   href: "/case-studies/renaissance-re",
-  image: "/images/presenter-data-wall.jpg",
+  image: "/images/howden/workshop-data-to-decisions.jpg",
 };
