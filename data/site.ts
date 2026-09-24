@@ -559,11 +559,13 @@ export const experienceTimeline = [
   { years: "2025–2026", title: "Westfield Specialty" },
 ];
 
-export const cities = [
+/** `video: true` once /public/videos/cities/<city>.mp4 exists — only flagged cities are requested, so no 404s. */
+export const cities: { name: string; note: string; compulsory?: boolean; video?: boolean }[] = [
   {
     name: "London",
     note: "The centre of the London Market and the home ground for much of our insurance and financial-services experience.",
     compulsory: true,
+    video: true,
   },
   {
     name: "Frankfurt",

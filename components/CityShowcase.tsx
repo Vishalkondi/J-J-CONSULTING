@@ -7,7 +7,7 @@ import { slugify, cn } from "@/lib/utils";
 
 /**
  * Global business hubs. Drop imagery into /public/images/cities/<city>.jpg
- * and optional aerial clips into /public/videos/cities/<city>.mp4 (London strongly recommended).
+ * and optional aerial clips into /public/videos/cities/<city>.mp4, then set `video: true` on that city in data/site.ts.
  * These are reference cities, NOT office locations.
  */
 export function CityShowcase() {
@@ -84,7 +84,7 @@ export function CityShowcase() {
               label={`/public/images/cities/${slug}.jpg`}
               className="h-full w-full"
             />
-            {mounted && !reduce && videoOk[slug] !== false && (
+            {mounted && !reduce && c.video && videoOk[slug] !== false && (
               <video
                 className="absolute inset-0 h-full w-full object-cover"
                 src={`/videos/cities/${slug}.mp4`}

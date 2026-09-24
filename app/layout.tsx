@@ -70,8 +70,10 @@ const jsonLd = [
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-GB">
-      <body>
+    // suppressHydrationWarning: browser extensions add attributes to <html>/<body> before React
+    // loads (e.g. __processed_…). It only ignores attribute differences on these two tags.
+    <html lang="en-GB" suppressHydrationWarning>
+      <body suppressHydrationWarning>
         <a href="#main" className="skip-link">
           Skip to content
         </a>
