@@ -22,7 +22,7 @@ export function MetlifeHero() {
       />
       <div className="wrap relative pb-20 pt-36 md:pb-28 md:pt-48">
         <div className="flex items-center gap-5">
-          <ClientMark name={m.client} logo={m.logo} className="h-16 w-16 shrink-0" />
+          <ClientMark name={m.client} logo={m.logo} className="h-16 w-16 shrink-0" pad="p-2" />
           <p className="label text-gold-light">{m.eyebrow}</p>
         </div>
         <h1 id="metlife-title" className="mt-8 max-w-4xl text-[clamp(40px,6.4vw,92px)] leading-[1.02]">

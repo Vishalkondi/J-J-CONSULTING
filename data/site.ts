@@ -451,6 +451,7 @@ export const previousClients = [
   {
     name: "Actuant Corp.",
     website: "http://www.actuant.com/",
+    logo: "/images/actuant-enerpac-logo.png", // Actuant Corp. is now Enerpac Tool Group
     location: "Spring Grove, Illinois, USA",
     project: "Systems Integration for BI / Data Warehouse & ERP Solutions",
     team: 22,
@@ -460,7 +461,7 @@ export const previousClients = [
   {
     name: "Mercury Marine Group",
     website: "http://www.mercurymarine.com/",
-    logo: "/images/mercury-marine-logo.png",
+    logo: "/images/mercury-marine-logo.svg",
     location: "Fond Du Lac, Wisconsin, USA",
     project: "BI / Data Warehouse Solution Implementation",
     team: 12,
@@ -498,6 +499,7 @@ export const previousClients = [
   {
     name: "Dialogic Inc.",
     website: "http://www.dialogic.com/",
+    logo: "/images/dialogic-logo.png",
     location: "Needham, Massachusetts, USA",
     project: "BI Reporting Solution Implementation",
     team: 14,
@@ -507,6 +509,7 @@ export const previousClients = [
   {
     name: "Primo Group",
     website: "http://www.primo.com/",
+    logo: "/images/primo-logo.svg",
     location: "Massachusetts, USA",
     project: "Oracle EBS Finance & Accounting Rollout",
     team: 8,
@@ -516,7 +519,7 @@ export const previousClients = [
   {
     name: "Molecular Devices Corp.",
     website: "http://www.moleculardevices.com/",
-    logo: "/images/molecular-devices-logo.png",
+    logo: "/images/molecular-devices-logo.svg",
     location: "Sunnyvale, California, USA",
     project: "Oracle EBS Finance & Supply Chain Rollout",
     team: 9,

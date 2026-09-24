@@ -50,7 +50,7 @@ export default function Clients() {
             {previousClients.map((c) => (
               <article key={c.name} className="grid gap-8 border-b border-navy/20 py-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
                 <div>
-                  {c.logo && <ClientMark name={c.name} logo={c.logo} className="mb-6 h-16 w-16 border border-navy/10" />}
+                  {c.logo && <ClientMark name={c.name} logo={c.logo} className="mb-6 h-16 w-44 border border-navy/10" pad="p-2" />}
                   <h3 className="text-[34px] leading-tight text-navy">
                     {c.website ? (
                       <a
