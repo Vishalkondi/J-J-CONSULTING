@@ -5,7 +5,7 @@ import { Reveal } from "../Reveal";
 import { TechCarousel } from "./TechCarousel";
 import { CapabilityCards } from "../CapabilityCards";
 import { industryIcons } from "../IndustryIcons";
-import { industries, insuranceExpertise } from "@/data/site";
+import { industries, insuranceExpertise, technologyPartners } from "@/data/site";
 
 export function InsuranceFinancial() {
   return (
@@ -94,6 +94,7 @@ export function TechEcosystem({ tone = "dark" }: { tone?: "dark" | "light" }) {
             intro="Experience across cloud, data, enterprise platforms, engineering and AI."
           />
         </div>
+        <TechnologyPartners dark={dark} />
         <div className="mt-14">
           <TechCarousel tone={dark ? "dark" : "light"} />
         </div>
@@ -104,10 +105,54 @@ export function TechEcosystem({ tone = "dark" }: { tone?: "dark" | "light" }) {
               : "mt-8 max-w-2xl font-mono text-[11px] leading-relaxed text-graphite"
           }
         >
-          Technology ecosystem shows platforms and tools we have worked with. Product names belong to their respective owners and do not
-          imply a formal partnership.
+          Technology partners: Microsoft and Amazon Web Services. Other platforms and tools shown are ones we have worked with; product
+          names belong to their respective owners and do not imply a formal partnership.
         </p>
       </div>
     </section>
+  );
+}
+
+function MicrosoftMark() {
+  return (
+    <svg viewBox="0 0 23 23" className="h-9 w-9 shrink-0" aria-hidden>
+      <rect x="0" y="0" width="11" height="11" fill="#F25022" />
+      <rect x="12" y="0" width="11" height="11" fill="#7FBA00" />
+      <rect x="0" y="12" width="11" height="11" fill="#00A4EF" />
+      <rect x="12" y="12" width="11" height="11" fill="#FFB900" />
+    </svg>
+  );
+}
+
+function TechnologyPartners({ dark }: { dark: boolean }) {
+  return (
+    <div className="mt-12">
+      <p className={dark ? "label text-gold-light" : "label text-gold-dark"}>Technology partners</p>
+      <ul className="mt-5 flex flex-wrap gap-4">
+        {technologyPartners.map((p) => (
+          <li key={p.name}>
+            <a
+              href={p.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-4 rounded-xl border border-navy/10 bg-white px-6 py-4 shadow-sm transition duration-300 hover:-translate-y-0.5 hover:shadow-md motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+              aria-label={`${p.label} (opens in a new tab)`}
+            >
+              {p.name === "Microsoft" ? (
+                <MicrosoftMark />
+              ) : (
+                <span className="flex h-9 shrink-0 items-center font-sans text-[26px] font-bold lowercase leading-none tracking-tight text-[#232F3E]">
+                  aws
+                </span>
+              )}
+              <span className="flex flex-col leading-tight">
+                <span className="font-sans text-[20px] font-semibold text-[#5E5E5E]">{p.name}</span>
+                <span className="font-sans text-[15px] text-[#737373]">Partner</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

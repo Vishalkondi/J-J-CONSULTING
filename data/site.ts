@@ -298,8 +298,8 @@ export const techGroups = [
 ];
 
 /**
- * Official vendor sites for technology-ecosystem items where linking is unambiguous (a link is not
- * a partnership claim — see the "Technology Ecosystem, not partners" note already on this page).
+ * Official vendor sites for technology-ecosystem items where linking is unambiguous (a link on its own
+ * is not a partnership claim — confirmed partners are listed separately in technologyPartners).
  * Shreynor and Data Master (deliveryNetwork, below) are intentionally NOT linked here — their exact
  * official sites haven't been confirmed, and those are common enough business names that guessing
  * a URL risks linking to the wrong company.
@@ -308,6 +308,12 @@ export const techLinks: Record<string, string> = {
   AWS: "https://aws.amazon.com/",
   "Microsoft Azure": "https://azure.microsoft.com/",
 };
+
+/** Confirmed technology partners — rendered as badges in the Technology section. */
+export const technologyPartners = [
+  { name: "Microsoft", label: "Microsoft Partner", href: "https://partner.microsoft.com/" },
+  { name: "Amazon Web Services", label: "AWS Partner", href: "https://aws.amazon.com/partners/" },
+];
 
 export const currentClients = [
   {
@@ -697,7 +703,6 @@ export const footerColumns = [
 export const pending = [
   "[CLIENT COUNT TO BE PROVIDED]",
   "[PHONE / EMAIL TO BE CONFIRMED]",
-  "[TECHNOLOGY PARTNER STATUS TO BE CONFIRMED — shown as 'Technology Ecosystem' until then]",
   "[LIBERTY SPECIALTY MARKETS — project description and logo permission]",
   "[LEGAL TEXT: Privacy, Cookie, Terms]",
   "[CORPORATE VIDEO: the YouTube ID previously configured (ZSKtvO5OKvk) pointed to an unrelated 'London From Above' Google Earth flyover video, not a J & J Consulting film — section removed from the homepage until a genuine corporate video ID is supplied. The component (components/CorporateVideo.tsx, components/home/Closing.tsx → CorporateVideoSection) is intact and ready to re-add.]",

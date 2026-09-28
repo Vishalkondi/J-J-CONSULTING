@@ -1,6 +1,6 @@
 import { rre } from "@/data/renaissance-re";
 import { beazley } from "@/data/beazley";
-import { howden, images } from "@/data/howden-hx";
+import { howden } from "@/data/howden-hx";
 import { msAmlin } from "@/data/ms-amlin";
 import { metlife } from "@/data/metlife";
 import { collinson } from "@/data/collinson";
@@ -77,7 +77,11 @@ export const featuredCases: FeaturedCase[] = [
     title: "Data platforms, cubes and dashboards",
     blurb: "Employee Benefits data analytics, an Actuarial Cube and a Broker Data Platform.",
     cta: "Read the case study",
-    visual: { kind: "image", src: images.skyline.src, alt: images.skyline.alt },
+    visual: {
+      kind: "image",
+      src: "/images/howden/analyst-dashboard-presentation.jpg",
+      alt: "A business analyst presenting Employee Benefits, Actuarial Cube and Broker Platform dashboards on a wall screen",
+    },
   },
   {
     href: "/case-studies/ms-amlin-solvency-ii",

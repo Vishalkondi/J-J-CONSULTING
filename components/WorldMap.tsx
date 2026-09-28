@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { worldDots } from "@/data/world-dots";
 import { countries, stats } from "@/data/site";
@@ -32,6 +32,10 @@ const intlProjects = stats.find((s) => /international projects/i.test(s.label));
 export function WorldMap() {
   const reduce = useReducedMotion();
   const [hover, setHover] = useState<string | null>(null);
+  // Travelling lights depend on the reduced-motion preference, which is unknown during SSR; adding them
+  // only after mount keeps the server HTML and the first client render identical (no hydration mismatch).
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const home = countries[0];
   const uk = project(home.lon, home.lat);
 
@@ -94,8 +98,8 @@ export function WorldMap() {
                   viewport={{ once: true, margin: "-10% 0px" }}
                   transition={reduce ? { duration: 0 } : { duration: 1.8, delay: 0.3 + i * 0.25, ease: "easeOut" }}
                 />
-                {/* travelling light; SMIL animation is simply left out for reduced motion */}
-                {!reduce && (
+                {/* travelling light; left out for reduced motion */}
+                {mounted && !reduce && (
                   <circle r={3} fill="#FFF3D6">
                     <animateMotion dur={`${3.2 + i * 0.4}s`} begin={`${2 + i * 0.35}s`} repeatCount="indefinite" path={d} />
                     <animate

@@ -103,56 +103,162 @@ function summarise(clients: PreviousClient[]) {
   ];
 }
 
-function PreviousClientCard({ client: c, featured }: { client: PreviousClient; featured: boolean }) {
+function ClientLogoPlate({ client: c, className }: { client: PreviousClient; className: string }) {
   const mark = (
-    <span className="absolute inset-0 flex items-center justify-center font-display text-[17px] text-navy" aria-hidden>
+    <span className="absolute inset-0 flex items-center justify-center font-display text-[22px] text-navy" aria-hidden>
       {initials(c.name)}
     </span>
   );
   return (
-    <li className={featured ? "sm:col-span-2" : undefined}>
-      <article className="group flex h-full flex-col rounded-2xl border border-navy/10 bg-paper/70 p-6 shadow-[0_10px_30px_-22px_rgba(12,32,56,0.35)] transition duration-300 hover:-translate-y-0.5 hover:border-navy/30 hover:bg-white hover:shadow-[0_18px_40px_-24px_rgba(12,32,56,0.35)] md:p-7">
-        <div className="flex items-start justify-between gap-4">
-          {"logo" in c && c.logo ? (
-            <SlotImage
-              src={c.logo}
-              alt={`${c.name} logo`}
-              fit="contain"
-              className="h-12 w-24 shrink-0 border border-navy/10 bg-white"
-              imgClassName="p-2"
-              fallback={mark}
-            />
-          ) : (
-            <span className="relative h-12 w-12 shrink-0 border border-navy/10 bg-white">{mark}</span>
-          )}
-          <span className="label pt-1 text-right text-gold-dark">{country(c.location)}</span>
+    <div className={`relative flex items-center justify-center bg-white ${className}`}>
+      {"logo" in c && c.logo ? (
+        <SlotImage
+          src={c.logo}
+          alt={`${c.name} logo`}
+          fit="contain"
+          className="h-14 w-40 bg-white transition-transform duration-500 group-hover:scale-[1.04] motion-reduce:transition-none"
+          fallback={mark}
+        />
+      ) : (
+        <span className="relative h-14 w-14">{mark}</span>
+      )}
+    </div>
+  );
+}
+
+const TeamIcon = () => (
+  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3.5 w-3.5" aria-hidden>
+    <circle cx="7.5" cy="7" r="2.75" />
+    <path d="M2.5 16c0-2.8 2.2-4.5 5-4.5s5 1.7 5 4.5" strokeLinecap="round" />
+    <circle cx="14" cy="7.5" r="2.25" />
+    <path d="M13.5 11.6c2.3.1 4 1.6 4 4.4" strokeLinecap="round" />
+  </svg>
+);
+
+const ValueIcon = () => (
+  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3.5 w-3.5" aria-hidden>
+    <path d="M3 15.5 8 10l3 3 6-7" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M13 6h4v4" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const PinIcon = () => (
+  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-3.5 w-3.5 shrink-0" aria-hidden>
+    <path d="M10 17.5s5.5-5 5.5-9.5a5.5 5.5 0 0 0-11 0c0 4.5 5.5 9.5 5.5 9.5Z" strokeLinejoin="round" />
+    <circle cx="10" cy="8" r="2" />
+  </svg>
+);
+
+function ClientStats({ client: c, dark }: { client: PreviousClient; dark: boolean }) {
+  const tile = dark ? "border-white/10 bg-white/[0.06]" : "border-navy/10 bg-bone/60";
+  const muted = dark ? "text-white/55" : "text-graphite";
+  const figure = dark ? "text-white" : "text-navy";
+  const accent = dark ? "text-gold-light" : "text-gold-dark";
+  return (
+    <dl className="grid grid-cols-2 gap-2.5">
+      <div className={`rounded-xl border px-4 py-3 ${tile}`}>
+        <dt className={`label flex items-center gap-1.5 ${muted}`}>
+          <span className={accent}>
+            <TeamIcon />
+          </span>
+          Team
+        </dt>
+        <dd className={`mt-2 font-display text-[22px] leading-none ${figure}`}>{c.team}</dd>
+      </div>
+      <div className={`rounded-xl border px-4 py-3 ${tile}`}>
+        <dt className={`label flex items-center gap-1.5 ${muted}`}>
+          <span className={accent}>
+            <ValueIcon />
+          </span>
+          Value
+        </dt>
+        <dd className={`mt-2 leading-none ${c.value ? `font-display text-[22px] ${figure}` : `pt-1 text-[13px] ${muted}`}`}>
+          {c.value ? c.value.replace(" million", "m") : "Undisclosed"}
+        </dd>
+      </div>
+    </dl>
+  );
+}
+
+function AreaChips({ areas, max, dark }: { areas: string[]; max?: number; dark: boolean }) {
+  const shown = max ? areas.slice(0, max) : areas;
+  const more = areas.length - shown.length;
+  const chip = dark ? "border-white/15 bg-white/[0.04] text-white/75" : "border-navy/10 bg-bone/50 text-graphite";
+  return (
+    <ul className="flex flex-wrap gap-1.5" aria-label="Delivery areas">
+      {shown.map((a) => (
+        <li key={a} className={`rounded-full border px-2.5 py-1 font-mono text-[10.5px] ${chip}`}>
+          {a}
+        </li>
+      ))}
+      {more > 0 && (
+        <li className={`px-1.5 py-1 font-mono text-[10.5px] ${dark ? "text-gold-light" : "text-gold-dark"}`}>+{more} more</li>
+      )}
+    </ul>
+  );
+}
+
+function FeaturedClientCard({ client: c }: { client: PreviousClient }) {
+  return (
+    <li className="sm:col-span-2">
+      <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl bg-gradient-to-br from-navy-700 via-navy to-midnight p-6 text-white shadow-[0_24px_60px_-30px_rgba(12,32,56,0.7)] md:p-8">
+        {/* Grid on its own layer: .blueprint is a background-image and would replace the gradient. */}
+        <div className="blueprint pointer-events-none absolute inset-0" aria-hidden />
+        <div className="relative flex items-start justify-between gap-4">
+          <ClientLogoPlate client={c} className="h-20 w-48 rounded-xl shadow-[0_16px_40px_-18px_rgba(0,0,0,0.6)]" />
+          <div className="flex flex-col items-end gap-2.5">
+            <span className="rounded-full border border-gold/50 bg-gold/10 px-3 py-1 font-mono text-[10.5px] uppercase tracking-[0.14em] text-gold-light">
+              Largest programme
+            </span>
+            <span className="label text-white/55">{country(c.location)}</span>
+          </div>
         </div>
 
-        <h3 className={`mt-6 font-display leading-tight text-navy ${featured ? "text-[30px] md:text-[34px]" : "text-[23px]"}`}>{c.name}</h3>
-        <p className="mt-1.5 text-[13px] text-graphite">{c.location}</p>
-        <p className={`mt-4 leading-relaxed text-charcoal ${featured ? "max-w-md text-[16px]" : "text-[14.5px]"}`}>{c.project}</p>
+        <h3 className="relative mt-7 font-display text-[30px] leading-tight md:text-[36px]">{c.name}</h3>
+        <p className="relative mt-2 flex items-center gap-1.5 text-[13px] text-white/60">
+          <PinIcon />
+          {c.location}
+        </p>
+        <p className="relative mt-4 max-w-md text-[16px] leading-relaxed text-white/85">{c.project}</p>
+        <div className="relative mt-6">
+          <AreaChips areas={c.areas} dark />
+        </div>
+        <div className="relative mt-auto pt-8">
+          <ClientStats client={c} dark />
+        </div>
+      </article>
+    </li>
+  );
+}
 
-        {featured && (
-          <ul className="mt-5 flex flex-wrap gap-2" aria-label="Delivery areas">
-            {c.areas.map((a) => (
-              <li key={a} className="border border-navy/15 px-2.5 py-1 font-mono text-[11px] text-graphite">
-                {a}
-              </li>
-            ))}
-          </ul>
-        )}
+function PreviousClientCard({ client: c }: { client: PreviousClient }) {
+  return (
+    <li>
+      <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-navy/10 bg-white shadow-[0_10px_30px_-22px_rgba(12,32,56,0.35)] transition duration-300 hover:-translate-y-1 hover:border-navy/20 hover:shadow-[0_22px_44px_-24px_rgba(12,32,56,0.4)] motion-reduce:transition-none motion-reduce:hover:translate-y-0">
+        {/* gold accent that sweeps across on hover */}
+        <span
+          className="absolute inset-x-0 top-0 z-10 h-[3px] origin-left scale-x-0 bg-gradient-to-r from-gold to-gold-light transition-transform duration-500 group-hover:scale-x-100 motion-reduce:transition-none"
+          aria-hidden
+        />
+        <div className="relative border-b border-navy/[0.07]">
+          <ClientLogoPlate client={c} className="h-28" />
+          <span className="label absolute right-4 top-3.5 text-gold-dark">{country(c.location)}</span>
+        </div>
 
-        <dl className="mt-auto flex gap-8 border-t border-navy/15 pt-5 [&:not(:first-child)]:mt-8">
-          <div>
-            <dt className="label text-graphite">Team</dt>
-            <dd className="mt-1 font-display text-[22px] text-navy">{c.team}</dd>
+        <div className="flex flex-1 flex-col p-6">
+          <h3 className="font-display text-[22px] leading-tight text-navy">{c.name}</h3>
+          <p className="mt-1.5 flex items-center gap-1.5 text-[12.5px] text-graphite">
+            <PinIcon />
+            {c.location}
+          </p>
+          <p className="mt-4 text-[14.5px] leading-relaxed text-charcoal">{c.project}</p>
+          <div className="mt-4">
+            <AreaChips areas={c.areas} max={3} dark={false} />
           </div>
-          <div>
-            <dt className="label text-graphite">Value</dt>
-            <dd className="mt-1 font-display text-[22px] text-navy">{c.value ?? "—"}</dd>
+          <div className="mt-auto pt-6">
+            <ClientStats client={c} dark={false} />
           </div>
-        </dl>
-        <span className="mt-5 block h-px w-8 bg-gold transition-all duration-500 group-hover:w-16" aria-hidden />
+        </div>
       </article>
     </li>
   );
@@ -182,9 +288,9 @@ export function PreviousClients() {
         </dl>
 
         <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <PreviousClientCard client={lead} featured />
+          <FeaturedClientCard client={lead} />
           {rest.map((c) => (
-            <PreviousClientCard key={c.name} client={c} featured={false} />
+            <PreviousClientCard key={c.name} client={c} />
           ))}
         </ul>
 
@@ -215,7 +321,7 @@ export function FeaturedCaseStudies({ limit }: { limit?: number }) {
               >
                 <Link
                   href={c.href}
-                  className={`group block overflow-hidden ${flip ? "lg:order-1" : ""}`}
+                  className={`group block overflow-hidden rounded-2xl ${flip ? "lg:order-1" : ""}`}
                   aria-label={`${c.client} case study`}
                 >
                   {v.kind === "image" ? (

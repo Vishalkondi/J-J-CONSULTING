@@ -16,7 +16,8 @@ const POSTER = "/images/hero-poster.jpg";
  * Behaviour
  *  - Video 1 autoplays (muted, inline). On end → crossfade into Video 2, then back. Loops forever.
  *  - Never black: a branded gradient sits under the videos and is what visitors see until playback starts.
- *  - If autoplay is refused (or reduced-motion is on): poster/fallback + a small "Play film" control.
+ *  - Plays for everyone (it is a slow, silent ambient clip) with a Pause control, per WCAG 2.2.2; reduced motion
+ *    still disables the other decorative animations. If the browser refuses autoplay: poster + "Play film".
  *  - If a video file is missing/broken: that slot is skipped; the other loops on its own.
  */
 export function HeroVideo() {
@@ -27,6 +28,7 @@ export function HeroVideo() {
   const [failed, setFailed] = useState([false, false]);
   const [blocked, setBlocked] = useState(false);
   const [muted, setMuted] = useState(true);
+  const [paused, setPaused] = useState(false);
 
   const allFailed = SOURCES.every((_, i) => failed[i]); // only the configured slots count
   const anyPlaying = playing[0] || playing[1];
@@ -42,14 +44,10 @@ export function HeroVideo() {
     }
   }, []);
 
-  // Start video 1 immediately (unless the visitor prefers reduced motion).
+  // Start video 1 immediately.
   useEffect(() => {
-    if (reduce) {
-      setBlocked(true);
-      return;
-    }
     tryPlay(0);
-  }, [reduce, tryPlay]);
+  }, [tryPlay]);
 
   useEffect(() => {
     refs.current.forEach((v) => {
@@ -73,6 +71,19 @@ export function HeroVideo() {
     nv.play()
       .then(() => setActive(next))
       .catch(() => setBlocked(true));
+  };
+
+  const togglePause = () => {
+    const v = refs.current[active];
+    if (!v) return;
+    if (paused) {
+      v.play()
+        .then(() => setPaused(false))
+        .catch(() => {});
+    } else {
+      v.pause();
+      setPaused(true);
+    }
   };
 
   const enter = () => {
@@ -118,9 +129,8 @@ export function HeroVideo() {
           muted
           loop={SOURCES.length === 1}
           playsInline
-          // Always false here — deterministic on server and client, avoiding a hydration mismatch
-          // (useReducedMotion() is unknown during SSR). Playback is instead started imperatively
-          // by the tryPlay() effect above, which already knows the real reduced-motion preference.
+          // Always false here; playback is started by the tryPlay() effect above, which can detect a
+          // refused autoplay and show the "Play film" fallback.
           autoPlay={false}
           preload="metadata"
           aria-hidden
@@ -209,21 +219,34 @@ export function HeroVideo() {
         </span>
       </a>
 
-      {/* Sound control (only when a video is actually running) */}
+      {/* Video controls (only once a video is actually running) */}
       {anyPlaying && !allFailed && (
-        <button
-          type="button"
-          onClick={() => setMuted((m) => !m)}
-          aria-pressed={!muted}
-          aria-label={muted ? "Turn video sound on" : "Turn video sound off"}
-          className="absolute bottom-6 right-5 flex items-center gap-2 border border-white/30 bg-black/20 px-3 py-2 font-mono text-[10px] tracking-[0.18em] text-white/80 backdrop-blur-sm transition-colors hover:border-white hover:text-white sm:right-8 lg:right-14"
-        >
-          <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full" style={{ background: muted ? "#8a8f96" : "#d2b97f" }} />
-          {muted ? "SOUND OFF" : "SOUND ON"}
-        </button>
+        <div className="absolute bottom-6 right-5 flex gap-2 sm:right-8 lg:right-14">
+          <button
+            type="button"
+            onClick={togglePause}
+            aria-label={paused ? "Play background video" : "Pause background video"}
+            className="flex items-center gap-2 border border-white/30 bg-black/20 px-3 py-2 font-mono text-[10px] tracking-[0.18em] text-white/80 backdrop-blur-sm transition-colors hover:border-white hover:text-white"
+          >
+            <svg viewBox="0 0 24 24" className="h-3 w-3 fill-current" aria-hidden>
+              {paused ? <path d="M8 5v14l11-7z" /> : <path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" />}
+            </svg>
+            {paused ? "PLAY" : "PAUSE"}
+          </button>
+          <button
+            type="button"
+            onClick={() => setMuted((m) => !m)}
+            aria-pressed={!muted}
+            aria-label={muted ? "Turn video sound on" : "Turn video sound off"}
+            className="flex items-center gap-2 border border-white/30 bg-black/20 px-3 py-2 font-mono text-[10px] tracking-[0.18em] text-white/80 backdrop-blur-sm transition-colors hover:border-white hover:text-white"
+          >
+            <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full" style={{ background: muted ? "#8a8f96" : "#d2b97f" }} />
+            {muted ? "SOUND OFF" : "SOUND ON"}
+          </button>
+        </div>
       )}
 
-      {/* Autoplay blocked / reduced motion */}
+      {/* Autoplay refused by the browser */}
       {blocked && !allFailed && !anyPlaying && (
         <button
           type="button"
