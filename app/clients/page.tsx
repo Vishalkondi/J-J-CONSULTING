@@ -5,7 +5,7 @@ import { CurrentClients } from "@/components/home/Proof";
 import { CtaBand } from "@/components/CtaBand";
 import { pageMeta } from "@/lib/seo";
 import { ExperienceGrid } from "@/components/ExperienceGrid";
-import { ClientMark } from "@/components/ClientMark";
+import { PreviousClientCard } from "@/components/clients/PreviousClientCard";
 import { previousClients } from "@/data/site";
 
 export const metadata: Metadata = pageMeta({
@@ -45,50 +45,30 @@ export default function Clients() {
       </section>
       <section id="previous" className="scroll-mt-24 bg-bone py-24 md:py-32">
         <div className="wrap">
-          <SectionHeading eyebrow="Selected Former Clients" title="Previous client project details" />
-          <div className="mt-14 border-t border-navy/20">
+          <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-end lg:gap-20">
+            <SectionHeading eyebrow="Selected former clients" title="Previous client project details" />
+            <p className="text-[17px] leading-relaxed text-graphite">
+              International ERP, CRM and BI programmes across the USA, Malaysia and India, delivered through Hitachi Solutions between 2004
+              and 2008, before J &amp; J Incorporated was established.
+            </p>
+          </div>
+          <dl className="mt-12 grid grid-cols-2 border-l border-t border-navy/15 md:grid-cols-4">
+            {[
+              [String(previousClients.length), "Client programmes"],
+              [String(previousClients.reduce((n, c) => n + c.team, 0)), "Team members across programmes"],
+              ["3", "Countries"],
+              ["2004 – 2008", "Through Hitachi Solutions"],
+            ].map(([v, l]) => (
+              <div key={l} className="border-b border-r border-navy/15 bg-white/60 p-6">
+                <dt className="sr-only">{l}</dt>
+                <dd className="font-display text-[clamp(28px,3vw,40px)] leading-none text-navy">{v}</dd>
+                <dd className="mt-2 text-[14px] text-graphite">{l}</dd>
+              </div>
+            ))}
+          </dl>
+          <div className="mt-10 grid gap-6 lg:grid-cols-2">
             {previousClients.map((c) => (
-              <article key={c.name} className="grid gap-8 border-b border-navy/20 py-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
-                <div>
-                  {c.logo && <ClientMark name={c.name} logo={c.logo} className="mb-6 h-16 w-44 border border-navy/10" pad="p-2" />}
-                  <h3 className="text-[34px] leading-tight text-navy">
-                    {c.website ? (
-                      <a
-                        href={c.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="underline decoration-navy/25 underline-offset-4 transition-colors hover:decoration-navy"
-                      >
-                        {c.name}
-                        <span className="sr-only"> (opens in a new tab)</span>
-                      </a>
-                    ) : (
-                      c.name
-                    )}
-                  </h3>
-                  <p className="mt-2 text-[14px] text-graphite">{c.location}</p>
-                  <p className="mt-6 text-[17px] leading-relaxed text-charcoal">{c.project}</p>
-                  <dl className="mt-6 flex gap-10">
-                    <div>
-                      <dt className="label text-graphite">Team</dt>
-                      <dd className="mt-1 font-display text-[28px] text-navy">{c.team}</dd>
-                    </div>
-                    {c.value && (
-                      <div>
-                        <dt className="label text-graphite">Project value</dt>
-                        <dd className="mt-1 font-display text-[28px] text-navy">{c.value}</dd>
-                      </div>
-                    )}
-                  </dl>
-                </div>
-                <ul className="flex flex-wrap content-start gap-x-6 gap-y-3 font-mono text-[12.5px] text-graphite">
-                  {c.areas.map((a) => (
-                    <li key={a} className="border-b border-navy/20 pb-1">
-                      {a}
-                    </li>
-                  ))}
-                </ul>
-              </article>
+              <PreviousClientCard key={c.name} c={c} />
             ))}
           </div>
           <p className="mt-8 font-mono text-[11px] text-graphite">Historical engagements. These are not current clients.</p>

@@ -464,12 +464,14 @@ export const marqueeOrder = [
   "axa-xl",
 ];
 
+/** Earlier-career client projects, delivered through Hitachi Solutions (2004 – 2008). Figures from the master resume. */
 export const previousClients = [
   {
     name: "Actuant Corp.",
     website: "http://www.actuant.com/",
     logo: "/images/actuant-enerpac-logo.png", // Actuant Corp. is now Enerpac Tool Group
     location: "Spring Grove, Illinois, USA",
+    period: "Dec 2007 – Jun 2008",
     project: "Systems Integration for BI / Data Warehouse & ERP Solutions",
     team: 22,
     value: "US$3.2 million",
@@ -480,6 +482,7 @@ export const previousClients = [
     website: "http://www.mercurymarine.com/",
     logo: "/images/mercury-marine-logo.svg",
     location: "Fond Du Lac, Wisconsin, USA",
+    period: "Apr – Nov 2007",
     project: "BI / Data Warehouse Solution Implementation",
     team: 12,
     value: "US$2.4 million",
@@ -498,6 +501,7 @@ export const previousClients = [
     website: "http://www.ptp.com.my/",
     logo: "/images/port-of-tanjung-pelepas-logo.png",
     location: "Johor Bahru, Malaysia",
+    period: "Apr 2006 – Mar 2007",
     project: "Oracle EBS ERP & CRM Implementation",
     team: 16,
     value: "US$2.7 million",
@@ -518,6 +522,7 @@ export const previousClients = [
     website: "http://www.dialogic.com/",
     logo: "/images/dialogic-logo.png",
     location: "Needham, Massachusetts, USA",
+    period: "Jan – Apr 2006",
     project: "BI Reporting Solution Implementation",
     team: 14,
     value: "US$1.4 million",
@@ -528,6 +533,7 @@ export const previousClients = [
     website: "http://www.primo.com/",
     logo: "/images/primo-logo.svg",
     location: "Massachusetts, USA",
+    period: "Oct 2005 – Jan 2006",
     project: "Oracle EBS Finance & Accounting Rollout",
     team: 8,
     value: "US$0.8 million",
@@ -538,6 +544,7 @@ export const previousClients = [
     website: "http://www.moleculardevices.com/",
     logo: "/images/molecular-devices-logo.svg",
     location: "Sunnyvale, California, USA",
+    period: "Feb – Sep 2005",
     project: "Oracle EBS Finance & Supply Chain Rollout",
     team: 9,
     value: "US$0.9 million",
@@ -548,9 +555,10 @@ export const previousClients = [
     website: "http://www.telex.com/",
     logo: "/images/telex-communications-logo.png",
     location: "Hyderabad, India",
+    period: "Aug 2004 – Jan 2005",
     project: "Oracle EBS ERP & CRM Implementation",
     team: 15,
-    value: null as string | null,
+    value: "US$1.4 million" as string | null,
     areas: ["Marketing", "Sales", "Service", "Order Capture", "Shipping"],
   },
 ];

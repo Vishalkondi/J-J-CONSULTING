@@ -155,6 +155,6 @@ export const featuredCases: FeaturedCase[] = [
     title: brit.title,
     blurb: brit.summary,
     cta: "Read the case study",
-    visual: { kind: "image", src: brit.visual.src, alt: brit.visual.alt, aspect: "aspect-[21/9]" },
+    visual: { kind: "logo", name: brit.client, logo: brit.logo },
   },
 ];
