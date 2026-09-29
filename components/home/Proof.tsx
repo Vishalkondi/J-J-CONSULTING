@@ -191,9 +191,7 @@ function AreaChips({ areas, max, dark }: { areas: string[]; max?: number; dark: 
           {a}
         </li>
       ))}
-      {more > 0 && (
-        <li className={`px-1.5 py-1 font-mono text-[10.5px] ${dark ? "text-gold-light" : "text-gold-dark"}`}>+{more} more</li>
-      )}
+      {more > 0 && <li className={`px-1.5 py-1 font-mono text-[10.5px] ${dark ? "text-gold-light" : "text-gold-dark"}`}>+{more} more</li>}
     </ul>
   );
 }
@@ -390,7 +388,7 @@ export function ProjectSpotlight() {
         <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
           <div>
             <div id="spot-title">
-              <SectionHeading tone="dark" eyebrow="Project spotlight" title="From assessment to action" intro={rre.impact.text} />
+              <SectionHeading tone="dark" eyebrow="Project spotlight" title="From assessment to action" intro={rre.impact.intro} />
             </div>
             <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t border-white/10 pt-6">
               {[

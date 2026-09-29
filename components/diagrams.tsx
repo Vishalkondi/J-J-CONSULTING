@@ -26,7 +26,7 @@ export function FlowChain({ steps, tone = "light", numbered = true }: { steps: s
         <li key={s} className="flex flex-col items-stretch lg:min-w-0 lg:flex-1 lg:flex-row">
           <motion.div
             className={cn(
-              "flex flex-1 flex-col justify-between gap-6 border px-4 py-4 lg:min-h-[112px] lg:min-w-0",
+              "flex flex-1 flex-col justify-between gap-6 border px-4 py-4 lg:min-h-[112px] lg:min-w-0 lg:px-3 xl:px-4",
               tone === "dark" ? "border-white/20 text-white" : "border-navy/20 bg-white text-navy",
             )}
             initial={{ opacity: 0, y: 12 }}
@@ -35,7 +35,9 @@ export function FlowChain({ steps, tone = "light", numbered = true }: { steps: s
             transition={reduce ? { duration: 0 } : { duration: 0.6, delay: i * 0.08 }}
           >
             {numbered && <span className="font-mono text-[11px] text-gold">{String(i + 1).padStart(2, "0")}</span>}
-            <span className="hyphens-auto break-words font-display text-[20px] leading-tight lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">{s}</span>
+            <span className="hyphens-auto break-words font-display text-[20px] leading-tight lg:text-[15px] xl:text-[16.5px] 2xl:text-[20px]">
+              {s}
+            </span>
           </motion.div>
           {i < steps.length - 1 && (
             <span aria-hidden className="flex items-center justify-center py-1 text-gold lg:self-center lg:px-1.5 lg:py-0">
@@ -103,10 +105,7 @@ export function GapAnalysis({ existing, gaps, recommendations }: { existing: str
       {stages.map((s, i) => (
         <motion.li
           key={s.title}
-          className={cn(
-            "relative flex flex-col border",
-            s.accent ? "border-navy bg-navy text-white" : "border-navy/15 bg-white text-navy",
-          )}
+          className={cn("relative flex flex-col border", s.accent ? "border-navy bg-navy text-white" : "border-navy/15 bg-white text-navy")}
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-8% 0px" }}
@@ -137,7 +136,10 @@ export function GapAnalysis({ existing, gaps, recommendations }: { existing: str
                   s.accent ? "border-white/10" : "border-navy/10",
                 )}
               >
-                <span aria-hidden className={cn("h-1.5 w-1.5 shrink-0 -translate-y-0.5 rounded-full", s.accent ? "bg-gold-light" : "bg-gold")} />
+                <span
+                  aria-hidden
+                  className={cn("h-1.5 w-1.5 shrink-0 -translate-y-0.5 rounded-full", s.accent ? "bg-gold-light" : "bg-gold")}
+                />
                 {item}
               </li>
             ))}

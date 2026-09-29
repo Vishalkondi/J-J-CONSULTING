@@ -15,18 +15,139 @@ export const rre = {
   period: "May 2024 — August 2024",
   areas: ["Policy & Claims", "Finance"],
   tools: ["ImageRight", "IT Infrastructure", "System Architectures", "MS Office", "Microsoft Excel"],
+  headline: "Turning complex systems into a clearer path forward.",
   statement:
-    "Evaluating the enterprise technology landscape to identify architectural gaps, streamline system and document flows, strengthen integration capabilities, and establish a structured roadmap for a scalable, future-ready target state.",
+    "We assessed the existing systems, integrations, business processes, and document-storage landscape to identify gaps, rationalise redundant integrations, and establish a structured direction towards the target state.",
+  capabilities: ["Systems Architecture", "Integration Strategy", "Business Process Analysis", "Document Management"],
   story: ["Current state", "Assessment", "Gap identification", "Recommendations", "Target objectives", "Execution plan"],
+  intro: {
+    title: "Creating clarity across a complex technology landscape",
+    paragraphs: [
+      "We worked with RenaissanceRe to evaluate its existing systems, integrations, business processes, and document-storage environment, with the objective of identifying structural gaps and establishing a clearer path towards the target state.",
+      "The engagement focused on understanding how the existing technology landscape operated end-to-end — from business processes and system interactions to integration dependencies and document management.",
+    ],
+  },
+  challenge: {
+    text: "As enterprise environments evolve, systems and integrations can become increasingly interconnected, creating complexity across processes, data flows, and technology dependencies.",
+    lead: "Our assessment focused on understanding the existing landscape in detail and identifying:",
+    points: [
+      "Gaps and limitations within the current architecture",
+      "Integration dependencies and redundant interfaces",
+      "Inefficiencies within existing system flows",
+      "Challenges within document-storage processes",
+      "Opportunities to simplify and rationalise the technology landscape",
+      "A structured path towards the desired target state",
+    ],
+  },
+  approachText: [
+    "We took a structured, end-to-end approach to the assessment.",
+    "We analysed the current-state architecture, mapped business and system process flows, reviewed integration points, and evaluated the existing document-storage platform.",
+    "Working closely with business stakeholders, technology teams, and third-party vendors, we developed a comprehensive understanding of the existing environment and the dependencies connecting its various components.",
+    "This enabled us to move beyond individual system issues and assess the broader ecosystem as an interconnected technology landscape.",
+  ],
+  approach: [
+    {
+      title: "Assessed the existing systems and integrations",
+      text: "A full-scale assessment of integrations and IT system architectures, including performance pitfalls.",
+    },
+    {
+      title: "Mapped current-state architecture and business process flows",
+      text: "Current process flows documented for document production across Policy & Claims and Finance.",
+    },
+    {
+      title: "Analysed integration dependencies and data flows",
+      text: "How documents and data move between business areas, systems and integrations.",
+    },
+    {
+      title: "Evaluated the document-storage platform",
+      text: "A deep evaluation of ImageRight to identify issues and gaps.",
+    },
+    {
+      title: "Identified gaps, redundancies and improvement opportunities",
+      text: "Including redundant integrations documented as candidates for decommissioning.",
+    },
+    {
+      title: "Worked with internal stakeholders and third-party vendors",
+      text: "Onshore and offshore vendor teams coordinated to complete the assessment.",
+    },
+    {
+      title: "Defined a structured target-state direction",
+      text: "Recommendations with a plan of action and order of sequence for execution.",
+    },
+  ],
+  landscape: {
+    title: "We worked across the entire landscape.",
+    lead: ["This was not simply a systems review.", "We looked at how the pieces connected."],
+    text: "From business processes and system architecture to integrations, document storage, and third-party dependencies, we examined the environment end-to-end to understand where complexity existed and where meaningful improvements could be made.",
+    steps: [
+      {
+        title: "Assess",
+        text: "We evaluated the existing architecture, systems, integrations, workflows, and document-storage environment.",
+      },
+      {
+        title: "Understand",
+        text: "We mapped dependencies and analysed how systems and processes interacted across the wider landscape.",
+      },
+      {
+        title: "Identify",
+        text: "We surfaced architectural gaps, integration redundancies, process inefficiencies, and areas requiring improvement.",
+      },
+      {
+        title: "Define",
+        text: "We translated our findings into practical recommendations and a structured direction for the target state.",
+      },
+      {
+        title: "Enable",
+        text: "We established a sequenced path forward, giving stakeholders a clearer foundation for future transformation.",
+      },
+    ],
+  },
   assessmentAreas: ["System Architecture", "Integrations", "Process Flows", "IT Infrastructure", "Document Storage", "Performance"],
   assessmentDetails: [
-    { title: "System Architecture", text: "How the existing IT systems fit together and where the architecture falls short." },
-    { title: "Integrations", text: "The interfaces between systems, including shortcomings and redundant integrations." },
-    { title: "Process Flows", text: "Current process flows documented for Policy & Claims and Finance." },
-    { title: "IT Infrastructure", text: "The infrastructure underpinning the systems in scope." },
-    { title: "Document Storage", text: "Document production and storage in ImageRight." },
-    { title: "Performance", text: "Performance pitfalls affecting day-to-day system use." },
+    {
+      title: "System Architecture",
+      text: "Our team assessed how the existing IT systems fit together and where the architecture fell short.",
+    },
+    { title: "Integrations", text: "We analysed the interfaces between systems, identifying shortcomings and redundant integrations." },
+    { title: "Process Flows", text: "We documented current process flows for document production across Policy & Claims and Finance." },
+    { title: "IT Infrastructure", text: "We assessed the IT infrastructure underpinning the systems in scope." },
+    { title: "Document Storage", text: "We evaluated document production and storage in ImageRight, identifying issues and gaps." },
+    { title: "Performance", text: "We identified performance pitfalls affecting day-to-day system use." },
   ],
+  pathForward: {
+    intro: "Rather than stopping at assessment, we established a structured plan for progressing towards the target state.",
+    pillars: [
+      { title: "Architecture", text: "A clearer understanding of the existing architecture and areas requiring change." },
+      {
+        title: "Integrations",
+        text: "Identification of redundant or inefficient integration points and opportunities for rationalisation.",
+      },
+      { title: "Document Management", text: "Detailed assessment of the existing document-storage environment and associated gaps." },
+      { title: "Business Processes", text: "Documentation and analysis of current workflows to identify opportunities for improvement." },
+      {
+        title: "Transformation Roadmap",
+        text: "A sequenced plan of action to help stakeholders move from the current state towards the desired future state.",
+      },
+    ],
+  },
+  clarityText: [
+    "Our work transformed a complex set of systems, integrations, and processes into a clearer view of the current environment.",
+    "We documented the existing flows, highlighted areas requiring attention, and identified opportunities to streamline the architecture by addressing unnecessary or redundant integrations.",
+    "The findings were translated into practical recommendations designed to improve system flows and provide a more structured foundation for future transformation.",
+  ],
+  delivered: [
+    "Current-state systems and architecture assessment",
+    "Business and system process-flow documentation",
+    "Integration landscape assessment",
+    "Document-storage platform evaluation",
+    "Gap and dependency analysis",
+    "Identification of redundant integrations",
+    "Improvement and rationalisation recommendations",
+    "Target-state direction",
+    "Structured execution sequence for future improvements",
+  ],
+  ourRole:
+    "We acted as a bridge between business, technology, architecture, and third-party stakeholders — bringing together business requirements, technical analysis, process understanding, and architectural thinking to turn a complex technology environment into an actionable transformation direction.",
   architecture: [
     { layer: "Business areas", items: ["Policy & Claims", "Finance"] },
     { layer: "Business processes", items: ["Document Production", "Process Flows"] },
@@ -45,9 +166,18 @@ export const rre = {
     text: "The project included a deep evaluation of ImageRight to identify issues, gaps and improvement opportunities.",
     outputs: ["Issues", "Gaps", "Improvement Opportunities"],
     findings: [
-      { title: "Issues", text: "System issues and performance pitfalls affecting how documents are stored and retrieved were identified and documented." },
-      { title: "Gaps", text: "Gaps between ImageRight, document production and the wider integration landscape were assessed across Policy & Claims and Finance." },
-      { title: "Improvement Opportunities", text: "Opportunities to improve and streamline document flows were captured as input to the recommendations." },
+      {
+        title: "Issues",
+        text: "System issues and performance pitfalls affecting how documents are stored and retrieved were identified and documented.",
+      },
+      {
+        title: "Gaps",
+        text: "Gaps between ImageRight, document production and the wider integration landscape were assessed across Policy & Claims and Finance.",
+      },
+      {
+        title: "Improvement Opportunities",
+        text: "Opportunities to improve and streamline document flows were captured as input to the recommendations.",
+      },
     ],
     scope: ["Document production", "Document storage", "Integrations", "Performance"],
   },
@@ -65,7 +195,10 @@ export const rre = {
   collaborationText: "The role involved coordinating multiple third-party vendors across onshore and offshore teams.",
   parties: [
     { title: "Business areas", text: "Policy & Claims and Finance teams provided the business context and current process knowledge." },
-    { title: "Business Analyst", text: "Coordinated the assessment, documented process flows and consolidated findings into recommendations." },
+    {
+      title: "Business Analyst",
+      text: "Coordinated the assessment, documented process flows and consolidated findings into recommendations.",
+    },
     { title: "Third-party vendors", text: "Onshore and offshore vendor teams contributed system and integration knowledge." },
   ],
   achievements: [
@@ -98,9 +231,14 @@ export const rre = {
     ],
   },
   impact: {
-    title: "From assessment to action",
+    title: "From Assessment to Action",
     steps: ["Assess", "Identify", "Document", "Recommend", "Sequence"],
-    text: "The assessment provided a structured view of the existing architecture, integrations and document storage landscape, together with recommendations and an execution sequence for achieving target objectives.",
+    intro:
+      "The assessment translated complex findings into a practical improvement strategy. We identified areas where integrations could be streamlined or decommissioned, documented opportunities for improvement, and defined a structured sequence of actions to move towards the desired target state.",
+    result: [
+      "The engagement gave stakeholders a consolidated view of their technology and integration landscape and a clearer understanding of where improvements could be made.",
+      "By connecting architecture, integrations, business processes, and document management into a single assessment, we created a structured foundation for simplifying system flows and progressing towards the target state.",
+    ],
   },
   disclaimers: {
     conceptual: "Conceptual representation of assessment scope. Not a depiction of the client's actual systems.",

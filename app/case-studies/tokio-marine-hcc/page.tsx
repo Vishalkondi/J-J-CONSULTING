@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
-import { CaseOverview } from "@/components/CaseOverview";
+import { CaseOverview } from "@/components/case/CaseOverview";
+import { TileGrid } from "@/components/case/TileGrid";
 import { CtaBand } from "@/components/CtaBand";
 import { Reveal } from "@/components/Reveal";
 import { Tags } from "@/components/Tags";
@@ -31,23 +32,6 @@ function Bullets({ items }: { items: readonly string[] }) {
       {items.map((i) => (
         <li key={i} className="py-5 text-[17px] leading-relaxed text-charcoal">
           {i}
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-/** Numbered tile grid for tool and partner lists. */
-function TileGrid({ items, label }: { items: readonly string[]; label: string }) {
-  return (
-    <ul aria-label={label} className="mt-4 grid grid-cols-2 border-l border-t border-navy/15 sm:grid-cols-3">
-      {items.map((it, i) => (
-        <li
-          key={it}
-          className="flex min-h-[96px] flex-col justify-between gap-3 border-b border-r border-navy/15 bg-white p-4 transition-colors hover:bg-paper"
-        >
-          <span className="font-mono text-[11px] text-gold-dark">{String(i + 1).padStart(2, "0")}</span>
-          <span className="font-display text-[17px] leading-tight text-navy">{it}</span>
         </li>
       ))}
     </ul>
@@ -118,7 +102,7 @@ export default function TmhccPage() {
             <p className="label mb-4 mt-12 text-gold-dark">Key responsibilities</p>
             <Bullets items={t.pas.responsibilities} />
             <p className="label mt-12 text-gold-dark">Tools and systems · {t.pas.technology.length}</p>
-            <TileGrid items={t.pas.technology} label="Tools and systems" />
+            <TileGrid items={t.pas.technology} label="Tools and systems" className="mt-4" />
           </Reveal>
         </div>
       </section>
@@ -132,7 +116,7 @@ export default function TmhccPage() {
               <p className="label mb-4 text-gold-dark">Achievements</p>
               <Bullets items={t.rfp.achievements} />
               <p className="label mt-12 text-gold-dark">Implementation partners evaluated · {t.rfp.partners.length}</p>
-              <TileGrid items={t.rfp.partners} label="Implementation partners evaluated" />
+              <TileGrid items={t.rfp.partners} label="Implementation partners evaluated" className="mt-4" />
             </Reveal>
           </div>
           <p className="label mt-16 text-gold-dark">Systems evaluated</p>

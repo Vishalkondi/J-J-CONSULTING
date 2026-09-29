@@ -1,5 +1,5 @@
-import { ClientMark } from "./ClientMark";
-import { Tags } from "./Tags";
+import { ClientMark } from "@/components/ClientMark";
+import { Tags } from "@/components/Tags";
 
 /** Case-study overview: engagement card (logo + key facts) beside the summary, headline stats and tag list. */
 export function CaseOverview({
