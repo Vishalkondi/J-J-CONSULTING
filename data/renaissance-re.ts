@@ -234,7 +234,7 @@ export const rre = {
     title: "From Assessment to Action",
     steps: ["Assess", "Identify", "Document", "Recommend", "Sequence"],
     intro:
-      "The assessment translated complex findings into a practical improvement strategy. We identified areas where integrations could be streamlined or decommissioned, documented opportunities for improvement, and defined a structured sequence of actions to move towards the desired target state.",
+      "The assessment translated complex findings into a practical improvement strategy. We identified integrations that were candidates for streamlining or decommissioning, documented opportunities for improvement, and defined a structured sequence of actions to move towards the desired target state.",
     result: [
       "The engagement gave stakeholders a consolidated view of their technology and integration landscape and a clearer understanding of where improvements could be made.",
       "By connecting architecture, integrations, business processes, and document management into a single assessment, we created a structured foundation for simplifying system flows and progressing towards the target state.",

@@ -60,7 +60,7 @@ export default function Industries() {
             <SlotImage
               src="/images/london-skyline.jpg"
               alt="The City of London skyline, home of the London insurance market"
-              className="mt-12 aspect-[16/10] w-full"
+              className="mt-12 aspect-[21/9] w-full"
             />
           </div>
           <ul className="grid content-start gap-3 sm:grid-cols-2">
