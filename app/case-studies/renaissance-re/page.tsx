@@ -329,7 +329,15 @@ export default function RenaissanceRePage() {
               <p className="label mt-5 text-gold-dark">The recommendations covered</p>
             </div>
           </div>
-          <ol className="mt-14 grid gap-px border border-navy/15 bg-navy/15 sm:grid-cols-2 lg:grid-cols-5">
+          <figure className="mt-14">
+            <SlotImage
+              src="/images/illustrations/current-to-target-state.jpg"
+              alt="Illustration of a fragmented current state moving through integration rationalisation and process redesign to a connected target state with centralised document management"
+              className="aspect-[16/9] w-full border border-navy/15"
+            />
+            <figcaption className="mt-3 font-mono text-[11px] text-graphite">{rre.disclaimers.visual}</figcaption>
+          </figure>
+          <ol className="mt-10 grid gap-px border border-navy/15 bg-navy/15 sm:grid-cols-2 lg:grid-cols-5">
             {rre.pathForward.pillars.map((p, i) => (
               <li
                 key={p.title}

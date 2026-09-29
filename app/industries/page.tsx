@@ -164,7 +164,15 @@ export default function Industries() {
               <p className="mt-6 font-display text-[22px] leading-snug text-navy">{challenges.approach}</p>
             </div>
           </div>
-          <div className="mt-14">
+          <figure className="mt-14">
+            <SlotImage
+              src="/images/illustrations/api-integration-flow.jpg"
+              alt="Illustration of tangled point-to-point connections being consolidated through an API layer into structured systems and documents"
+              className="aspect-[8/3] w-full"
+            />
+            <figcaption className="mt-3 font-mono text-[11px] text-graphite">Illustrative visual.</figcaption>
+          </figure>
+          <div className="mt-12">
             <FlowChain steps={challenges.flow} />
           </div>
           <p className="mt-8 max-w-2xl border-l-2 border-gold pl-5 text-[17px] leading-relaxed text-graphite">{challenges.outcome}</p>
