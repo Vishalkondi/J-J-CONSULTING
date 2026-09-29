@@ -6,13 +6,6 @@ export const brit = {
   slug: "brit-insurance",
   client: "BRIT Insurance",
   logo: "/images/brit-logo.png",
-  visual: {
-    src: "/images/brit-programme-visual-clean.jpg",
-    alt: "London skyline at dusk with a subtle data network overlay, representing regulatory data and systems analysis",
-    width: 1280,
-    height: 540,
-    caption: "Illustrative summary graphic — not a client system or screenshot.",
-  },
   eyebrow: "Selected project experience",
   title: "Solvency II & GDPR Regulatory Compliance",
   role: "Solvency II Business Analyst",
