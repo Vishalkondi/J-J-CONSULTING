@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { SectionHeading } from "@/components/SectionHeading";
-import { TimelineBar } from "@/components/home/TimelineBar";
 import { ExperienceCounters } from "@/components/home/Intro";
 import { CtaBand } from "@/components/CtaBand";
 import { pageMeta } from "@/lib/seo";
 import { ServiceCards } from "@/components/ServiceCards";
 import { Leadership } from "@/components/Leadership";
+import { EngagementJourney } from "@/components/about/EngagementJourney";
+import { HowWeOperate } from "@/components/about/HowWeOperate";
+import { WhyUs } from "@/components/about/WhyUs";
 
 export const metadata: Metadata = pageMeta({
   title: "About",
@@ -40,9 +42,9 @@ export default function About() {
               <p>We are organised around five disciplines that work together: technology, consulting, talent, training and workforce.</p>
             </div>
           </div>
-          <TimelineBar />
         </div>
       </section>
+      <EngagementJourney />
       <ExperienceCounters />
       <section className="bg-bone py-24 md:py-32">
         <div className="wrap">
@@ -50,6 +52,8 @@ export default function About() {
           <ServiceCards className="mt-14" />
         </div>
       </section>
+      <HowWeOperate />
+      <WhyUs />
       <Leadership />
       <CtaBand />
     </>

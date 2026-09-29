@@ -124,7 +124,7 @@ function MicrosoftMark() {
   );
 }
 
-function TechnologyPartners({ dark }: { dark: boolean }) {
+export function TechnologyPartners({ dark }: { dark: boolean }) {
   return (
     <div className="mt-12">
       <p className={dark ? "label text-gold-light" : "label text-gold-dark"}>Technology partners</p>
