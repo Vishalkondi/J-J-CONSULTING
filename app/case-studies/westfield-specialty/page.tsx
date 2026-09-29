@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
-import { ClientMark } from "@/components/ClientMark";
+import { CaseOverview } from "@/components/CaseOverview";
 import { CtaBand } from "@/components/CtaBand";
 import { Reveal } from "@/components/Reveal";
-import { Tags } from "@/components/Tags";
 import { company } from "@/data/site";
 import { images } from "@/data/howden-hx";
 import { westfield as w } from "@/data/westfield";
@@ -37,25 +36,21 @@ export default function WestfieldPage() {
       />
 
       {/* OVERVIEW */}
-      <section className="bg-paper py-20 md:py-28" aria-label="Overview">
-        <div className="wrap grid gap-12 lg:grid-cols-[minmax(0,320px)_1fr] lg:gap-24">
-          <ClientMark name={w.client} logo={w.logo} className="aspect-square w-full max-w-[280px] border border-navy/10" />
-          <div>
-            <p className="max-w-2xl text-[19px] leading-relaxed text-graphite">{w.statement}</p>
-            <dl className="mt-10 grid gap-px border border-navy/15 bg-navy/15 sm:grid-cols-3">
-              {w.stats.map((s) => (
-                <div key={s.label} className="bg-white p-6">
-                  <dt className="sr-only">{s.label}</dt>
-                  <dd className="font-display text-[44px] leading-none text-navy">{s.value}</dd>
-                  <dd className="mt-3 text-[14px] leading-snug text-graphite">{s.label}</dd>
-                </div>
-              ))}
-            </dl>
-            <p className="label mt-10 text-graphite">Business areas</p>
-            <Tags items={[...w.domains]} label="Business areas" />
-          </div>
-        </div>
-      </section>
+      <CaseOverview
+        client={w.client}
+        logo={w.logo}
+        facts={[
+          { label: "Role", value: w.role },
+          { label: "Period", value: w.period },
+          { label: "Project", value: w.title },
+          { label: "Location", value: "Luxembourg" },
+        ]}
+        heading="Preparing a new Luxembourg entity to write Company Market business"
+        statement={w.statement}
+        stats={w.stats}
+        tagsLabel="Business areas"
+        tags={w.domains}
+      />
 
       {/* DELIVERIES */}
       <section className="blueprint relative bg-midnight py-20 text-white md:py-28" aria-labelledby="del-title">
@@ -115,29 +110,59 @@ export default function WestfieldPage() {
             <h2 id="resp-title" className="mt-5 text-[clamp(30px,3.6vw,50px)] leading-[1.08] text-navy">
               Key responsibilities
             </h2>
-            <p className="label mt-10 text-graphite">Vendor teams managed</p>
-            <Tags items={[...w.vendors]} label="Vendor teams managed" />
+            <div className="blueprint relative mt-10 bg-navy p-7 text-white md:p-8">
+              <p className="label text-gold-light">Vendor teams managed</p>
+              <p className="mt-2 font-display text-[40px] leading-none">{w.vendors.length}</p>
+              <ul className="mt-6 grid grid-cols-2 gap-x-6 border-t border-white/15 pt-5" aria-label="Vendor teams managed">
+                {w.vendors.map((v) => (
+                  <li key={v} className="flex items-center gap-2.5 py-1.5 font-display text-[19px]">
+                    <span aria-hidden className="h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
+                    {v}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
           <Reveal>
-            <ul className="divide-y divide-navy/15 border-y border-navy/15">
-              {w.responsibilities.map((i) => (
-                <li key={i} className="py-5 text-[17px] leading-relaxed text-charcoal">
-                  {i}
+            <ol className="border-t border-navy/15">
+              {w.responsibilities.map((r, i) => (
+                <li
+                  key={r}
+                  className="group grid grid-cols-[48px_1fr] gap-4 border-b border-navy/15 py-6 transition-colors hover:bg-white/60"
+                >
+                  <span className="pt-1 font-mono text-[12px] text-gold-dark">{pad(i + 1)}</span>
+                  <p className="text-[17px] leading-relaxed text-charcoal">{r}</p>
                 </li>
               ))}
-            </ul>
+            </ol>
           </Reveal>
         </div>
       </section>
 
       {/* TECHNOLOGY */}
-      <section className="bg-bone py-20 md:py-24" aria-labelledby="tech-title">
+      <section className="bg-bone py-20 md:py-28" aria-labelledby="tech-title">
         <div className="wrap">
-          <h2 id="tech-title" className="label text-graphite">
-            Technology and systems
-          </h2>
-          <Tags items={[...w.technology]} label="Technology and systems" />
-          <Link href="/case-studies" className="link-arrow mt-14 text-navy">
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <div>
+              <p className="label text-gold-dark">Technology and systems</p>
+              <h2 id="tech-title" className="mt-5 text-[clamp(30px,3.6vw,50px)] leading-[1.08] text-navy">
+                The platforms behind the work
+              </h2>
+            </div>
+            <p className="font-mono text-[12px] uppercase tracking-[0.14em] text-graphite">{w.technology.length} systems and tools</p>
+          </div>
+          <ul className="mt-12 grid grid-cols-2 border-l border-t border-navy/15 sm:grid-cols-3 lg:grid-cols-5">
+            {w.technology.map((t, i) => (
+              <li
+                key={t}
+                className="flex min-h-[112px] flex-col justify-between gap-4 border-b border-r border-navy/15 bg-white p-5 transition-colors hover:bg-paper"
+              >
+                <span className="font-mono text-[11px] text-gold-dark">{pad(i + 1)}</span>
+                <span className="font-display text-[18px] leading-tight text-navy">{t}</span>
+              </li>
+            ))}
+          </ul>
+          <Link href="/case-studies" className="btn mt-14 border border-navy text-navy transition hover:bg-navy hover:text-white">
             All case studies <span aria-hidden>→</span>
           </Link>
         </div>

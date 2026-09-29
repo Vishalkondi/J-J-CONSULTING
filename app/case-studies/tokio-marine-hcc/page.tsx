@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
-import { ClientMark } from "@/components/ClientMark";
+import { CaseOverview } from "@/components/CaseOverview";
 import { CtaBand } from "@/components/CtaBand";
 import { Reveal } from "@/components/Reveal";
 import { Tags } from "@/components/Tags";
@@ -37,6 +37,23 @@ function Bullets({ items }: { items: readonly string[] }) {
   );
 }
 
+/** Numbered tile grid for tool and partner lists. */
+function TileGrid({ items, label }: { items: readonly string[]; label: string }) {
+  return (
+    <ul aria-label={label} className="mt-4 grid grid-cols-2 border-l border-t border-navy/15 sm:grid-cols-3">
+      {items.map((it, i) => (
+        <li
+          key={it}
+          className="flex min-h-[96px] flex-col justify-between gap-3 border-b border-r border-navy/15 bg-white p-4 transition-colors hover:bg-paper"
+        >
+          <span className="font-mono text-[11px] text-gold-dark">{String(i + 1).padStart(2, "0")}</span>
+          <span className="font-display text-[17px] leading-tight text-navy">{it}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 function ProjectHeading({ n, title, areas, id }: { n: number; title: string; areas: readonly string[]; id: string }) {
   return (
     <div className="lg:sticky lg:top-28 lg:self-start">
@@ -56,25 +73,20 @@ export default function TmhccPage() {
       <PageHero eyebrow={t.eyebrow} title={t.title} intro={`${t.role} · ${t.period}`} image={images.skyline} />
 
       {/* OVERVIEW */}
-      <section className="bg-paper py-20 md:py-28" aria-label="Overview">
-        <div className="wrap grid gap-12 lg:grid-cols-[minmax(0,320px)_1fr] lg:gap-24">
-          <ClientMark name={t.client} logo={t.logo} className="aspect-square w-full max-w-[280px] border border-navy/10" />
-          <div>
-            <p className="max-w-2xl text-[19px] leading-relaxed text-graphite">{t.statement}</p>
-            <dl className="mt-10 grid gap-px border border-navy/15 bg-navy/15 sm:grid-cols-3">
-              {t.stats.map((s) => (
-                <div key={s.label} className="bg-white p-6">
-                  <dt className="sr-only">{s.label}</dt>
-                  <dd className="font-display text-[44px] leading-none text-navy">{s.value}</dd>
-                  <dd className="mt-3 text-[14px] leading-snug text-graphite">{s.label}</dd>
-                </div>
-              ))}
-            </dl>
-            <p className="label mt-10 text-graphite">Lines of business</p>
-            <Tags items={[...t.linesOfBusiness]} label="Lines of business" />
-          </div>
-        </div>
-      </section>
+      <CaseOverview
+        client={t.client}
+        logo={t.logo}
+        facts={[
+          { label: "Role", value: t.role },
+          { label: "Period", value: t.period },
+          { label: "Scope", value: "Policy administration, vendor selection, target state architecture" },
+        ]}
+        heading="From legacy policy systems to a defined target state"
+        statement={t.statement}
+        stats={t.stats}
+        tagsLabel="Lines of business"
+        tags={t.linesOfBusiness}
+      />
 
       {/* PROJECT INDEX */}
       <section className="blueprint relative bg-midnight py-16 text-white md:py-20" aria-label="Projects">
@@ -105,8 +117,8 @@ export default function TmhccPage() {
             <Bullets items={t.pas.achievements} />
             <p className="label mb-4 mt-12 text-gold-dark">Key responsibilities</p>
             <Bullets items={t.pas.responsibilities} />
-            <p className="label mt-12 text-graphite">Tools and systems</p>
-            <Tags items={[...t.pas.technology]} label="Tools and systems" />
+            <p className="label mt-12 text-gold-dark">Tools and systems · {t.pas.technology.length}</p>
+            <TileGrid items={t.pas.technology} label="Tools and systems" />
           </Reveal>
         </div>
       </section>
@@ -119,8 +131,8 @@ export default function TmhccPage() {
             <Reveal>
               <p className="label mb-4 text-gold-dark">Achievements</p>
               <Bullets items={t.rfp.achievements} />
-              <p className="label mt-12 text-graphite">Implementation partners evaluated</p>
-              <Tags items={[...t.rfp.partners]} label="Implementation partners evaluated" />
+              <p className="label mt-12 text-gold-dark">Implementation partners evaluated · {t.rfp.partners.length}</p>
+              <TileGrid items={t.rfp.partners} label="Implementation partners evaluated" />
             </Reveal>
           </div>
           <p className="label mt-16 text-gold-dark">Systems evaluated</p>
@@ -187,7 +199,7 @@ export default function TmhccPage() {
 
       <section className="bg-bone py-16">
         <div className="wrap">
-          <Link href="/case-studies" className="link-arrow text-navy">
+          <Link href="/case-studies" className="btn border border-navy text-navy transition hover:bg-navy hover:text-white">
             All case studies <span aria-hidden>→</span>
           </Link>
         </div>
