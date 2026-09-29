@@ -1,7 +1,7 @@
 import { HeroVideo } from "@/components/HeroVideo";
 import { Introduction, ExperienceCounters } from "@/components/home/Intro";
 import { WhatWeDo } from "@/components/home/Services";
-import { InsuranceFinancial, Capabilities, TechEcosystem } from "@/components/home/Expertise";
+import { InsuranceYears, InsuranceFinancial, Capabilities, TechEcosystem } from "@/components/home/Expertise";
 import { CurrentClients, PreviousClients, FeaturedCaseStudies, ProjectSpotlight } from "@/components/home/Proof";
 import { GlobalHubs, DeliveryNetwork, InternationalExperience } from "@/components/home/World";
 import { ExperienceMarquee } from "@/components/home/ExperienceMarquee";
@@ -14,6 +14,7 @@ export default function Home() {
       <Introduction /> {/* 02 */}
       <ExperienceCounters /> {/* 03 */}
       <WhatWeDo /> {/* 04 */}
+      <InsuranceYears />
       <InsuranceFinancial /> {/* 05 */}
       <ExperienceMarquee />
       <Capabilities /> {/* 06 */}

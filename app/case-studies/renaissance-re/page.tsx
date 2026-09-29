@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { rre } from "@/data/renaissance-re";
+import { cn } from "@/lib/utils";
 import { articles } from "@/data/insights";
 import { company } from "@/data/site";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -119,16 +120,18 @@ export default function RenaissanceRePage() {
       <section className="blueprint relative bg-midnight py-24 text-white md:py-32">
         <div className="wrap">
           <SectionHeading tone="dark" eyebrow="Current state" title="What was assessed" />
-          <ul className="mt-12 grid gap-px border border-white/15 bg-white/15 sm:grid-cols-2 lg:grid-cols-3">
-            {rre.assessmentAreas.map((a) => (
-              <li key={a} className="bg-midnight px-6 py-7 font-display text-[26px]">
-                {a}
+          <ul className="mt-12 grid border-l border-t border-white/15 sm:grid-cols-2 lg:grid-cols-3">
+            {rre.assessmentDetails.map((a, i) => (
+              <li key={a.title} className="flex flex-col gap-3 border-b border-r border-white/15 px-6 py-7 md:px-8 md:py-9">
+                <span className="font-mono text-[12px] text-gold-light">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="font-display text-[26px] leading-tight">{a.title}</h3>
+                <p className="text-[15px] leading-relaxed text-white/65">{a.text}</p>
               </li>
             ))}
           </ul>
           <div className="mt-20">
             <p className="label text-gold-light">Architecture</p>
-            <h3 className="mt-3 max-w-2xl text-[clamp(26px,3vw,40px)] leading-tight">A conceptual view of the landscape in scope</h3>
+            <h3 className="mt-3 max-w-2xl text-balance text-[clamp(26px,3vw,40px)] leading-tight">A conceptual view of the landscape in scope</h3>
             <div className="mt-10">
               <ArchitectureStack layers={rre.architecture} />
             </div>
@@ -154,20 +157,39 @@ export default function RenaissanceRePage() {
 
       {/* IMAGERIGHT */}
       <section className="bg-paper py-24 md:py-32">
-        <div className="wrap grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-24">
-          <div>
-            <p className="label text-gold-dark">Deep dive</p>
-            <h2 className="mt-4 text-[clamp(38px,5vw,72px)] leading-[1.02] text-navy">ImageRight</h2>
-            <p className="mt-3 font-display text-[clamp(20px,2.2vw,28px)] text-steel">{rre.imageRight.subtitle}</p>
-            <p className="mt-8 max-w-md text-[18px] leading-relaxed text-graphite">{rre.imageRight.text}</p>
+        <div className="wrap">
+          <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-20">
+            <div>
+              <p className="label text-gold-dark">Deep dive</p>
+              <h2 className="mt-4 text-[clamp(38px,5vw,72px)] leading-[1.02] text-navy">ImageRight</h2>
+              <p className="mt-3 font-display text-[clamp(20px,2.2vw,28px)] text-steel">{rre.imageRight.subtitle}</p>
+              <p className="mt-8 max-w-md text-[18px] leading-relaxed text-graphite">{rre.imageRight.text}</p>
+              <ul className="mt-8 flex flex-wrap gap-2">
+                {rre.imageRight.scope.map((t) => (
+                  <li key={t} className="border border-navy/15 bg-white px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-navy">
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <figure>
+              <SlotImage
+                src="/images/cloud-infrastructure.jpg"
+                alt="Close-up of network and server infrastructure"
+                className="aspect-[4/3] w-full"
+              />
+              <figcaption className="mt-3 font-mono text-[11px] text-graphite">{rre.disclaimers.visual}</figcaption>
+            </figure>
           </div>
-          <ul className="self-end border-t border-navy/20">
-            {rre.imageRight.outputs.map((o) => (
-              <li key={o} className="border-b border-navy/20 py-6 font-display text-[clamp(26px,3vw,40px)] text-navy">
-                {o}
+          <ol className="mt-16 grid gap-px border border-navy/15 bg-navy/15 md:grid-cols-3">
+            {rre.imageRight.findings.map((f, i) => (
+              <li key={f.title} className="flex flex-col gap-4 bg-white p-7 md:p-8">
+                <span className="font-mono text-[12px] text-gold-dark">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="font-display text-[clamp(24px,2.4vw,32px)] leading-tight text-navy">{f.title}</h3>
+                <p className="text-[16px] leading-relaxed text-graphite">{f.text}</p>
               </li>
             ))}
-          </ul>
+          </ol>
         </div>
       </section>
 
@@ -192,9 +214,30 @@ export default function RenaissanceRePage() {
               title="Identify. Improve. Streamline."
               intro="Redundant integrations were identified and documented as opportunities for decommissioning, as part of the recommended path to the target state."
             />
-            <div className="mt-12">
-              <FlowChain steps={rre.recommendationFlow} tone="dark" />
-            </div>
+            <ol className="mt-12 grid gap-px border border-white/15 bg-white/15 sm:grid-cols-2 lg:grid-cols-5">
+              {rre.recommendationDetails.map((r, i) => (
+                <li
+                  key={r.title}
+                  className={cn(
+                    "flex flex-col gap-5 p-6 lg:min-h-[240px]",
+                    i === rre.recommendationDetails.length - 1 ? "bg-gold text-navy" : "bg-navy",
+                  )}
+                >
+                  <span className={cn("font-mono text-[12px]", i === rre.recommendationDetails.length - 1 ? "text-navy/70" : "text-gold-light")}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="font-display text-[26px] leading-tight">{r.title}</h3>
+                  <p
+                    className={cn(
+                      "mt-auto text-[15px] leading-relaxed",
+                      i === rre.recommendationDetails.length - 1 ? "text-navy/80" : "text-white/70",
+                    )}
+                  >
+                    {r.text}
+                  </p>
+                </li>
+              ))}
+            </ol>
           </div>
           <div>
             <p className="label text-gold-light">Execution roadmap</p>
@@ -209,8 +252,28 @@ export default function RenaissanceRePage() {
       {/* THIRD-PARTY */}
       <section className="bg-paper py-24 md:py-32">
         <div className="wrap">
-          <SectionHeading eyebrow="Third-party collaboration" title="Coordinating across vendors and teams" intro={rre.collaborationText} />
-          <div className="mt-12">
+          <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-20">
+            <SectionHeading eyebrow="Third-party collaboration" title="Coordinating across vendors and teams" intro={rre.collaborationText} />
+            <SlotImage
+              src="/images/howden/workshop-data-to-decisions.jpg"
+              alt="An analyst presenting a process flow to colleagues in a meeting room"
+              className="aspect-[3/2] w-full"
+            />
+          </div>
+          <ul className="mt-14 grid gap-6 md:grid-cols-3">
+            {rre.parties.map((p, i) => (
+              <li
+                key={p.title}
+                className={cn("border p-7", i === 1 ? "border-navy bg-navy text-white" : "border-navy/15 bg-white text-navy")}
+              >
+                <p className={cn("label", i === 1 ? "text-gold-light" : "text-gold-dark")}>{i === 1 ? "Coordinating role" : "Contributor"}</p>
+                <h3 className="mt-3 font-display text-[24px] leading-tight">{p.title}</h3>
+                <p className={cn("mt-3 text-[16px] leading-relaxed", i === 1 ? "text-white/75" : "text-graphite")}>{p.text}</p>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-14">
+            <p className="label mb-6 text-gold-dark">How findings came together</p>
             <FlowChain steps={rre.collaboration} />
           </div>
         </div>
@@ -251,11 +314,39 @@ export default function RenaissanceRePage() {
           <div className="mt-24 grid items-center gap-12 lg:grid-cols-[1fr_1fr] lg:gap-24">
             <div>
               <p className="label text-gold-light">Systems thinking</p>
-              <h3 className="mt-3 text-[clamp(28px,3.4vw,46px)] leading-tight">Business analysis connects the whole picture</h3>
+              <h3 className="mt-3 text-balance text-[clamp(28px,3.4vw,46px)] leading-tight">Business analysis connects the whole picture</h3>
+              <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-white/70">{rre.systemsThinking.intro}</p>
+              <dl className="mt-8 max-w-xl divide-y divide-white/10 border-y border-white/10">
+                {rre.systemsThinking.connections.map((c) => (
+                  <div key={c.node} className="grid gap-1 py-3.5 sm:grid-cols-[140px_1fr] sm:gap-6">
+                    <dt className="label pt-1 text-gold-light">{c.node}</dt>
+                    <dd className="text-[16px] leading-relaxed text-white/80">{c.text}</dd>
+                  </div>
+                ))}
+              </dl>
               <ConceptualNote tone="dark">{rre.disclaimers.conceptual}</ConceptualNote>
             </div>
             <SystemsRadial center={rre.systemsThinking.center} nodes={rre.systemsThinking.nodes} />
           </div>
+          <Reveal>
+            <figure className="mt-20 grid overflow-hidden border border-white/15 lg:grid-cols-[1.4fr_1fr]">
+              <SlotImage
+                src="/images/boardroom-team-london.jpg"
+                alt="Business and technology stakeholders reviewing findings around a boardroom table in London"
+                className="aspect-[16/10] w-full lg:aspect-auto lg:min-h-[380px]"
+              />
+              <figcaption className="flex flex-col justify-center gap-5 bg-white/[0.03] p-8 md:p-10">
+                <p className="label text-gold-light">A shared starting point</p>
+                <p className="font-display text-[clamp(22px,2.2vw,30px)] leading-snug">
+                  One structured view of architecture, integrations and document storage.
+                </p>
+                <p className="text-[16px] leading-relaxed text-white/65">
+                  Current process flows were documented for Policy &amp; Claims and Finance, giving business and technology teams a shared
+                  starting point for the recommendations and execution sequence.
+                </p>
+              </figcaption>
+            </figure>
+          </Reveal>
         </div>
       </section>
 
@@ -271,25 +362,6 @@ export default function RenaissanceRePage() {
               {rre.impact.text}
             </blockquote>
           </Reveal>
-        </div>
-      </section>
-
-      {/* EDITORIAL VISUAL */}
-      <section className="bg-bone py-20">
-        <div className="wrap">
-          <figure>
-            <SlotImage
-              src="/images/renaissance-re-editorial.jpg"
-              alt="Editorial visual for the RenaissanceRe case study"
-              className="aspect-[21/9] w-full"
-              fallback={
-                <div className="absolute inset-0">
-                  <CaseVisual variant="banner" data={rreVisualData} />
-                </div>
-              }
-            />
-            <figcaption className="mt-3 font-mono text-[11px] text-graphite">{rre.disclaimers.visual}</figcaption>
-          </figure>
         </div>
       </section>
 

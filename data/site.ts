@@ -13,8 +13,8 @@ export const company = {
   tagline: "Technology. Transformation. Talent.",
   strapline: "Consulting, technology and talent solutions for complex business environments.",
   address: {
-    lines: ["Hamilton House", "87–89 Bell Street", "Reigate", "Surrey", "RH2 7AN", "United Kingdom"],
-    oneLine: "Hamilton House, 87–89 Bell Street, Reigate, Surrey, RH2 7AN, United Kingdom",
+    lines: ["Hamilton House", "87–89 Bell Street", "Reigate", "Surrey", "England", "RH2 7AN", "United Kingdom"],
+    oneLine: "Hamilton House, 87–89 Bell Street, Reigate, Surrey, England, RH2 7AN, United Kingdom",
   },
 
   // Use the configured production URL when available.

@@ -156,3 +156,87 @@ function TechnologyPartners({ dark }: { dark: boolean }) {
     </div>
   );
 }
+
+const pillarIcon = {
+  shield: <path d="M12 3 5 6v5c0 4.4 3 8.4 7 9.5 4-1.1 7-5.1 7-9.5V6l-7-3Zm-3 9 2 2 4-4" />,
+  chart: <path d="M4 20h16M7 16v-4m4 4V9m4 7v-6m4-6-5 5-3-3-4 4" />,
+  globe: <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm-9-9h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3Z" />,
+  people: <path d="M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-6 9c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5m1-9a2.5 2.5 0 1 0 0-5m2 14c0-2.6-1.2-4.4-3-5.2" />,
+};
+
+const insurancePillars: { label: string; icon: keyof typeof pillarIcon; gold?: boolean }[] = [
+  { label: "Insurance expertise", icon: "shield" },
+  { label: "Financial services", icon: "chart", gold: true },
+  { label: "London Market", icon: "globe" },
+  { label: "Clients, people & partnerships", icon: "people", gold: true },
+];
+
+export function InsuranceYears() {
+  return (
+    <section className="blueprint relative overflow-hidden bg-midnight py-24 text-white md:py-32" aria-labelledby="years-title">
+      {/* gold glow behind the headline, navy glow behind the photo */}
+      <div className="pointer-events-none absolute -left-40 top-1/4 h-[520px] w-[520px] rounded-full bg-gold/10 blur-3xl" aria-hidden />
+      <div className="pointer-events-none absolute -right-40 bottom-0 h-[560px] w-[560px] rounded-full bg-navy-700/60 blur-3xl" aria-hidden />
+      <div className="wrap relative grid items-center gap-14 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
+        <div>
+          <p className="pill bg-white/5 text-gold-light">Insurance &amp; financial services</p>
+          <h2 id="years-title" className="mt-8 font-display leading-[0.95]">
+            <span className="block text-[clamp(40px,5.6vw,76px)] text-white">More than</span>
+            <span className="block bg-gradient-to-r from-gold-light via-gold to-gold-light bg-clip-text text-[clamp(64px,9.5vw,132px)] text-transparent">
+              16 Years
+            </span>
+          </h2>
+          <p className="mt-6 max-w-xl text-[clamp(19px,1.8vw,24px)] leading-snug text-white/75">
+            in insurance and financial services, including the London Market.
+          </p>
+          <span className="mt-8 block h-px w-24 bg-gradient-to-r from-gold to-gold/0" aria-hidden />
+
+          <ul className="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
+            {insurancePillars.map((p) => (
+              <li key={p.label} className="group flex flex-col items-center text-center">
+                <span
+                  className={`flex h-[72px] w-[72px] items-center justify-center rounded-full shadow-[0_14px_30px_-14px_rgba(0,0,0,0.8)] transition duration-300 group-hover:-translate-y-1 motion-reduce:transition-none ${
+                    p.gold
+                      ? "bg-gradient-to-br from-gold-light to-gold-dark text-midnight"
+                      : "border border-gold/50 bg-navy-800 text-gold-light group-hover:border-gold"
+                  }`}
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8" aria-hidden>
+                    {pillarIcon[p.icon]}
+                  </svg>
+                </span>
+                <span className="mt-4 max-w-[9rem] text-[14.5px] font-semibold leading-tight text-white/90">{p.label}</span>
+              </li>
+            ))}
+          </ul>
+
+          <Link href="/industries" className="link-arrow mt-12 text-gold-light">
+            Insurance &amp; financial services expertise <span aria-hidden>→</span>
+          </Link>
+        </div>
+
+        <Reveal>
+          <div className="relative mx-auto max-w-[480px] lg:max-w-none">
+            <SlotImage
+              src="/images/london-market-insurance.jpg"
+              alt="A consultant looking out over the City of London skyline, with an insurance shield on the desk"
+              className="aspect-[736/1024] w-full rounded-2xl border border-white/10 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.9)]"
+            />
+            {/* navy grade so the photo's pale sky sits in the brand palette */}
+            <div
+              className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-t from-midnight/85 via-navy/25 to-navy/40 mix-blend-multiply"
+              aria-hidden
+            />
+            <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-gold/20" aria-hidden />
+            <div className="absolute -bottom-6 -left-4 rounded-2xl border border-gold/30 bg-midnight/85 px-5 py-4 shadow-[0_24px_50px_-24px_rgba(0,0,0,0.9)] backdrop-blur-md sm:-left-8">
+              <p className="font-display text-[34px] leading-none text-white">
+                16<span className="text-gold">+</span>
+              </p>
+              <p className="label mt-1.5 text-gold-light">Years · London Market</p>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}

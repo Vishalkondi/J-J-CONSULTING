@@ -23,7 +23,7 @@ export function FlowChain({ steps, tone = "light", numbered = true }: { steps: s
   return (
     <ol className="flex flex-col gap-0 lg:flex-row lg:items-stretch">
       {steps.map((s, i) => (
-        <li key={s} className="flex flex-col items-stretch lg:min-w-0 lg:flex-1 lg:flex-row lg:items-center">
+        <li key={s} className="flex flex-col items-stretch lg:min-w-0 lg:flex-1 lg:flex-row">
           <motion.div
             className={cn(
               "flex flex-1 flex-col justify-between gap-6 border px-4 py-4 lg:min-h-[112px] lg:min-w-0",
@@ -35,10 +35,10 @@ export function FlowChain({ steps, tone = "light", numbered = true }: { steps: s
             transition={reduce ? { duration: 0 } : { duration: 0.6, delay: i * 0.08 }}
           >
             {numbered && <span className="font-mono text-[11px] text-gold">{String(i + 1).padStart(2, "0")}</span>}
-            <span className="hyphens-auto font-display text-[20px] leading-tight lg:text-[17px] xl:text-[20px]">{s}</span>
+            <span className="hyphens-auto break-words font-display text-[20px] leading-tight lg:text-[16px] xl:text-[18px] 2xl:text-[20px]">{s}</span>
           </motion.div>
           {i < steps.length - 1 && (
-            <span aria-hidden className={cn("flex items-center justify-center py-1 text-gold lg:px-1.5 lg:py-0")}>
+            <span aria-hidden className="flex items-center justify-center py-1 text-gold lg:self-center lg:px-1.5 lg:py-0">
               <span className="lg:hidden">↓</span>
               <span className="hidden lg:inline">→</span>
             </span>
@@ -92,32 +92,68 @@ export function ArchitectureStack({ layers }: { layers: { layer: string; items: 
 
 /** Three-stage gap analysis: existing → gaps → recommendations */
 export function GapAnalysis({ existing, gaps, recommendations }: { existing: string[]; gaps: string[]; recommendations: string[] }) {
-  const col = (title: string, items: string[], accent?: boolean) => (
-    <div className={cn("flex-1 border p-6", accent ? "border-gold bg-gold/[0.06]" : "border-navy/20 bg-white")}>
-      <p className="label text-gold-dark">{title}</p>
-      <ul className="mt-5 space-y-3">
-        {items.map((i) => (
-          <li key={i} className="border-b border-navy/10 pb-3 font-display text-[19px] leading-snug text-navy last:border-0">
-            {i}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+  const reduce = useReducedMotion();
+  const stages = [
+    { title: "What exists", caption: "Current state", items: existing },
+    { title: "What was identified", caption: "Gaps & shortcomings", items: gaps },
+    { title: "What was recommended", caption: "Path forward", items: recommendations, accent: true },
+  ];
   return (
-    <div className="flex flex-col gap-3 md:flex-row md:items-stretch">
-      {col("What exists", existing)}
-      <span aria-hidden className="flex items-center justify-center text-gold">
-        <span className="md:hidden">↓</span>
-        <span className="hidden md:inline">→</span>
-      </span>
-      {col("What was identified", gaps)}
-      <span aria-hidden className="flex items-center justify-center text-gold">
-        <span className="md:hidden">↓</span>
-        <span className="hidden md:inline">→</span>
-      </span>
-      {col("What was recommended", recommendations, true)}
-    </div>
+    <ol className="grid gap-10 md:grid-cols-3 md:gap-6 lg:gap-8">
+      {stages.map((s, i) => (
+        <motion.li
+          key={s.title}
+          className={cn(
+            "relative flex flex-col border",
+            s.accent ? "border-navy bg-navy text-white" : "border-navy/15 bg-white text-navy",
+          )}
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-8% 0px" }}
+          transition={reduce ? { duration: 0 } : { duration: 0.6, delay: i * 0.1 }}
+        >
+          <div className={cn("flex items-start justify-between gap-4 border-b px-6 py-5", s.accent ? "border-white/15" : "border-navy/10")}>
+            <div>
+              <p className={cn("label", s.accent ? "text-gold-light" : "text-gold-dark")}>
+                {String(i + 1).padStart(2, "0")} — {s.caption}
+              </p>
+              <h3 className="mt-2 font-display text-[22px] leading-tight">{s.title}</h3>
+            </div>
+            <span
+              className={cn(
+                "flex h-9 w-9 shrink-0 items-center justify-center rounded-full font-mono text-[12px]",
+                s.accent ? "bg-gold text-navy" : "bg-bone text-navy",
+              )}
+            >
+              {s.items.length}
+            </span>
+          </div>
+          <ul className="flex-1 px-6 py-2">
+            {s.items.map((item) => (
+              <li
+                key={item}
+                className={cn(
+                  "flex items-baseline gap-3 border-b py-3.5 font-display text-[18px] leading-snug last:border-0",
+                  s.accent ? "border-white/10" : "border-navy/10",
+                )}
+              >
+                <span aria-hidden className={cn("h-1.5 w-1.5 shrink-0 -translate-y-0.5 rounded-full", s.accent ? "bg-gold-light" : "bg-gold")} />
+                {item}
+              </li>
+            ))}
+          </ul>
+          {i < stages.length - 1 && (
+            <span
+              aria-hidden
+              className="absolute left-1/2 top-full z-10 flex h-8 w-8 -translate-x-1/2 translate-y-1 items-center justify-center rounded-full border border-gold bg-bone text-[14px] text-gold-dark md:left-full md:top-1/2 md:-translate-y-1/2 md:translate-x-[calc(-50%+12px)] lg:translate-x-[calc(-50%+16px)]"
+            >
+              <span className="md:hidden">↓</span>
+              <span className="hidden md:inline">→</span>
+            </span>
+          )}
+        </motion.li>
+      ))}
+    </ol>
   );
 }
 

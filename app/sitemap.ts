@@ -16,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/case-studies/westfield-specialty",
     "/case-studies/ascot-group",
     "/case-studies/beazley",
+    "/case-studies/tokio-marine-hcc",
     "/case-studies/ms-amlin",
     "/case-studies/ms-amlin-solvency-ii",
     "/case-studies/metlife-uk",

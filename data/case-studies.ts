@@ -9,6 +9,8 @@ import { ascot } from "@/data/ascot";
 import { hastings } from "@/data/hastings";
 import { axaXl } from "@/data/axa-xl";
 import { msaSolvency } from "@/data/ms-amlin-solvency";
+import { tmhcc } from "@/data/tmhcc";
+import { westfield } from "@/data/westfield";
 
 export type FeaturedCase = {
   href: string;
@@ -41,11 +43,11 @@ export const featuredCases: FeaturedCase[] = [
   {
     href: "/case-studies/westfield-specialty",
     client: "Westfield Specialty",
-    label: "Business Analyst · April 2025 – February 2026",
-    title: "Project Goldcrest",
-    blurb: "New Company Market Entity Setup in Luxembourg.",
-    cta: "View the engagement",
-    visual: { kind: "logo", name: "Westfield Specialty", logo: "/images/westfield-specialty-logo.png" },
+    label: `${westfield.role} · ${westfield.period}`,
+    title: westfield.title,
+    blurb: `${westfield.subtitle}: claims, actuarial systems, and underwriting workbench and pricing.`,
+    cta: "Read the case study",
+    visual: { kind: "logo", name: westfield.client, logo: westfield.logo },
   },
   {
     href: "/case-studies/ascot-group",
@@ -69,6 +71,15 @@ export const featuredCases: FeaturedCase[] = [
       alt: "Illustrative visual for the Beazley modernisation programme",
       aspect: "aspect-[3/2]",
     },
+  },
+  {
+    href: `/case-studies/${tmhcc.slug}`,
+    client: tmhcc.client,
+    label: `${tmhcc.role} · ${tmhcc.period}`,
+    title: tmhcc.title,
+    blurb: "Guidewire policy administration, vendor and partner RFPs, and six target state architecture archetypes.",
+    cta: "Read the case study",
+    visual: { kind: "logo", name: tmhcc.client, logo: tmhcc.logo },
   },
   {
     href: "/case-studies/howden-hyperion-x",
