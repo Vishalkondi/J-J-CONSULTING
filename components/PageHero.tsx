@@ -20,7 +20,7 @@ export function PageHero({
     <section className="relative overflow-hidden bg-midnight text-white">
       {image ? (
         <>
-          <Image quality={92} src={image.src} alt="" fill priority sizes="100vw" className="object-cover" />
+          <Image quality={92} src={image.src} alt="" fill priority sizes="100vw" className="settle object-cover" />
           <div
             className="absolute inset-0"
             aria-hidden
@@ -32,10 +32,10 @@ export function PageHero({
         <div className="hero-fallback blueprint absolute inset-0" aria-hidden />
       )}
       <div className="wrap relative pb-20 pt-40 md:pb-28 md:pt-52">
-        {eyebrow && <p className="pill mb-6 bg-white/5 text-gold-light backdrop-blur-sm">{eyebrow}</p>}
-        <h1 className="max-w-4xl text-[clamp(38px,6vw,84px)] leading-[1.02]">{title}</h1>
-        {intro && <p className="mt-8 max-w-2xl text-[18px] leading-relaxed text-white/70">{intro}</p>}
-        {children}
+        {eyebrow && <p className="pill rise mb-6 bg-white/5 text-gold-light backdrop-blur-sm">{eyebrow}</p>}
+        <h1 className="rise max-w-4xl text-[clamp(38px,6vw,84px)] leading-[1.02] [--d:80ms]">{title}</h1>
+        {intro && <p className="rise mt-8 max-w-2xl text-[18px] leading-relaxed text-white/70 [--d:160ms]">{intro}</p>}
+        {children && <div className="rise [--d:240ms]">{children}</div>}
       </div>
     </section>
   );

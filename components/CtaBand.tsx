@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Reveal } from "@/components/Reveal";
 
 export function CtaBand({
   title = "Let’s Build What’s Next.",
@@ -11,7 +12,7 @@ export function CtaBand({
 }) {
   return (
     <section className="blueprint bg-navy py-20 text-white md:py-28">
-      <div className="wrap flex flex-col justify-between gap-8 md:flex-row md:items-end">
+      <Reveal className="wrap flex flex-col justify-between gap-8 md:flex-row md:items-end">
         <div>
           <h2 className="text-[clamp(32px,4.4vw,60px)] leading-[1.05]">{title}</h2>
           <p className="mt-5 max-w-lg text-[17px] leading-relaxed text-white/70">{text}</p>
@@ -19,7 +20,7 @@ export function CtaBand({
         <Link href="/contact" className="btn btn-gold shrink-0">
           {label} <span aria-hidden>→</span>
         </Link>
-      </div>
+      </Reveal>
     </section>
   );
 }

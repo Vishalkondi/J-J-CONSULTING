@@ -72,6 +72,13 @@ body {
   .btn {
     @apply inline-flex items-center gap-3 rounded-md px-6 py-3.5 text-[13px] font-medium tracking-wide transition-colors duration-300;
   }
+  /* Trailing "→" glyph eases forward on hover. */
+  .btn > [aria-hidden] {
+    @apply transition-transform duration-300;
+  }
+  .btn:hover > [aria-hidden] {
+    @apply translate-x-1;
+  }
   .btn-gold {
     @apply bg-gold text-midnight hover:bg-gold-light;
   }
@@ -161,6 +168,25 @@ body {
   animation: nudge 2.4s ease-in-out infinite;
 }
 
+/* Page-hero entrance: CSS-only so it runs at first paint with no hydration cost. Stagger with --d. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+.rise {
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both;
+}
+@keyframes settle {
+  from {
+    transform: scale(1.06);
+  }
+}
+.settle {
+  animation: settle 2.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -171,6 +197,10 @@ body {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+  }
+  .rise,
+  .settle {
+    animation: none;
   }
 }
 
