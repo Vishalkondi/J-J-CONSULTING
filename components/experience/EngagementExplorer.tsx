@@ -32,8 +32,8 @@ export function EngagementExplorer({ items, panels }: { items: Item[]; panels: R
   }, [items]);
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[340px_1fr] lg:gap-14">
-      <div>
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-[340px_1fr] lg:gap-14">
+      <div className="min-w-0">
         <p className="label mb-4 text-gold-dark">{items.length} engagements</p>
         <ul
           role="tablist"
