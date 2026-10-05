@@ -251,3 +251,58 @@ body {
     margin-top: 0.5rem;
   }
 }
+
+/* Services page: slow drifting blueprint grid, hairlines that draw in, and masked line-by-line headline reveal. */
+.grid-drift {
+  background-image:
+    linear-gradient(rgba(143, 176, 214, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(143, 176, 214, 0.08) 1px, transparent 1px);
+  background-size: 72px 72px;
+  animation: grid-drift 48s linear infinite;
+}
+@keyframes grid-drift {
+  to {
+    background-position: 72px 72px;
+  }
+}
+.line-mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+.line-in {
+  display: block;
+  animation: line-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both;
+}
+@keyframes line-in {
+  from {
+    transform: translateY(105%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .grid-drift,
+  .line-in {
+    animation: none;
+  }
+}
+
+/* /services: highlight text and gradient button in the J & J logo colours (blue #2058B8–#74B0F2, gold #EBB84C–#FAE6B2). */
+.dm-gradient-text {
+  background-image: linear-gradient(90deg, #ebb84c, #fae6b2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.brand-text-blue {
+  background-image: linear-gradient(90deg, #2058b8, #3b82e4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.btn-dm {
+  background-image: linear-gradient(90deg, #2058b8, #3b82e4);
+  color: #fff;
+  box-shadow: 0 14px 30px -14px rgba(32, 88, 184, 0.7);
+}
+.btn-dm:hover {
+  filter: brightness(1.1);
+}

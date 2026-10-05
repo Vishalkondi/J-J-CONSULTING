@@ -55,13 +55,14 @@ export const heroCategories = [
  */
 export const leadership: { name: string; role: string; bio: string; photo?: string; highlights?: string[] }[] = [];
 
-export const stats = [
-  { value: 25, suffix: "+", label: "Years of professional experience" },
+/** `servicesHero` marks the figures shown under the /services hero. */
+export const stats: { value: number; suffix: string; label: string; servicesHero?: boolean }[] = [
+  { value: 25, suffix: "+", label: "Years of professional experience", servicesHero: true },
   { value: 16, suffix: "+", label: "Years in insurance & financial services" },
   { value: 6, suffix: "+", label: "Years in consulting" },
-  { value: 25, suffix: "+", label: "International projects" },
+  { value: 25, suffix: "+", label: "International projects", servicesHero: true },
   { value: 8, suffix: "", label: "Full-cycle solution implementations" },
-  { value: 5, suffix: "", label: "Countries of international experience" },
+  { value: 5, suffix: "", label: "Countries of international experience", servicesHero: true },
 ];
 
 export const countries = [
@@ -601,6 +602,7 @@ export const cities: { name: string; note: string; compulsory?: boolean; video?:
     note: "One of Europe's principal corporate and financial capitals.",
   },
   {
+    // Photo: Patrick Federi on Unsplash (Unsplash License), https://unsplash.com/photos/DtJSERJmtDc
     name: "Zurich",
     note: "A global centre for insurance, reinsurance and private banking.",
   },
@@ -624,11 +626,13 @@ export const deliveryNetwork = [
     name: "Shreynor",
     location: "Hyderabad",
     website: null as string | null,
+    logo: null as string | null,
   },
   {
     name: "Data Master",
     location: "Solapur",
     website: "https://www.thedatamaster.in/",
+    logo: "/images/partners/data-master-mark.png",
   },
 ];
 
@@ -713,5 +717,6 @@ export const pending = [
   "[PHONE / EMAIL TO BE CONFIRMED]",
   "[LIBERTY SPECIALTY MARKETS — project description and logo permission]",
   "[LEGAL TEXT: Privacy, Cookie, Terms]",
+  "[DATA MASTER CLAIMS — confirm with Data Master before launch (copied from thedatamaster.in, shown on /services): Microsoft Training Services Partner status, Microsoft Certified Trainer, Certified Databricks Instructor, 'certified data scientists', 10+ projects completed, 50+ trained at the Databricks Learning Festival (Nov 2023). Add the Microsoft logo back only once confirmed and permitted.]",
   "[CORPORATE VIDEO: the YouTube ID previously configured (ZSKtvO5OKvk) pointed to an unrelated 'London From Above' Google Earth flyover video, not a J & J Consulting film — section removed from the homepage until a genuine corporate video ID is supplied. The component (components/CorporateVideo.tsx, components/home/Closing.tsx → CorporateVideoSection) is intact and ready to re-add.]",
 ];

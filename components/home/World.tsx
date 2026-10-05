@@ -35,23 +35,30 @@ export function DeliveryNetwork() {
         </div>
         <ul className="border-t border-navy/20">
           {deliveryNetwork.map((d) => (
-            <li key={d.name} className="flex items-baseline justify-between gap-6 border-b border-navy/20 py-8">
-              <span className="font-display text-[clamp(30px,4vw,52px)] leading-none text-navy">
-                {d.website ? (
-                  <a
-                    href={d.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline decoration-navy/25 underline-offset-8 transition-colors hover:decoration-navy"
-                  >
-                    {d.name}
-                    <span className="sr-only"> (opens in a new tab)</span>
-                  </a>
-                ) : (
-                  d.name
+            <li key={d.name} className="group flex flex-wrap items-center justify-between gap-x-6 gap-y-4 border-b border-navy/20 py-8">
+              <div className="flex items-center gap-5">
+                {d.logo && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={d.logo} alt="" width={64} height={38} className="h-10 w-auto shrink-0" />
                 )}
-              </span>
-              <span className="label text-graphite">{d.location}</span>
+                <div>
+                  <p className="font-display text-[clamp(30px,4vw,48px)] leading-none text-navy">{d.name}</p>
+                  <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.14em] text-graphite">
+                    Delivery &amp; outsourcing partner · {d.location}, India
+                  </p>
+                </div>
+              </div>
+              {d.website && (
+                <a
+                  href={d.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-navy/25 px-4 py-2 text-[13px] font-medium text-navy transition-colors hover:border-navy hover:bg-navy hover:text-white"
+                >
+                  Visit website <span aria-hidden>↗</span>
+                  <span className="sr-only"> for {d.name} (opens in a new tab)</span>
+                </a>
+              )}
             </li>
           ))}
         </ul>

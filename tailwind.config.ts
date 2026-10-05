@@ -13,6 +13,20 @@ const config: Config = {
         bone: "#EAE5DB",
         charcoal: "#1D2228",
         graphite: "#4B525B",
+        // Data Master Consulting palette (thedatamaster.in), used on /services.
+        dm: {
+          blue: "#1E3A8A",
+          indigo: "#312E81",
+          purple: "#581C87",
+          sky: "#38BDF8",
+          mist: "#BFDBFE",
+          primary: "#2563EB",
+          violet: "#9333EA",
+          ink: "#0F172A",
+          slate: "#475569",
+          soft: "#F5F7FF",
+          line: "#E2E8F0",
+        },
       },
       fontFamily: {
         display: ['"DM Serif Display"', "Georgia", "serif"],

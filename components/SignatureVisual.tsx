@@ -26,7 +26,7 @@ const icon = {
 } as const;
 
 /** One icon per discipline, keyed by service slug. */
-const nodeIcons: Record<string, React.ReactElement> = {
+export const nodeIcons: Record<string, React.ReactElement> = {
   "it-consultancy": (
     <svg {...icon}>
       <rect x="3" y="4" width="18" height="12" rx="1.5" />

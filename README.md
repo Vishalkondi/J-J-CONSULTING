@@ -46,7 +46,7 @@ Run `npm run check:content` any time — it lists exactly which of the below are
 - **Brand:** `public/brand/` (`jj-mark.svg`, `jj-consulting.png`, `jj-consulting-light.png`); favicon is `app/icon.svg`. Replace the PNGs with true SVGs when available.
 - **Client logos:** most are supplied (Ascot, AXA, Beazley, BRIT, Collinson, Hastings Direct, Howden's assets, MetLife, MS Amlin, RenaissanceRe, XL). Still outstanding: **Westfield Specialty** and **Liberty Specialty Markets** (logo only — Liberty's site link is already in). Set `logo` per organisation in `data/site.ts → insuranceExperience`; files go in `public/images/clients/`.
 - **Still-pending images:** `public/images/renaissance-re-project.jpg`, `renaissance-re-editorial.jpg`, `westfield-specialty-logo.png`, `liberty-specialty-markets-logo.png`, `london-financial-district.jpg`.
-- **City hub imagery:** `public/images/cities/<slug>.jpg` (optional `.mp4` too) — none supplied yet for any of the seven cities (London, Frankfurt, Paris, Zurich, Geneva, Dublin, Amsterdam); each falls back to a plain gradient with a dev-mode filename label.
+- **City hub imagery:** `public/images/cities/<slug>.jpg` (optional `.mp4` too) — photos supplied for all seven cities (London, Frankfurt, Paris, Zurich, Geneva, Dublin, Amsterdam); only London has a video. A missing image falls back to a plain gradient with a dev-mode filename label.
 - `assets-source/*-collage-source.*` are intentionally **not** published — each is an AI-generated reference image that contained imitation client branding, invented figures, or fabricated slogans. Only cropped, fact-checked, text-free derivatives (if any) were published from each; see the file's own note in `assets-source/README.txt` for specifics.
 
 ## Before launch
