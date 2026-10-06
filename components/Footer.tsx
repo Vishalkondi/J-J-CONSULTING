@@ -30,9 +30,9 @@ export function Footer() {
       />
 
       <div className="wrap relative pt-20 md:pt-24">
-        {/* Statement row */}
-        <div className="flex flex-col gap-10 border-b border-white/10 pb-14 md:pb-16 lg:flex-row lg:items-end lg:justify-between">
-          <div>
+        {/* Statement row: tagline left, strapline and actions right */}
+        <div className="grid gap-10 border-b border-white/10 pb-14 md:pb-16 lg:grid-cols-12 lg:items-end lg:gap-12">
+          <div className="lg:col-span-8">
             <p className="label !font-mono text-gold-light">J &amp; J Consulting · Est. {company.established}</p>
             <p className="mt-5 font-display text-[clamp(36px,5vw,68px)] leading-[1.02] tracking-[-0.01em]">
               {taglineWords.map((w, i) => (
@@ -43,61 +43,89 @@ export function Footer() {
               ))}
             </p>
           </div>
-          <div className="flex flex-col gap-3 sm:flex-row lg:shrink-0">
-            <Link href="/contact" className="btn btn-gold justify-center">
-              Talk to Us <span aria-hidden>→</span>
-            </Link>
-            <Link href="/services" className="btn justify-center border border-white/25 text-white hover:border-white/60 hover:bg-white/5">
-              Our services
-            </Link>
+          <div className="lg:col-span-4">
+            <p className="max-w-sm text-[16px] leading-relaxed text-white/65">{company.strapline}</p>
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <Link href="/contact" className="btn btn-gold justify-center">
+                Talk to Us <span aria-hidden>→</span>
+              </Link>
+              <Link
+                href="/services"
+                className="btn justify-center border border-white/25 text-white hover:border-white/60 hover:bg-white/5"
+              >
+                Our services
+              </Link>
+            </div>
           </div>
         </div>
 
-        {/* Brand + navigation */}
+        {/* Brand + office, navigation */}
         <div className="grid gap-14 py-14 md:py-16 lg:grid-cols-[1fr_1.9fr] lg:gap-20">
-          <div className="md:grid md:grid-cols-2 md:gap-10 lg:block">
-            <div>
-              <Link href="/" aria-label="J & J Consulting — home" className="inline-block">
-                <Logo />
-              </Link>
-              <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-white/65">{company.strapline}</p>
-            </div>
+          <div>
+            <Link href="/" aria-label="J & J Consulting — home" className="inline-block">
+              <Logo />
+            </Link>
 
-            <address className="mt-9 not-italic md:mt-0 lg:mt-9">
-              <p className="label !font-mono text-white/45">Office</p>
-              <p className="mt-3 text-[15px] leading-relaxed text-white/85">
-                {company.address.lines.slice(0, 2).join(", ")}
-                <br />
-                {company.address.lines.slice(2, 6).join(", ")}
-                <br />
-                {company.address.lines[6]}
-              </p>
-              <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="group mt-4 inline-flex items-center gap-2 text-[13.5px] text-gold-light">
-                <span className={drawLine}>Get directions</span> <span aria-hidden>↗</span>
-                <span className="sr-only"> (opens Google Maps in a new tab)</span>
-              </a>
-              {(company.email || company.phone) && (
-                <ul className="mt-6 space-y-2 text-[15px] text-white/85">
-                  {company.email && (
-                    <li>
-                      <a href={`mailto:${company.email}`} className="group">
-                        <span className={drawLine}>{company.email}</span>
-                      </a>
-                    </li>
-                  )}
-                  {company.phone && (
-                    <li>
-                      <a href={`tel:${company.phone.replace(/\s+/g, "")}`} className="group">
-                        <span className={drawLine}>{company.phone}</span>
-                      </a>
-                    </li>
-                  )}
-                </ul>
-              )}
+            <address className="mt-8 flex max-w-md gap-5 rounded-2xl border border-white/10 bg-white/[0.03] p-6 not-italic">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-gold/30 bg-gold/10 text-gold-light">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.7"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden
+                >
+                  <path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z" />
+                  <circle cx="12" cy="10" r="2.3" />
+                </svg>
+              </span>
+              <div>
+                <p className="label !font-mono text-white/45">Office · Reigate, UK</p>
+                <p className="mt-2.5 text-[15px] leading-relaxed text-white/85">
+                  {company.address.lines.slice(0, 2).join(", ")}
+                  <br />
+                  {company.address.lines.slice(2, 6).join(", ")}
+                  <br />
+                  {company.address.lines[6]}
+                </p>
+                <a
+                  href={mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group mt-4 inline-flex items-center gap-2 text-[13.5px] text-gold-light"
+                >
+                  <span className={drawLine}>Get directions</span>{" "}
+                  <span aria-hidden className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                    ↗
+                  </span>
+                  <span className="sr-only"> (opens Google Maps in a new tab)</span>
+                </a>
+                {(company.email || company.phone) && (
+                  <ul className="mt-5 space-y-2 border-t border-white/10 pt-5 text-[15px] text-white/85">
+                    {company.email && (
+                      <li>
+                        <a href={`mailto:${company.email}`} className="group">
+                          <span className={drawLine}>{company.email}</span>
+                        </a>
+                      </li>
+                    )}
+                    {company.phone && (
+                      <li>
+                        <a href={`tel:${company.phone.replace(/\s+/g, "")}`} className="group">
+                          <span className={drawLine}>{company.phone}</span>
+                        </a>
+                      </li>
+                    )}
+                  </ul>
+                )}
+              </div>
             </address>
           </div>
 
-          <nav aria-label="Footer" className="grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-4">
+          <nav aria-label="Footer" className="grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-4 lg:pt-1">
             {footerColumns.map((col) => (
               <div key={col.title}>
                 <h2 className="label flex items-center gap-2.5 !font-mono text-gold-light">
@@ -107,7 +135,10 @@ export function Footer() {
                 <ul className="mt-6 space-y-3.5">
                   {col.links.map((l) => (
                     <li key={l.label}>
-                      <Link href={l.href} className="group inline-flex text-[14.5px] leading-snug text-white/70 transition-colors hover:text-white">
+                      <Link
+                        href={l.href}
+                        className="group inline-flex text-[14.5px] leading-snug text-white/70 transition-colors hover:text-white"
+                      >
                         <span className={drawLine}>{l.label}</span>
                       </Link>
                     </li>
@@ -137,19 +168,22 @@ export function Footer() {
               href="#main"
               className="group inline-flex items-center gap-2 rounded-full border border-white/15 px-3.5 py-1.5 text-white/65 transition-colors hover:border-gold hover:text-white"
             >
-              Back to top <span aria-hidden className="transition-transform group-hover:-translate-y-0.5">↑</span>
+              Back to top{" "}
+              <span aria-hidden className="transition-transform group-hover:-translate-y-0.5">
+                ↑
+              </span>
             </a>
           </div>
         </div>
       </div>
 
-      {/* Oversized wordmark, fitted to the container width and cropped by the footer edge */}
-      <div className="wrap pointer-events-none relative -mb-[2.5%] select-none" aria-hidden>
-        <svg viewBox="0 0 1000 150" className="block w-full">
+      {/* Oversized wordmark, fitted to the container width; fully visible, fading out towards the bottom */}
+      <div className="wrap pointer-events-none relative select-none pb-3 md:pb-5" aria-hidden>
+        <svg viewBox="0 0 1000 175" className="block w-full">
           <defs>
             <linearGradient id="footer-wordmark" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stopColor="#fff" stopOpacity="0.11" />
-              <stop offset="1" stopColor="#fff" stopOpacity="0" />
+              <stop offset="0" stopColor="#fff" stopOpacity="0.075" />
+              <stop offset="1" stopColor="#fff" stopOpacity="0.015" />
             </linearGradient>
           </defs>
           <text

@@ -12,6 +12,7 @@ const icons = [
 export function WhyJJ() {
   return (
     <section
+      id="why"
       className="relative overflow-hidden bg-[linear-gradient(120deg,#0A1830_0%,#12306A_55%,#2058B8_100%)] py-24 text-white md:py-32"
       aria-labelledby="why-title"
     >
@@ -34,7 +35,16 @@ export function WhyJJ() {
               >
                 <div className="flex items-center justify-between">
                   <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#2058B8] to-[#EBB84C]">
-                    <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                    <svg
+                      viewBox="0 0 24 24"
+                      className="h-6 w-6"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden
+                    >
                       {icons[i]}
                     </svg>
                   </span>
