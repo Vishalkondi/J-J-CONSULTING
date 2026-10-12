@@ -1,4 +1,4 @@
-import { BrandIcon, BrandLockup } from "./BrandMark";
+import { BrandIcon, BrandLockup, MetalIcon } from "./BrandMark";
 import { company } from "@/data/site";
 import { cn } from "@/lib/utils";
 
@@ -6,12 +6,14 @@ type Props = {
   variant?: "compact" | "full";
   tone?: "light" | "dark"; // light = sits on a dark background
   size?: "hero" | "footer" | "default";
+  /** "metal" = the gold-and-silver mark (home hero and navbar). */
+  finish?: "brand" | "metal";
   className?: string;
 };
 
 /** Font size drives the whole stacked lockup (it is built in em units). */
 const FULL_SIZES = {
-  hero: "text-[clamp(13px,2.4vh,30px)]",
+  hero: "text-[clamp(14px,3vh,34px)]",
   footer: "text-[17px]",
   default: "text-[16px]",
 } as const;
@@ -21,13 +23,13 @@ const FULL_SIZES = {
  * requests. `compact` = icon + "J & J" for the navbar/footer; `full` = the stacked brand lockup.
  * public/brand/jj-mark.svg remains for the favicon and other non-React uses.
  */
-export function Logo({ variant = "compact", tone = "light", size = "default", className }: Props) {
+export function Logo({ variant = "compact", tone = "light", size = "default", finish = "brand", className }: Props) {
   const ink = tone === "light" ? "text-white" : "text-navy";
 
   if (variant === "compact") {
     return (
       <span className={cn("inline-flex items-center gap-3", ink, className)} aria-label="J & J">
-        <BrandIcon className="h-9 w-auto sm:h-10" />
+        {finish === "metal" ? <MetalIcon className="h-9 w-auto sm:h-10" /> : <BrandIcon className="h-9 w-auto sm:h-10" />}
         <span className="font-display text-[24px] leading-none tracking-[0.04em] sm:text-[26px]">
           J<span className="mx-[3px] text-gold">&amp;</span>J
         </span>
@@ -35,5 +37,5 @@ export function Logo({ variant = "compact", tone = "light", size = "default", cl
     );
   }
 
-  return <BrandLockup tone={tone} established={company.established} className={cn(FULL_SIZES[size], className)} />;
+  return <BrandLockup tone={tone} finish={finish} established={company.established} className={cn(FULL_SIZES[size], className)} />;
 }

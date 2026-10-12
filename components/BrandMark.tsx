@@ -51,6 +51,57 @@ export function BrandIcon({ className }: { className?: string }) {
 }
 
 /**
+ * Metallic variant of the mark: a gold-and-silver pinwheel around a dark square (the reference
+ * hero artwork). Four pieces, gold top-left and bottom-right with large rounded outer corners,
+ * brushed silver top-right and bottom-left, each with a thin bevel highlight.
+ */
+export function MetalIcon({ className }: { className?: string }) {
+  const id = useId().replace(/:/g, "");
+  const u = (n: string) => `${n}-${id}`;
+  const gold = "M64 0H86A10 10 0 0 1 96 10V70H70V96H10A10 10 0 0 1 0 86V64A64 64 0 0 1 64 0Z";
+  const gold2 = "M130 104H190A10 10 0 0 1 200 114V136A64 64 0 0 1 136 200H114A10 10 0 0 1 104 190V130H130Z";
+  const silver = "M114 0H190A10 10 0 0 1 200 10V86A10 10 0 0 1 190 96H130V70H104V10A10 10 0 0 1 114 0Z";
+  const silver2 = "M10 104H70V130H96V190A10 10 0 0 1 86 200H10A10 10 0 0 1 0 190V114A10 10 0 0 1 10 104Z";
+  return (
+    <svg viewBox="-2 -2 204 204" className={className} aria-hidden>
+      <defs>
+        <linearGradient id={u("au")} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#FFF0C2" />
+          <stop offset="0.3" stopColor="#EBB84C" />
+          <stop offset="0.55" stopColor="#B9822A" />
+          <stop offset="0.8" stopColor="#F3CF78" />
+          <stop offset="1" stopColor="#8E5E17" />
+        </linearGradient>
+        <linearGradient id={u("ag")} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#F2F4F6" />
+          <stop offset="0.35" stopColor="#A9AEB5" />
+          <stop offset="0.6" stopColor="#5E636B" />
+          <stop offset="0.85" stopColor="#C8CCD1" />
+          <stop offset="1" stopColor="#4A4E55" />
+        </linearGradient>
+        <linearGradient id={u("hl")} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#fff" stopOpacity="0.45" />
+          <stop offset="0.4" stopColor="#fff" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      {[gold, gold2].map((d) => (
+        <path key={d} d={d} fill={`url(#${u("au")})`} />
+      ))}
+      {[silver, silver2].map((d) => (
+        <path key={d} d={d} fill={`url(#${u("ag")})`} />
+      ))}
+      {/* bevel: a fine light edge and a sheen across the top of every piece */}
+      {[gold, gold2, silver, silver2].map((d) => (
+        <g key={d}>
+          <path d={d} fill={`url(#${u("hl")})`} />
+          <path d={d} fill="none" stroke="#fff" strokeOpacity="0.35" strokeWidth="1.5" />
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+/**
  * Full stacked lockup: mark, "J & J", CONSULTING, EST. 2010 — all vector/live text, so it stays
  * sharp at any size. Everything scales from the font size set by `className` (e.g. text-[20px]).
  * tone: "light" = for dark backgrounds (white lettering), "dark" = for light backgrounds.
@@ -59,10 +110,13 @@ export function BrandLockup({
   tone = "light",
   className,
   established = 2010,
+  finish = "brand",
 }: {
   tone?: "light" | "dark";
   className?: string;
   established?: number;
+  /** "metal" swaps in the gold-and-silver MetalIcon, used on the home hero. */
+  finish?: "brand" | "metal";
 }) {
   const ink = tone === "light" ? "text-white" : "text-navy";
   const gold = tone === "light" ? "text-gold-light" : "text-gold-dark";
@@ -72,7 +126,11 @@ export function BrandLockup({
       role="img"
       aria-label={`J & J Consulting, established ${established}`}
     >
-      <BrandIcon className="h-[6.4em] w-auto drop-shadow-[0_0.4em_0.9em_rgba(0,0,0,0.35)]" />
+      {finish === "metal" ? (
+        <MetalIcon className="h-[6.4em] w-auto drop-shadow-[0_0_1.4em_rgba(235,184,76,0.45)]" />
+      ) : (
+        <BrandIcon className="h-[6.4em] w-auto drop-shadow-[0_0.4em_0.9em_rgba(0,0,0,0.35)]" />
+      )}
       <span className={cn("mt-[0.4em] text-[2.55em] font-medium tracking-[0.03em]", ink)} aria-hidden>
         J<span className={cn("mx-[0.22em]", gold)}>&amp;</span>J
       </span>

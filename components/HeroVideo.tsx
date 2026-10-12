@@ -11,6 +11,8 @@ import { cn } from "@/lib/utils";
 const HAS_SECOND = process.env.NEXT_PUBLIC_HERO_VIDEO_2 === "1";
 const SOURCES: string[] = ["/videos/hero-video-01.mp4", ...(HAS_SECOND ? ["/videos/hero-video-02.mp4"] : [])];
 const POSTER = "/images/hero-poster.jpg";
+// Colour grade applied to the footage and poster: richer, warmer and darker, for the sunset look.
+const DUSK_GRADE = "saturate(1.45) contrast(1.15) brightness(0.88) sepia(0.08)";
 
 /**
  * Behaviour
@@ -106,12 +108,12 @@ export function HeroVideo() {
 
   return (
     <section
-      className="relative isolate h-[100svh] min-h-[640px] w-full overflow-hidden bg-midnight text-white md:h-screen"
+      className="relative isolate flex min-h-[max(100svh,640px)] w-full flex-col overflow-hidden bg-midnight text-white"
       aria-label="J & J Consulting introduction"
     >
       {/* Fallback layer — always present so the hero is never empty/black. .site-hero-poster is
           dedicated to this one section; see the comment in globals.css for why. */}
-      <div className="hero-fallback blueprint site-hero-poster absolute inset-0 -z-30" aria-hidden />
+      <div className="hero-fallback blueprint site-hero-poster absolute inset-0 -z-30" style={{ filter: DUSK_GRADE }} aria-hidden />
 
       {SOURCES.map((src, i) => (
         <video
@@ -136,10 +138,30 @@ export function HeroVideo() {
           aria-hidden
           tabIndex={-1}
           onPlaying={() => setPlaying((p) => p.map((x, k) => (k === i ? true : x)))}
+          style={{ filter: DUSK_GRADE }}
           onEnded={() => handleEnded(i)}
           onError={() => setFailed((f) => f.map((x, k) => (k === i ? true : x)))}
         />
       ))}
+
+      {/* Dusk grade: deep blue-violet sky at the top, an amber sun glow upper-right and a warm wash
+          over the city, so the daytime footage reads as golden-hour sunset. */}
+      <div
+        className="absolute inset-0 -z-10 mix-blend-soft-light"
+        aria-hidden
+        style={{
+          background:
+            "radial-gradient(900px 520px at 92% 38%, rgba(255,170,60,0.9), transparent 65%), linear-gradient(180deg, rgba(20,24,70,0.9) 0%, rgba(120,60,40,0.5) 35%, rgba(255,140,40,0.55) 60%, rgba(40,25,20,0.6) 100%)",
+        }}
+      />
+      <div
+        className="absolute inset-0 -z-10 mix-blend-screen"
+        aria-hidden
+        style={{
+          background:
+            "radial-gradient(140px 140px at 99% 42%, rgba(255,214,140,0.85), transparent 70%), radial-gradient(620px 360px at 98% 42%, rgba(255,150,40,0.4), transparent 70%), linear-gradient(180deg, rgba(18,26,66,0.6) 0%, rgba(40,40,90,0.2) 25%, transparent 45%)",
+        }}
+      />
 
       {/* Cinematic overlay: darker at the top (navbar) and bottom, plus a navy wash on the left so the
           logo, headline and buttons stay legible over bright footage. */}
@@ -153,15 +175,15 @@ export function HeroVideo() {
       />
 
       {/* Content */}
-      <div className="wrap relative flex h-full flex-col justify-end pb-24 pt-32 md:pb-28">
+      <div className="wrap relative flex w-full flex-1 flex-col justify-end pb-24 pt-28 md:pb-28">
         <motion.h1 {...fadeIn(0.35)} className="!font-sans">
           <span className="sr-only">J &amp; J Consulting</span>
           <span aria-hidden>
-            <Logo variant="full" size="hero" className="drop-shadow-[0_10px_30px_rgba(0,0,0,0.55)]" />
+            <Logo variant="full" size="hero" finish="metal" className="drop-shadow-[0_10px_30px_rgba(0,0,0,0.55)]" />
           </span>
         </motion.h1>
 
-        <motion.p {...fadeIn(0.8)} className="mt-8 font-display text-[clamp(26px,3.6vw,52px)] leading-[1.1] text-white">
+        <motion.p {...fadeIn(0.8)} className="mt-6 font-display text-[clamp(26px,3.6vw,52px)] leading-[1.1] text-white">
           {company.tagline}
         </motion.p>
 
@@ -181,7 +203,7 @@ export function HeroVideo() {
         {/* Floating stat card (desktop): the headline figures, from the same data as the counters. */}
         <motion.div
           {...fadeIn(1.5)}
-          className="absolute right-14 top-[30%] hidden w-[300px] rounded-2xl border border-white/15 bg-midnight/55 p-6 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.8)] backdrop-blur-md xl:block"
+          className="absolute right-14 top-[24%] hidden w-[300px] rounded-2xl border border-white/15 bg-midnight/55 p-6 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.8)] backdrop-blur-md xl:block"
         >
           <p className="pill bg-white/5 text-gold-light">Since {company.established}</p>
           <dl className="mt-5 space-y-4">

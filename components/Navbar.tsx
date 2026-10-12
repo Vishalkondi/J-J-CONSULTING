@@ -71,7 +71,7 @@ export function Navbar() {
       >
         <div className="wrap flex items-center justify-between">
           <Link href="/" aria-label="J & J Consulting — home" className="relative z-[60]">
-            <Logo />
+            <Logo finish="metal" />
           </Link>
 
           <nav aria-label="Primary" className="hidden xl:block">
