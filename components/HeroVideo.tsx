@@ -12,7 +12,7 @@ const HAS_SECOND = process.env.NEXT_PUBLIC_HERO_VIDEO_2 === "1";
 const SOURCES: string[] = ["/videos/hero-video-01.mp4", ...(HAS_SECOND ? ["/videos/hero-video-02.mp4"] : [])];
 const POSTER = "/images/hero-poster.jpg";
 // Colour grade applied to the footage and poster: richer, warmer and darker, for the sunset look.
-const DUSK_GRADE = "saturate(1.45) contrast(1.15) brightness(0.88) sepia(0.08)";
+const DUSK_GRADE = "saturate(1.75) contrast(1.28) brightness(0.82) sepia(0.06)";
 
 /**
  * Behaviour
@@ -163,6 +163,13 @@ export function HeroVideo() {
         }}
       />
 
+      {/* Deep blue dusk sky over the top third, behind the navbar. */}
+      <div
+        className="absolute inset-0 -z-10"
+        aria-hidden
+        style={{ background: "linear-gradient(180deg, rgba(12,18,48,0.7) 0%, rgba(30,30,70,0.35) 22%, transparent 42%)" }}
+      />
+
       {/* Cinematic overlay: darker at the top (navbar) and bottom, plus a navy wash on the left so the
           logo, headline and buttons stay legible over bright footage. */}
       <div
@@ -175,7 +182,7 @@ export function HeroVideo() {
       />
 
       {/* Content */}
-      <div className="wrap relative flex w-full flex-1 flex-col justify-end pb-24 pt-28 md:pb-28">
+      <div className="wrap relative flex w-full flex-1 flex-col justify-end pb-6 pt-24 md:pb-8">
         <motion.h1 {...fadeIn(0.35)} className="!font-sans">
           <span className="sr-only">J &amp; J Consulting</span>
           <span aria-hidden>
@@ -183,15 +190,15 @@ export function HeroVideo() {
           </span>
         </motion.h1>
 
-        <motion.p {...fadeIn(0.8)} className="mt-6 font-display text-[clamp(26px,3.6vw,52px)] leading-[1.1] text-white">
+        <motion.p {...fadeIn(0.8)} className="mt-5 font-display text-[clamp(26px,3.6vw,52px)] leading-[1.1] text-white">
           {company.tagline}
         </motion.p>
 
-        <motion.p {...fadeIn(1.05)} className="mt-5 max-w-xl text-[17px] leading-relaxed text-white/80">
+        <motion.p {...fadeIn(1.05)} className="mt-4 max-w-xl text-[17px] leading-relaxed text-white/80">
           {company.strapline}
         </motion.p>
 
-        <motion.div {...fadeIn(1.3)} className="mt-9 flex flex-wrap gap-4">
+        <motion.div {...fadeIn(1.3)} className="mt-7 flex flex-wrap gap-4">
           <Link href="/services" className="btn btn-gold">
             Explore Our Expertise <span aria-hidden>→</span>
           </Link>
@@ -219,54 +226,58 @@ export function HeroVideo() {
           </dl>
         </motion.div>
 
-        <motion.ul
+        <motion.div
           {...fadeIn(1.6)}
-          className="mt-12 hidden flex-wrap gap-x-8 gap-y-2 border-t border-white/20 pt-5 font-mono text-[11px] tracking-[0.12em] text-white/70 md:flex"
-          aria-label="What we do"
+          className="mt-8 flex items-end justify-between gap-6 border-t border-white/20 pt-4 md:mt-10"
         >
-          {heroCategories.map((c) => (
-            <li key={c}>{c}</li>
-          ))}
-        </motion.ul>
+          <ul className="hidden min-w-0 flex-wrap items-center gap-y-2 font-mono xl:flex-nowrap text-[10.5px] tracking-[0.1em] text-white/75 md:flex" aria-label="What we do">
+            {heroCategories.map((c) => (
+              <li key={c} className="whitespace-nowrap border-r border-white/30 px-4 leading-none first:pl-0 last:border-0 xl:px-5">
+                {c}
+              </li>
+            ))}
+          </ul>
+
+          <div className="ml-auto flex items-center gap-5">
+            {/* Video controls (only once a video is actually running) */}
+            {anyPlaying && !allFailed && (
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={togglePause}
+                  aria-label={paused ? "Play background video" : "Pause background video"}
+                  className="flex h-8 w-8 items-center justify-center border border-white/30 bg-black/20 text-white/80 backdrop-blur-sm transition-colors hover:border-white hover:text-white"
+                >
+                  <svg viewBox="0 0 24 24" className="h-3 w-3 fill-current" aria-hidden>
+                    {paused ? <path d="M8 5v14l11-7z" /> : <path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" />}
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMuted((m) => !m)}
+                  aria-pressed={!muted}
+                  aria-label={muted ? "Turn video sound on" : "Turn video sound off"}
+                  className="flex h-8 w-8 items-center justify-center border border-white/30 bg-black/20 text-white/80 backdrop-blur-sm transition-colors hover:border-white hover:text-white"
+                >
+                  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-none stroke-current" strokeWidth="2" aria-hidden>
+                    <path d="M4 9v6h4l5 4V5L8 9z" className="fill-current" />
+                    {muted ? <path d="M17 9l5 6M22 9l-5 6" /> : <path d="M17 8.5a5 5 0 0 1 0 7M19.5 6a8.5 8.5 0 0 1 0 12" />}
+                  </svg>
+                </button>
+              </div>
+            )}
+            <a
+              href="#introduction"
+              className="hidden flex-col items-center gap-1.5 whitespace-nowrap font-mono text-[10px] tracking-[0.3em] text-white/75 hover:text-white md:flex"
+            >
+              SCROLL TO EXPLORE{" "}
+              <span className="nudge" aria-hidden>
+                ↓
+              </span>
+            </a>
+          </div>
+        </motion.div>
       </div>
-
-      {/* Scroll cue */}
-      <a
-        href="#introduction"
-        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 font-mono text-[10px] tracking-[0.3em] text-white/70 hover:text-white md:flex"
-      >
-        SCROLL TO EXPLORE{" "}
-        <span className="nudge" aria-hidden>
-          ↓
-        </span>
-      </a>
-
-      {/* Video controls (only once a video is actually running) */}
-      {anyPlaying && !allFailed && (
-        <div className="absolute bottom-6 right-5 flex gap-2 sm:right-8 lg:right-14">
-          <button
-            type="button"
-            onClick={togglePause}
-            aria-label={paused ? "Play background video" : "Pause background video"}
-            className="flex items-center gap-2 border border-white/30 bg-black/20 px-3 py-2 font-mono text-[10px] tracking-[0.18em] text-white/80 backdrop-blur-sm transition-colors hover:border-white hover:text-white"
-          >
-            <svg viewBox="0 0 24 24" className="h-3 w-3 fill-current" aria-hidden>
-              {paused ? <path d="M8 5v14l11-7z" /> : <path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" />}
-            </svg>
-            {paused ? "PLAY" : "PAUSE"}
-          </button>
-          <button
-            type="button"
-            onClick={() => setMuted((m) => !m)}
-            aria-pressed={!muted}
-            aria-label={muted ? "Turn video sound on" : "Turn video sound off"}
-            className="flex items-center gap-2 border border-white/30 bg-black/20 px-3 py-2 font-mono text-[10px] tracking-[0.18em] text-white/80 backdrop-blur-sm transition-colors hover:border-white hover:text-white"
-          >
-            <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full" style={{ background: muted ? "#8a8f96" : "#d2b97f" }} />
-            {muted ? "SOUND OFF" : "SOUND ON"}
-          </button>
-        </div>
-      )}
 
       {/* Autoplay refused by the browser */}
       {blocked && !allFailed && !anyPlaying && (

@@ -52,38 +52,36 @@ export function BrandIcon({ className }: { className?: string }) {
 
 /**
  * Metallic variant of the mark: a gold-and-silver pinwheel around a dark square (the reference
- * hero artwork). Four pieces, gold top-left and bottom-right with large rounded outer corners,
- * brushed silver top-right and bottom-left, each with a thin bevel highlight.
+ * hero artwork). Gold uprights left and right with large rounded outer corners, silver bars along
+ * the top-right and bottom-left. Each piece has a bevel highlight.
  */
 export function MetalIcon({ className }: { className?: string }) {
   const id = useId().replace(/:/g, "");
   const u = (n: string) => `${n}-${id}`;
-  const gold = "M64 0H86A10 10 0 0 1 96 10V70H70V96H10A10 10 0 0 1 0 86V64A64 64 0 0 1 64 0Z";
-  const gold2 = "M130 104H190A10 10 0 0 1 200 114V136A64 64 0 0 1 136 200H114A10 10 0 0 1 104 190V130H130Z";
-  const silver = "M114 0H190A10 10 0 0 1 200 10V86A10 10 0 0 1 190 96H130V70H104V10A10 10 0 0 1 114 0Z";
-  const silver2 = "M10 104H70V130H96V190A10 10 0 0 1 86 200H10A10 10 0 0 1 0 190V114A10 10 0 0 1 10 104Z";
+  const gold = "M68 8V116A8 8 0 0 1 60 124H8A8 8 0 0 1 0 116V60A60 60 0 0 1 60 0A8 8 0 0 1 68 8Z";
+  const gold2 = "M140 76H192A8 8 0 0 1 200 84V140A60 60 0 0 1 140 200A8 8 0 0 1 132 192V84A8 8 0 0 1 140 76Z";
+  const silver = "M84 0H192A8 8 0 0 1 200 8V60A8 8 0 0 1 192 68H84A8 8 0 0 1 76 60V8A8 8 0 0 1 84 0Z";
+  const silver2 = "M8 132H116A8 8 0 0 1 124 140V192A8 8 0 0 1 116 200H8A8 8 0 0 1 0 192V140A8 8 0 0 1 8 132Z";
   return (
     <svg viewBox="-2 -2 204 204" className={className} aria-hidden>
       <defs>
         <linearGradient id={u("au")} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#FFF0C2" />
-          <stop offset="0.3" stopColor="#EBB84C" />
-          <stop offset="0.55" stopColor="#B9822A" />
-          <stop offset="0.8" stopColor="#F3CF78" />
-          <stop offset="1" stopColor="#8E5E17" />
+          <stop offset="0" stopColor="#FCE7A8" />
+          <stop offset="0.35" stopColor="#E2B04A" />
+          <stop offset="0.7" stopColor="#C08A2C" />
+          <stop offset="1" stopColor="#8C5F1C" />
         </linearGradient>
         <linearGradient id={u("ag")} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#F2F4F6" />
-          <stop offset="0.35" stopColor="#A9AEB5" />
-          <stop offset="0.6" stopColor="#5E636B" />
-          <stop offset="0.85" stopColor="#C8CCD1" />
-          <stop offset="1" stopColor="#4A4E55" />
+          <stop offset="0" stopColor="#B9BDC2" />
+          <stop offset="0.5" stopColor="#7D8188" />
+          <stop offset="1" stopColor="#4B4F56" />
         </linearGradient>
         <linearGradient id={u("hl")} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#fff" stopOpacity="0.45" />
           <stop offset="0.4" stopColor="#fff" stopOpacity="0" />
         </linearGradient>
       </defs>
+      <rect x="78" y="78" width="44" height="44" rx="6" fill="#0B1220" fillOpacity="0.55" />
       {[gold, gold2].map((d) => (
         <path key={d} d={d} fill={`url(#${u("au")})`} />
       ))}
@@ -127,7 +125,7 @@ export function BrandLockup({
       aria-label={`J & J Consulting, established ${established}`}
     >
       {finish === "metal" ? (
-        <MetalIcon className="h-[6.4em] w-auto drop-shadow-[0_0_1.4em_rgba(235,184,76,0.45)]" />
+        <MetalIcon className="h-[7.2em] w-auto drop-shadow-[0_0_1.4em_rgba(235,184,76,0.45)]" />
       ) : (
         <BrandIcon className="h-[6.4em] w-auto drop-shadow-[0_0.4em_0.9em_rgba(0,0,0,0.35)]" />
       )}
