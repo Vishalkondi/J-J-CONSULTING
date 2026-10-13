@@ -6,14 +6,14 @@ type Props = {
   variant?: "compact" | "full";
   tone?: "light" | "dark"; // light = sits on a dark background
   size?: "hero" | "footer" | "default";
-  /** "metal" = the gold-and-silver mark (home hero and navbar). */
+  /** "metal" (default) = the gold-and-silver mark; "brand" = the earlier blue-and-gold mark. */
   finish?: "brand" | "metal";
   className?: string;
 };
 
 /** Font size drives the whole stacked lockup (it is built in em units). */
 const FULL_SIZES = {
-  hero: "text-[clamp(13px,2.8vh,34px)]",
+  hero: "text-[clamp(13px,3vh,36px)]",
   footer: "text-[17px]",
   default: "text-[16px]",
 } as const;
@@ -21,9 +21,9 @@ const FULL_SIZES = {
 /**
  * J & J Consulting logo, fully vector (components/BrandMark.tsx): sharp at any size, no image
  * requests. `compact` = icon + "J & J" for the navbar/footer; `full` = the stacked brand lockup.
- * public/brand/jj-mark.svg remains for the favicon and other non-React uses.
+ * public/brand/jj-mark.svg (the metal mark) is for the favicon and other non-React uses.
  */
-export function Logo({ variant = "compact", tone = "light", size = "default", finish = "brand", className }: Props) {
+export function Logo({ variant = "compact", tone = "light", size = "default", finish = "metal", className }: Props) {
   const ink = tone === "light" ? "text-white" : "text-navy";
 
   if (variant === "compact" && finish === "metal") {

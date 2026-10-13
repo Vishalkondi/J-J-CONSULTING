@@ -69,9 +69,9 @@ export function Navbar() {
         )}
         style={{ paddingTop: `calc(env(safe-area-inset-top, 0px) + ${scrolled || open ? "0.75rem" : "1.5rem"})` }}
       >
-        <div className="wrap flex items-center justify-between">
+        <div className="wrap flex items-center justify-between xl:max-w-none xl:px-[5vw]">
           <Link href="/" aria-label="J & J Consulting — home" className="relative z-[60]">
-            <Logo finish="metal" />
+            <Logo />
           </Link>
 
           <nav aria-label="Primary" className="hidden xl:block">
@@ -96,8 +96,8 @@ export function Navbar() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <Link href="/contact" className="btn btn-gold hidden !py-2.5 sm:inline-flex">
-              Talk to Us
+            <Link href="/contact" className="btn btn-gold hidden !py-3 text-[14px] sm:inline-flex">
+              Talk to Us <span aria-hidden>→</span>
             </Link>
             <button
               ref={toggleRef}

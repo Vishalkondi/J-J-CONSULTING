@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
@@ -6,13 +7,20 @@ import { Logo } from "./Logo";
 import { company, heroCategories, stats } from "@/data/site";
 import { cn } from "@/lib/utils";
 
+// Still sunset photo shown in place of the video (matches the approved hero design). Set to null
+// to go back to the video. To use the exact design photo, save it as public/images/hero-sunset.jpg
+// and point this at it.
+const HERO_STILL: string | null = null;
+
 // One hero video today. To enable the two-video crossfade, add public/videos/hero-video-02.mp4
 // and set NEXT_PUBLIC_HERO_VIDEO_2=1 in .env.local.
 const HAS_SECOND = process.env.NEXT_PUBLIC_HERO_VIDEO_2 === "1";
-const SOURCES: string[] = ["/videos/hero-video-01.mp4", ...(HAS_SECOND ? ["/videos/hero-video-02.mp4"] : [])];
-const POSTER = "/images/hero-poster.jpg";
-// Colour grade applied to the footage and poster: richer, warmer and darker, for the sunset look.
-const DUSK_GRADE = "saturate(1.75) contrast(1.28) brightness(0.82) sepia(0.06)";
+const SOURCES: string[] = HERO_STILL
+  ? []
+  : ["/videos/hero-video-01.mp4", ...(HAS_SECOND ? ["/videos/hero-video-02.mp4"] : [])];
+const POSTER = "/images/hero-sunset.jpg";
+// Colour grade applied to the footage and poster: a gentle sunset look, kept restrained (not too orange).
+const DUSK_GRADE = "saturate(1.1) contrast(1.22) brightness(0.88)";
 
 /**
  * Behaviour
@@ -115,6 +123,19 @@ export function HeroVideo() {
           dedicated to this one section; see the comment in globals.css for why. */}
       <div className="hero-fallback blueprint site-hero-poster absolute inset-0 -z-30" style={{ filter: DUSK_GRADE }} aria-hidden />
 
+      {HERO_STILL && (
+        <Image
+          src={HERO_STILL}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="-z-20 object-cover object-[50%_45%]"
+          style={{ filter: DUSK_GRADE }}
+          aria-hidden
+        />
+      )}
+
       {SOURCES.map((src, i) => (
         <video
           key={src}
@@ -151,7 +172,7 @@ export function HeroVideo() {
         aria-hidden
         style={{
           background:
-            "radial-gradient(900px 520px at 92% 38%, rgba(255,170,60,0.9), transparent 65%), linear-gradient(180deg, rgba(20,24,70,0.9) 0%, rgba(120,60,40,0.5) 35%, rgba(255,140,40,0.55) 60%, rgba(40,25,20,0.6) 100%)",
+            "radial-gradient(900px 520px at 92% 38%, rgba(255,170,60,0.45), transparent 65%), linear-gradient(180deg, rgba(20,24,70,0.85) 0%, rgba(90,60,50,0.3) 35%, rgba(255,140,40,0.25) 60%, rgba(40,25,20,0.5) 100%)",
         }}
       />
       <div
@@ -159,7 +180,7 @@ export function HeroVideo() {
         aria-hidden
         style={{
           background:
-            "radial-gradient(140px 140px at 99% 42%, rgba(255,214,140,0.85), transparent 70%), radial-gradient(620px 360px at 98% 42%, rgba(255,150,40,0.4), transparent 70%), linear-gradient(180deg, rgba(18,26,66,0.6) 0%, rgba(40,40,90,0.2) 25%, transparent 45%)",
+            "radial-gradient(140px 140px at 99% 42%, rgba(255,214,140,0.6), transparent 70%), radial-gradient(620px 360px at 98% 42%, rgba(255,150,40,0.18), transparent 70%), linear-gradient(180deg, rgba(18,26,66,0.6) 0%, rgba(40,40,90,0.2) 25%, transparent 45%)",
         }}
       />
 
@@ -177,32 +198,32 @@ export function HeroVideo() {
         aria-hidden
         style={{
           background:
-            "linear-gradient(90deg, rgba(8,18,31,0.72) 0%, rgba(8,18,31,0.45) 45%, rgba(8,18,31,0.05) 80%), linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.15) 22%, rgba(0,0,0,0.25) 55%, rgba(0,0,0,0.8) 100%)",
+            "linear-gradient(90deg, rgba(8,18,31,0.62) 0%, rgba(8,18,31,0.32) 42%, rgba(8,18,31,0) 75%), linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.08) 22%, rgba(0,0,0,0.15) 55%, rgba(0,0,0,0.75) 100%)",
         }}
       />
 
       {/* Content */}
-      <div className="wrap relative flex w-full flex-1 flex-col justify-end pb-6 pt-24 md:pb-8">
+      <div className="wrap relative flex w-full flex-1 flex-col justify-end pb-5 pt-28 md:pb-6 xl:max-w-none xl:px-[5vw]">
         <motion.h1 {...fadeIn(0.35)} className="!font-sans">
           <span className="sr-only">J &amp; J Consulting</span>
           <span aria-hidden>
-            <Logo variant="full" size="hero" finish="metal" className="drop-shadow-[0_10px_30px_rgba(0,0,0,0.55)]" />
+            <Logo variant="full" size="hero" className="drop-shadow-[0_10px_30px_rgba(0,0,0,0.55)]" />
           </span>
         </motion.h1>
 
-        <motion.p {...fadeIn(0.8)} className="mt-5 font-display text-[clamp(26px,3.6vw,52px)] leading-[1.1] text-white">
+        <motion.p {...fadeIn(0.8)} className="mt-3 font-display text-[clamp(28px,3.6vw,56px)] leading-[1.1] text-white">
           {company.tagline}
         </motion.p>
 
-        <motion.p {...fadeIn(1.05)} className="mt-4 max-w-xl text-[17px] leading-relaxed text-white/80">
+        <motion.p {...fadeIn(1.05)} className="mt-3 max-w-xl text-[clamp(16px,1.3vw,18px)] leading-snug text-white/85">
           {company.strapline}
         </motion.p>
 
-        <motion.div {...fadeIn(1.3)} className="mt-7 flex flex-wrap gap-4">
-          <Link href="/services" className="btn btn-gold">
+        <motion.div {...fadeIn(1.3)} className="mt-5 flex flex-wrap gap-4">
+          <Link href="/services" className="btn btn-gold px-6 py-3 text-[14.5px]">
             Explore Our Expertise <span aria-hidden>→</span>
           </Link>
-          <Link href="/contact" className="btn btn-ghost">
+          <Link href="/contact" className="btn btn-ghost px-6 py-3 text-[14.5px]">
             Talk to Us <span aria-hidden>→</span>
           </Link>
         </motion.div>
@@ -210,17 +231,17 @@ export function HeroVideo() {
         {/* Floating stat card (desktop): the headline figures, from the same data as the counters. */}
         <motion.div
           {...fadeIn(1.5)}
-          className="absolute right-14 top-[24%] hidden w-[300px] rounded-2xl border border-white/15 bg-midnight/55 p-6 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.8)] backdrop-blur-md xl:block"
+          className="absolute right-[8%] top-[22%] hidden w-[clamp(280px,21vw,340px)] rounded-2xl border border-white/15 bg-[rgba(22,18,14,0.6)] p-6 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.8)] backdrop-blur-md xl:block"
         >
           <p className="pill bg-white/5 text-gold-light">Since {company.established}</p>
           <dl className="mt-5 space-y-4">
             {stats.slice(0, 3).map((s) => (
-              <div key={s.label} className="flex items-baseline gap-4 border-b border-white/10 pb-4 last:border-0 last:pb-0">
-                <dd className="w-16 shrink-0 font-display text-[30px] leading-none text-white">
+              <div key={s.label} className="flex items-baseline gap-3 border-b border-white/10 pb-4 last:border-0 last:pb-0">
+                <dd className="w-[4.5rem] shrink-0 font-display text-[clamp(28px,2.2vw,34px)] leading-none text-white">
                   {s.value}
                   {s.suffix}
                 </dd>
-                <dt className="order-last text-[13px] leading-snug text-white/70">{s.label}</dt>
+                <dt className="order-last text-[clamp(13px,1vw,15px)] leading-snug text-white/75">{s.label}</dt>
               </div>
             ))}
           </dl>
@@ -228,9 +249,9 @@ export function HeroVideo() {
 
         <motion.div
           {...fadeIn(1.6)}
-          className="mt-8 flex items-end justify-between gap-6 border-t border-white/20 pt-4 md:mt-10"
+          className="mt-7 flex items-end justify-between gap-6 border-t border-white/20 pt-4 md:mt-6"
         >
-          <ul className="hidden min-w-0 flex-wrap items-center gap-y-2 font-mono xl:flex-nowrap text-[10.5px] tracking-[0.1em] text-white/75 md:flex" aria-label="What we do">
+          <ul className="hidden min-w-0 flex-wrap items-center gap-y-2 font-mono xl:flex-nowrap text-[11.5px] tracking-[0.1em] text-white/80 md:flex" aria-label="What we do">
             {heroCategories.map((c) => (
               <li key={c} className="whitespace-nowrap border-r border-white/30 px-4 leading-none first:pl-0 last:border-0 xl:px-5">
                 {c}

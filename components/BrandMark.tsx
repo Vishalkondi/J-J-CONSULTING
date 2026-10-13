@@ -2,8 +2,8 @@ import { useId } from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * The J & J mark, drawn inline as vector (same geometry and colours as public/brand/jj-mark.svg,
- * plus a soft top highlight). Gradient ids are made unique per instance so several marks on one
+ * The earlier blue-and-gold J & J mark, drawn inline as vector with a soft top highlight; kept
+ * for Logo finish="brand". Gradient ids are made unique per instance so several marks on one
  * page never clash.
  */
 export function BrandIcon({ className }: { className?: string }) {
@@ -51,49 +51,66 @@ export function BrandIcon({ className }: { className?: string }) {
 }
 
 /**
- * Metallic variant of the mark: a gold-and-silver pinwheel around a dark square (the reference
- * hero artwork). Gold uprights left and right with large rounded outer corners, silver bars along
- * the top-right and bottom-left. Each piece has a bevel highlight.
+ * Metallic variant of the mark (the reference hero artwork): a pinwheel of two folded gold pieces
+ * and two gunmetal squares around a dark square opening. Gold top-left and bottom-right, each with
+ * a large rounded outer corner, a curved inner corner and a darker fold facet; gunmetal top-right
+ * and bottom-left. Geometry is shared with public/brand/jj-mark.svg and app/icon.svg.
  */
+export const METAL_PATHS = {
+  gold: "M0 136V38A38 38 0 0 1 38 0H96V58H84A20 20 0 0 0 64 78V136Z",
+  gold2: "M200 64V162A38 38 0 0 1 162 200H104V142H116A20 20 0 0 0 136 122V64Z",
+  // darker lower face of each gold fold, split from the lit face by a curved crease
+  fold: "M0 136V126C14 92 44 64 84 58A20 20 0 0 0 64 78V136Z",
+  fold2: "M200 64V74C186 108 156 136 116 142A20 20 0 0 0 136 122V64Z",
+  silver: "M107 0H197A3 3 0 0 1 200 3V57A3 3 0 0 1 197 60H107A3 3 0 0 1 104 57V3A3 3 0 0 1 107 0Z",
+  silver2: "M3 140H93A3 3 0 0 1 96 143V197A3 3 0 0 1 93 200H3A3 3 0 0 1 0 197V143A3 3 0 0 1 3 140Z",
+} as const;
+
 export function MetalIcon({ className }: { className?: string }) {
   const id = useId().replace(/:/g, "");
   const u = (n: string) => `${n}-${id}`;
-  const gold = "M68 8V116A8 8 0 0 1 60 124H8A8 8 0 0 1 0 116V60A60 60 0 0 1 60 0A8 8 0 0 1 68 8Z";
-  const gold2 = "M140 76H192A8 8 0 0 1 200 84V140A60 60 0 0 1 140 200A8 8 0 0 1 132 192V84A8 8 0 0 1 140 76Z";
-  const silver = "M84 0H192A8 8 0 0 1 200 8V60A8 8 0 0 1 192 68H84A8 8 0 0 1 76 60V8A8 8 0 0 1 84 0Z";
-  const silver2 = "M8 132H116A8 8 0 0 1 124 140V192A8 8 0 0 1 116 200H8A8 8 0 0 1 0 192V140A8 8 0 0 1 8 132Z";
+  const { gold, gold2, fold, fold2, silver, silver2 } = METAL_PATHS;
   return (
     <svg viewBox="-2 -2 204 204" className={className} aria-hidden>
       <defs>
         <linearGradient id={u("au")} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#FCE7A8" />
-          <stop offset="0.35" stopColor="#E2B04A" />
-          <stop offset="0.7" stopColor="#C08A2C" />
-          <stop offset="1" stopColor="#8C5F1C" />
+          <stop offset="0" stopColor="#F2C566" />
+          <stop offset="0.45" stopColor="#FBE3A0" />
+          <stop offset="1" stopColor="#D9A23F" />
+        </linearGradient>
+        <linearGradient id={u("au2")} x1="1" y1="1" x2="0" y2="0">
+          <stop offset="0" stopColor="#F2C566" />
+          <stop offset="0.45" stopColor="#FBE3A0" />
+          <stop offset="1" stopColor="#D9A23F" />
+        </linearGradient>
+        <linearGradient id={u("fd")} x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0" stopColor="#8E5F1A" />
+          <stop offset="0.55" stopColor="#C68B2C" />
+          <stop offset="1" stopColor="#F0C468" />
+        </linearGradient>
+        <linearGradient id={u("fd2")} x1="1" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#8E5F1A" />
+          <stop offset="0.55" stopColor="#C68B2C" />
+          <stop offset="1" stopColor="#F0C468" />
         </linearGradient>
         <linearGradient id={u("ag")} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#B9BDC2" />
-          <stop offset="0.5" stopColor="#7D8188" />
-          <stop offset="1" stopColor="#4B4F56" />
-        </linearGradient>
-        <linearGradient id={u("hl")} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#fff" stopOpacity="0.45" />
-          <stop offset="0.4" stopColor="#fff" stopOpacity="0" />
+          <stop offset="0" stopColor="#8C8F95" />
+          <stop offset="0.5" stopColor="#6A6D73" />
+          <stop offset="1" stopColor="#45484E" />
         </linearGradient>
       </defs>
-      <rect x="78" y="78" width="44" height="44" rx="6" fill="#0B1220" fillOpacity="0.55" />
+      <path d={gold} fill={`url(#${u("au")})`} />
+      <path d={fold} fill={`url(#${u("fd")})`} />
+      <path d={gold2} fill={`url(#${u("au2")})`} />
+      <path d={fold2} fill={`url(#${u("fd2")})`} />
+      <path d={silver} fill={`url(#${u("ag")})`} />
+      <path d={silver2} fill={`url(#${u("ag")})`} />
+      {/* bright metal rim on every piece */}
       {[gold, gold2].map((d) => (
-        <path key={d} d={d} fill={`url(#${u("au")})`} />
+        <path key={d} d={d} fill="none" stroke="#FFE7A6" strokeOpacity="0.85" strokeWidth="1.4" />
       ))}
       {[silver, silver2].map((d) => (
-        <path key={d} d={d} fill={`url(#${u("ag")})`} />
-      ))}
-      {/* bevel: a fine light edge and a sheen across the top of every piece */}
-      {[gold, gold2, silver, silver2].map((d) => (
-        <g key={d}>
-          <path d={d} fill={`url(#${u("hl")})`} />
-          <path d={d} fill="none" stroke="#fff" strokeOpacity="0.35" strokeWidth="1.5" />
-        </g>
+        <path key={d} d={d} fill="none" stroke="#E9C77A" strokeOpacity="0.55" strokeWidth="1.2" />
       ))}
     </svg>
   );
@@ -125,16 +142,16 @@ export function BrandLockup({
       aria-label={`J & J Consulting, established ${established}`}
     >
       {finish === "metal" ? (
-        <MetalIcon className="h-[7.2em] w-auto drop-shadow-[0_0_1.4em_rgba(235,184,76,0.45)]" />
+        <MetalIcon className="h-[7.6em] w-auto drop-shadow-[0_0_1.2em_rgba(240,180,70,0.55)]" />
       ) : (
         <BrandIcon className="h-[6.4em] w-auto drop-shadow-[0_0.4em_0.9em_rgba(0,0,0,0.35)]" />
       )}
-      <span className={cn("mt-[0.4em] text-[2.55em] font-medium tracking-[0.03em]", ink)} aria-hidden>
+      <span className={cn("mt-[0.4em] text-[2.8em] font-medium tracking-[0.03em]", ink)} aria-hidden>
         J<span className={cn("mx-[0.22em]", gold)}>&amp;</span>J
       </span>
       <span
         className={cn(
-          "mt-[0.2em] text-[0.66em] font-medium tracking-[0.24em] [-webkit-text-stroke:0.02em_currentColor] [margin-right:-0.24em]",
+          "mt-[0.15em] text-[0.82em] font-medium tracking-[0.22em] [-webkit-text-stroke:0.02em_currentColor] [margin-right:-0.24em]",
           gold,
         )}
         aria-hidden
