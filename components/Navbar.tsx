@@ -75,7 +75,7 @@ export function Navbar() {
           </Link>
 
           <nav aria-label="Primary" className="hidden xl:block">
-            <ul className="flex items-center gap-8">
+            <ul className="flex items-center gap-6 2xl:gap-8">
               {nav
                 .filter((n) => n.href !== "/")
                 .map((n) => (
@@ -84,7 +84,7 @@ export function Navbar() {
                       href={n.href}
                       aria-current={isActive(n.href) ? "page" : undefined}
                       className={cn(
-                        "relative py-2 text-[13px] tracking-wide text-white/80 transition-colors hover:text-white",
+                        "relative py-2 text-[15px] font-medium tracking-wide text-white/85 transition-colors hover:text-white",
                         isActive(n.href) && "text-white after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:bg-gold",
                       )}
                     >
