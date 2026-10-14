@@ -12,6 +12,9 @@ import { cn } from "@/lib/utils";
 // and point this at it.
 const HERO_STILL: string | null = "/images/hero-sunset.jpg";
 
+// Softens the photo's sunset: less orange and a gentler sun glow.
+const STILL_GRADE = "saturate(0.72) brightness(0.94) contrast(1.06)";
+
 // One hero video today. To enable the two-video crossfade, add public/videos/hero-video-02.mp4
 // and set NEXT_PUBLIC_HERO_VIDEO_2=1 in .env.local.
 const HAS_SECOND = process.env.NEXT_PUBLIC_HERO_VIDEO_2 === "1";
@@ -131,6 +134,7 @@ export function HeroVideo() {
           priority
           sizes="100vw"
           className="-z-20 object-cover object-center"
+          style={{ filter: STILL_GRADE }}
           aria-hidden
         />
       )}
@@ -165,13 +169,13 @@ export function HeroVideo() {
       ))}
 
       {HERO_STILL ? (
-        // The photo already carries its own sunset grade; only a light wash for text legibility.
+        // Light wash for text legibility, plus a cool blue tint that calms the orange sky.
         <div
           className="absolute inset-0 -z-10"
           aria-hidden
           style={{
             background:
-              "linear-gradient(90deg, rgba(8,18,31,0.35) 0%, rgba(8,18,31,0.12) 40%, transparent 60%), linear-gradient(180deg, rgba(0,0,0,0.2) 0%, transparent 18%, transparent 70%, rgba(0,0,0,0.45) 100%)",
+              "linear-gradient(90deg, rgba(8,18,31,0.35) 0%, rgba(8,18,31,0.12) 40%, transparent 60%), linear-gradient(180deg, rgba(0,0,0,0.2) 0%, transparent 18%, transparent 70%, rgba(0,0,0,0.45) 100%), linear-gradient(rgba(20,32,64,0.18), rgba(20,32,64,0.18))",
           }}
         />
       ) : (
