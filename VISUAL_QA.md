@@ -2,11 +2,11 @@
 
 **Automated status (verified by running the commands, not assumed):**
 
-| Check | Result |
-|---|---|
-| `npm run typecheck` | PASS |
-| `npm run lint` | PASS |
-| `npm run check:content` | PASS |
+| Check                        | Result                    |
+| ---------------------------- | ------------------------- |
+| `npm run typecheck`          | PASS                      |
+| `npm run lint`               | PASS                      |
+| `npm run check:content`      | PASS                      |
 | `npm run build` (production) | PASS — 45 pages generated |
 
 **Visual status: NOT VERIFIED.** This environment has no browser (a headless-browser install was attempted and failed — the download and its system dependencies are blocked by this sandbox's network allowlist). Every row below is blank until someone opens the page in a real browser and checks it. Nothing here should be read as "passed."
@@ -47,23 +47,23 @@ Fill in **PASS / FAIL / NEEDS REVIEW** per cell after actually looking at the pa
 
 Viewports (width × height): **320×800 · 375×812 · 390×844 · 430×932 · 768×1024 · 1024×768 · 1440×900 · 1920×1080**
 
-| # | Item | 320×800 | 375×812 | 390×844 | 430×932 | 768×1024 | 1024×768 | 1440×900 | 1920×1080 |
-|---|---|---|---|---|---|---|---|---|---|
-| 1 | Hero composition (headline hierarchy, no text/image overlap) | | | | | | | | |
-| 2 | AXA / XL logo proportions (sharp, not stretched, correct sizing) | | | | | | | | |
-| 3 | Brand-history panel (visible, subtle, not misread as AXA XL owning 2010–2014) | | | | | | | | |
-| 4 | Project cards (all 3 — value/team/dates render correctly, no overlap) | | | | | | | | |
-| 5 | Data-flow diagrams (arrows, spacing, alignment, mobile stacking) | | | | | | | | |
-| 6 | Technology stack (pills wrap correctly, no overflow) | | | | | | | | |
-| 7 | Business-domain cards (all 8, grid reflows cleanly) | | | | | | | | |
-| 8 | Regulatory section (terms legible, groundwork wording intact) | | | | | | | | |
-| 9 | Delivery lifecycle timeline (stages readable, no clipping) | | | | | | | | |
-| 10 | Responsive behaviour (no horizontal scroll, no broken grids) | | | | | | | | |
-| 11 | Image cropping (skyline hero image, correct object-position, sharp) | | | | | | | | |
-| 12 | Typography (no oversized/clipped headings, comfortable line length) | | | | | | | | |
-| 13 | Animation (smooth, no layout shift, respects reduced-motion) | | | | | | | | |
-| 14 | Accessibility (visible focus states, contrast, tab order) | | | | | | | | |
-| 15 | Console errors (DevTools console clean on load + scroll) | | | | | | | | |
+| #   | Item                                                                          | 320×800 | 375×812 | 390×844 | 430×932 | 768×1024 | 1024×768 | 1440×900 | 1920×1080 |
+| --- | ----------------------------------------------------------------------------- | ------- | ------- | ------- | ------- | -------- | -------- | -------- | --------- |
+| 1   | Hero composition (headline hierarchy, no text/image overlap)                  |         |         |         |         |          |          |          |           |
+| 2   | AXA / XL logo proportions (sharp, not stretched, correct sizing)              |         |         |         |         |          |          |          |           |
+| 3   | Brand-history panel (visible, subtle, not misread as AXA XL owning 2010–2014) |         |         |         |         |          |          |          |           |
+| 4   | Project cards (all 3 — value/team/dates render correctly, no overlap)         |         |         |         |         |          |          |          |           |
+| 5   | Data-flow diagrams (arrows, spacing, alignment, mobile stacking)              |         |         |         |         |          |          |          |           |
+| 6   | Technology stack (pills wrap correctly, no overflow)                          |         |         |         |         |          |          |          |           |
+| 7   | Business-domain cards (all 8, grid reflows cleanly)                           |         |         |         |         |          |          |          |           |
+| 8   | Regulatory section (terms legible, groundwork wording intact)                 |         |         |         |         |          |          |          |           |
+| 9   | Delivery lifecycle timeline (stages readable, no clipping)                    |         |         |         |         |          |          |          |           |
+| 10  | Responsive behaviour (no horizontal scroll, no broken grids)                  |         |         |         |         |          |          |          |           |
+| 11  | Image cropping (skyline hero image, correct object-position, sharp)           |         |         |         |         |          |          |          |           |
+| 12  | Typography (no oversized/clipped headings, comfortable line length)           |         |         |         |         |          |          |          |           |
+| 13  | Animation (smooth, no layout shift, respects reduced-motion)                  |         |         |         |         |          |          |          |           |
+| 14  | Accessibility (visible focus states, contrast, tab order)                     |         |         |         |         |          |          |          |           |
+| 15  | Console errors (DevTools console clean on load + scroll)                      |         |         |         |         |          |          |          |           |
 
 ## Rules for filling this in
 

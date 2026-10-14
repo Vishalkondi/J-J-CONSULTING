@@ -1,16 +1,12 @@
 import Link from "next/link";
+import { InsightCard } from "../InsightCard";
+import { ContactDetails } from "../ContactDetails";
 import { SectionHeading } from "../SectionHeading";
 import { CorporateVideo } from "../CorporateVideo";
 import { ContactForm } from "../ContactForm";
 import { articles, spotlight } from "@/data/insights";
-import { company } from "@/data/site";
-import { formatDate } from "@/lib/utils";
 
 export function NewsInsights() {
-  const list = [
-    { href: spotlight.href, type: spotlight.type, category: spotlight.category, title: spotlight.title, date: null as string | null },
-    ...articles.slice(0, 3).map((a) => ({ href: `/insights/${a.slug}`, type: a.type, category: a.category, title: a.title, date: a.date })),
-  ];
   return (
     <section className="bg-paper py-24 md:py-36" aria-labelledby="news-title">
       <div className="wrap">
@@ -22,16 +18,13 @@ export function NewsInsights() {
             All insights <span aria-hidden>→</span>
           </Link>
         </div>
-        <ul className="mt-14 border-t border-navy/20">
-          {list.map((a) => (
-            <li key={a.href} className="group border-b border-navy/20">
-              <Link href={a.href} className="grid gap-3 py-8 md:grid-cols-[220px_1fr_140px] md:items-baseline md:gap-10">
-                <span className="label text-gold-dark">{a.type}</span>
-                <span className="font-display text-[clamp(22px,2.4vw,32px)] leading-snug text-navy transition-colors group-hover:text-steel">
-                  {a.title}
-                </span>
-                <span className="font-mono text-[12px] text-graphite md:text-right">{a.date ? formatDate(a.date) : a.category}</span>
-              </Link>
+        <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <li>
+            <InsightCard {...spotlight} />
+          </li>
+          {articles.slice(0, 3).map((a) => (
+            <li key={a.slug}>
+              <InsightCard href={`/insights/${a.slug}`} {...a} />
             </li>
           ))}
         </ul>
@@ -67,18 +60,40 @@ export function ContactSection() {
             Whether you are looking for technology expertise, specialist talent, workforce solutions, management consulting or professional
             technology training, speak with J &amp; J Consulting.
           </p>
-          <address className="mt-12 border-l-2 border-gold pl-6 not-italic">
-            <p className="label text-graphite">J &amp; J Consulting</p>
-            <p className="mt-3 text-[16px] leading-[1.8] text-charcoal">
-              {company.address.lines.map((l) => (
-                <span key={l} className="block">
-                  {l}
-                </span>
+          <ContactDetails className="mt-12" />
+          <div className="mt-12 border-t border-navy/15 pt-10">
+            <p className="label text-gold-dark">What happens next</p>
+            <ol className="relative mt-6">
+              <span aria-hidden className="absolute bottom-4 left-[15px] top-4 w-px bg-gradient-to-b from-gold to-gold/15" />
+              {[
+                [
+                  "We review your enquiry",
+                  "Your message goes to the right discipline: technology, consulting, talent, training or workforce.",
+                ],
+                ["We get in touch", "A member of the team contacts you to understand your requirements in more detail."],
+                ["We agree next steps", "Together we define the scope and the most practical way forward."],
+              ].map(([t, d], i) => (
+                <li key={t} className="relative grid grid-cols-[32px_1fr] gap-4 pb-6 last:pb-0">
+                  <span className="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border border-gold bg-paper font-mono text-[11px] text-gold-dark">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className="pt-1">
+                    <p className="font-display text-[19px] leading-tight text-navy">{t}</p>
+                    <p className="mt-1 max-w-sm text-[14.5px] leading-relaxed text-graphite">{d}</p>
+                  </div>
+                </li>
               ))}
-            </p>
-          </address>
+            </ol>
+          </div>
         </div>
-        <ContactForm />
+        <div className="self-start rounded-2xl border border-navy/10 bg-white p-6 shadow-[0_24px_60px_-30px_rgba(12,32,56,0.4)] sm:p-10">
+          <p className="label text-gold-dark">Enquiries</p>
+          <p className="mt-3 font-display text-[30px] leading-tight text-navy">Send us a message</p>
+          <p className="mb-8 mt-2 text-[14.5px] text-graphite">
+            Tell us what you need and we will respond. Fields marked <span className="text-gold-dark">*</span> are required.
+          </p>
+          <ContactForm />
+        </div>
       </div>
     </section>
   );

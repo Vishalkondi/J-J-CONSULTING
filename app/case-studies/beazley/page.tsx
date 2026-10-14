@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ClientMark } from "@/components/ClientMark";
+import { CaseOverview } from "@/components/case/CaseOverview";
+import { NumberedListSection } from "@/components/case/NumberedListSection";
+import { TechnologySection } from "@/components/case/TechnologySection";
+import { ConceptualNote, FlowChain } from "@/components/diagrams";
 import { CtaBand } from "@/components/CtaBand";
 import { SlotImage } from "@/components/SlotImage";
 import { company } from "@/data/site";
@@ -68,67 +70,40 @@ export default function BeazleyPage() {
         </div>
       </section>
 
-      {/* BUSINESS AREAS */}
-      <section className="bg-paper py-24 md:py-32">
-        <div className="wrap grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
-          <div>
-            <h2 className="text-[clamp(30px,3.6vw,48px)] leading-[1.08] text-navy">Business areas covered</h2>
-            <p className="mt-5 max-w-sm text-[16px] leading-relaxed text-graphite">
-              A pricing and rating platform touches most of the business. The analysis spanned six functions.
-            </p>
-          </div>
-          <ul className="grid gap-x-8 border-t border-navy/20 sm:grid-cols-2">
-            {b.areas.map((a) => (
-              <li key={a} className="border-b border-navy/15 py-4 font-display text-[24px] text-navy">
-                {a}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+      {/* OVERVIEW */}
+      <CaseOverview
+        client={b.client}
+        logo={b.logo}
+        facts={[
+          { label: "Role", value: b.role },
+          { label: "Period", value: b.period },
+          { label: "Programme", value: b.title },
+        ]}
+        heading={b.overviewHeading}
+        statement={b.statement}
+        stats={b.stats}
+        tagsLabel="Business areas"
+        tags={b.areas}
+      />
 
       {/* LIFECYCLE */}
-      <section className="bg-bone py-24 md:py-28">
+      <section className="blueprint relative bg-midnight py-20 text-white md:py-28" aria-labelledby="lifecycle-title">
         <div className="wrap">
-          <h2 className="text-[clamp(28px,3.2vw,44px)] leading-[1.1] text-navy">Delivery lifecycle</h2>
-          <ol
-            className="no-scrollbar mt-12 flex gap-px overflow-x-auto border border-navy/15 bg-navy/15"
-            aria-label="Programme delivery stages"
-          >
-            {b.lifecycle.map((step, i) => (
-              <li key={step} className="min-w-[150px] flex-1 bg-white p-6">
-                <span className="font-mono text-[12px] text-gold-dark">{String(i + 1).padStart(2, "0")}</span>
-                <p className="mt-4 font-display text-[22px] leading-tight text-navy">{step}</p>
-              </li>
-            ))}
-          </ol>
-          <p className="mt-4 font-mono text-[11px] text-graphite">{b.disclaimers.lifecycle}</p>
+          <p className="label text-gold-light">Delivery lifecycle</p>
+          <h2 id="lifecycle-title" className="mt-5 max-w-3xl text-balance text-[clamp(30px,3.6vw,50px)] leading-[1.08]">
+            From requirements workshops to go-live
+          </h2>
+          <div className="mt-12">
+            <FlowChain steps={[...b.lifecycle]} tone="dark" />
+          </div>
+          <ConceptualNote tone="dark">{b.disclaimers.lifecycle}</ConceptualNote>
         </div>
       </section>
 
-      {/* SYSTEMS */}
-      <section className="bg-paper py-24 md:py-28">
-        <div className="wrap grid gap-12 lg:grid-cols-[minmax(0,320px)_1fr] lg:gap-24">
-          <ClientMark name={b.client} logo={b.logo} className="aspect-square w-full max-w-[280px] border border-navy/10" />
-          <div>
-            <h2 className="label text-graphite">Systems and tools referenced</h2>
-            <ul className="mt-5 grid gap-x-8 font-mono text-[14px] text-charcoal sm:grid-cols-2">
-              {b.systems.map((s) => (
-                <li key={s} className="border-b border-navy/10 py-3">
-                  {s}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-8 max-w-xl text-[14.5px] leading-relaxed text-graphite">
-              Shown as documented scope of the programme. J &amp; J Consulting makes no claim about system ownership, configuration or
-              outcomes.
-            </p>
-            <Link href="/case-studies" className="link-arrow mt-8 text-navy">
-              All case studies <span aria-hidden>→</span>
-            </Link>
-          </div>
-        </div>
-      </section>
+      <NumberedListSection id="ach-title" eyebrow="Delivered" title="What the engagement put in place" items={b.achievements} tone="bone" />
+      <NumberedListSection id="resp-title" eyebrow="Role in practice" title="Key responsibilities" items={b.responsibilities} />
+
+      <TechnologySection items={b.systems} columns="lg:grid-cols-6" />
       <CtaBand />
     </>
   );

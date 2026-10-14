@@ -156,7 +156,7 @@ export function Navbar() {
                   Talk to Us
                 </Link>
                 <p className="mt-6 font-mono text-[11px] leading-relaxed text-white/50">
-                  Hamilton House, 87–89 Bell Street, Reigate, Surrey RH2 7AN
+                  Hamilton House, 87–89 Bell Street, Reigate, Surrey, England, RH2 7AN
                 </p>
               </div>
             </div>

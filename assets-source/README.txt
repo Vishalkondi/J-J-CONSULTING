@@ -21,3 +21,17 @@ logo/signage (not the real supplied logo), invented slogans ("From Risk to Oppor
 Solutions Progress", "Insurance builds a more resilient world", "A stronger, safer tomorrow"), and fake
 etched-wall corporate messaging. Only the clean top-middle skyline tile (no text/logos) was extracted, as
 public/images/city-skyline-dusk.jpg.
+data-master-*-source.jpg — AI-generated Data Master Consulting brand renders (supplied 2026-10-05). The logo matches the real
+mark (public/images/partners/data-master-mark.png). Published on /services at the user's request, each placed with its content
+(paths in data/services-page.ts → trainingPartner; files in public/images/partners/ and partners/campaign/):
+  reception-light — the /services hero image (public/images/partners/campaign/reception-light.jpg).
+  bus-shelter-poster, billboard-day — headers of the Corporate Training / Consulting pillar cards.
+  ideas-into-impact — the "trusted partner" image.
+  logo-3d, desk-flatlay, office-wide — the "Brand identity" panel (labelled "concept visuals").
+  brochure-spread — CROPPED to the cover only, beside the training programmes (the inside pages show invented figures —
+    500+ trained, 50+ clients, 20+ trainers, 100+ projects; Data Master's site says 10+ projects — and an unattributed
+    "Corporate Client" testimonial).
+Not used (duplicates/off-brand): signage-reception, merch-flatlay, billboard-sunset, fashion-poster, figurine-box,
+  reception-luxury, newspaper-ad (also: placeholder-looking phone number +91 98765 43210 in its contact strip).
+  premium-solutions-box — NOT published: a different invented brand ("Premium Solutions") whose mark resembles the J & J mark.
+Slogans on the published visuals are unconfirmed by Data Master (listed in data/site.ts `pending`).

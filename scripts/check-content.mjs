@@ -45,13 +45,16 @@ for (const f of evalFiles) {
 // 2. unverified-claim words (rendered content only)
 const claims =
   /\b(award[- ]winning|awards?\b|iso ?\d{4,5}|certified partner|official partner|gold partner|trusted by \d|offices in|\d+\+? clients|guaranteed)\b/gi;
+// Resume-confirmed facts about a client's own business (not claims about JJ) that trip the pattern above.
+const allowedClaims = [["data/experience.ts", "financial data across more than 95 clients"]];
 for (const f of files) {
-  const rel = f.slice(root.length + 1);
+  const rel = f.slice(root.length + 1).replaceAll("\\", "/");
   if (rel.startsWith("components/marketing") || rel === "data/insights.ts") continue;
   const text = stripComments(readFileSync(f, "utf8"));
   for (const m of text.matchAll(claims)) {
     const ctx = text.slice(Math.max(0, m.index - 80), m.index + 80).toLowerCase();
     if (/(do not|don't|never|not )/.test(ctx) || /pending|to be confirmed/.test(ctx)) continue;
+    if (allowedClaims.some(([file, phrase]) => file === rel && ctx.includes(phrase))) continue;
     console.error(`✗ possible unverified claim "${m[0]}" in ${rel}`);
     errors++;
   }

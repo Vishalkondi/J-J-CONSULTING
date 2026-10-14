@@ -1,6 +1,6 @@
 import { rre } from "@/data/renaissance-re";
 import { beazley } from "@/data/beazley";
-import { howden, images } from "@/data/howden-hx";
+import { howden } from "@/data/howden-hx";
 import { msAmlin } from "@/data/ms-amlin";
 import { metlife } from "@/data/metlife";
 import { collinson } from "@/data/collinson";
@@ -9,6 +9,8 @@ import { ascot } from "@/data/ascot";
 import { hastings } from "@/data/hastings";
 import { axaXl } from "@/data/axa-xl";
 import { msaSolvency } from "@/data/ms-amlin-solvency";
+import { tmhcc } from "@/data/tmhcc";
+import { westfield } from "@/data/westfield";
 
 export type FeaturedCase = {
   href: string;
@@ -41,11 +43,11 @@ export const featuredCases: FeaturedCase[] = [
   {
     href: "/case-studies/westfield-specialty",
     client: "Westfield Specialty",
-    label: "Business Analyst · April 2025 – February 2026",
-    title: "Project Goldcrest",
-    blurb: "New Company Market Entity Setup in Luxembourg.",
-    cta: "View the engagement",
-    visual: { kind: "logo", name: "Westfield Specialty", logo: "/images/westfield-specialty-logo.png" },
+    label: `${westfield.role} · ${westfield.period}`,
+    title: westfield.title,
+    blurb: `${westfield.subtitle}: claims, actuarial systems, and underwriting workbench and pricing.`,
+    cta: "Read the case study",
+    visual: { kind: "logo", name: westfield.client, logo: westfield.logo },
   },
   {
     href: "/case-studies/ascot-group",
@@ -71,13 +73,26 @@ export const featuredCases: FeaturedCase[] = [
     },
   },
   {
+    href: `/case-studies/${tmhcc.slug}`,
+    client: tmhcc.client,
+    label: `${tmhcc.role} · ${tmhcc.period}`,
+    title: tmhcc.title,
+    blurb: "Guidewire policy administration, vendor and partner RFPs, and six target state architecture archetypes.",
+    cta: "Read the case study",
+    visual: { kind: "logo", name: tmhcc.client, logo: tmhcc.logo },
+  },
+  {
     href: "/case-studies/howden-hyperion-x",
     client: "Howden Group / Hyperion X",
     label: `${howden.role} · ${howden.dates}`,
     title: "Data platforms, cubes and dashboards",
     blurb: "Employee Benefits data analytics, an Actuarial Cube and a Broker Data Platform.",
     cta: "Read the case study",
-    visual: { kind: "image", src: images.skyline.src, alt: images.skyline.alt },
+    visual: {
+      kind: "image",
+      src: "/images/howden/analyst-dashboard-presentation.jpg",
+      alt: "A business analyst presenting Employee Benefits, Actuarial Cube and Broker Platform dashboards on a wall screen",
+    },
   },
   {
     href: "/case-studies/ms-amlin-solvency-ii",
@@ -140,6 +155,6 @@ export const featuredCases: FeaturedCase[] = [
     title: brit.title,
     blurb: brit.summary,
     cta: "Read the case study",
-    visual: { kind: "image", src: brit.visual.src, alt: brit.visual.alt, aspect: "aspect-[21/9]" },
+    visual: { kind: "logo", name: brit.client, logo: brit.logo },
   },
 ];

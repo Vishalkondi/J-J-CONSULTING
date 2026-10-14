@@ -73,8 +73,8 @@ export function AxaXlHero() {
       <div className="wrap relative pb-16 pt-36 md:pb-24 md:pt-48">
         {/* LOGOS + BRAND HISTORY NOTE */}
         <div className="flex flex-wrap items-center gap-5">
-          <ClientMark name="AXA" logo={a.logos.axa} className="h-14 w-14 shrink-0 border border-white/15" />
-          <ClientMark name="XL Insurance Reinsurance" logo={a.logos.xl} className="h-14 w-36 shrink-0 border border-white/15" />
+          <ClientMark name="AXA" logo={a.logos.axa} className="h-14 w-14 shrink-0 border border-white/15" pad="p-1.5" />
+          <ClientMark name="XL Insurance Reinsurance" logo={a.logos.xl} className="h-14 w-36 shrink-0 border border-white/15" pad="p-1.5" />
           <span aria-hidden className="hidden h-8 w-px bg-white/20 sm:block" />
           <p className="max-w-sm text-[12.5px] leading-snug text-white/55">
             Experience spanning the Catlin Group and XL Group era, subsequently becoming part of AXA XL.

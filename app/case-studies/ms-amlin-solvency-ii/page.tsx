@@ -61,7 +61,7 @@ export default function MsAmlinSolvencyPage() {
                 aria-label="MS Amlin website (opens in a new tab)"
                 className="block transition-opacity duration-300 hover:opacity-90"
               >
-                <ClientMark name={m.client} logo={m.logo} className="h-14 w-40 shrink-0" />
+                <ClientMark name={m.client} logo={m.logo} className="h-14 w-40 shrink-0" pad="p-2" />
               </a>
               <VisitMsAmlin tone="dark" className="!px-5 !py-3" />
             </div>

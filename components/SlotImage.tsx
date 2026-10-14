@@ -1,5 +1,5 @@
 "use client";
-import { useState, type ReactNode } from "react";
+import { useCallback, useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 /**
@@ -27,11 +27,16 @@ export function SlotImage({
 }) {
   const [failed, setFailed] = useState(false);
   const dev = process.env.NODE_ENV !== "production";
+  // A server-rendered <img> can fail before hydration attaches onError, so also check on mount.
+  const checkLoaded = useCallback((img: HTMLImageElement | null) => {
+    if (img?.complete && img.naturalWidth === 0) setFailed(true);
+  }, []);
   return (
     <div className={cn("relative overflow-hidden bg-navy", className)}>
       {!failed && (
         // eslint-disable-next-line @next/next/no-img-element
         <img
+          ref={checkLoaded}
           src={src}
           alt={alt}
           loading={eager ? "eager" : "lazy"}

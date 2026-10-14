@@ -72,7 +72,7 @@ export const howden = {
 
 export const stats: Stat[] = [
   { value: "3", label: "Engagements" },
-  { value: "10+", label: "Data sources" },
+  { value: "6", label: "Months, June – November 2020" },
   { value: "60", label: "Dashboards monitored" },
 ];
 
