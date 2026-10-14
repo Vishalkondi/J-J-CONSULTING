@@ -1,12 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="500 279 600 608" role="img" aria-label="J &amp; J">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 204 204" role="img" aria-label="J &amp; J">
   <defs>
-    <linearGradient id="b1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3B82E4"/><stop offset="1" stop-color="#6FAEF2"/></linearGradient>
-    <linearGradient id="b2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2058B8"/><stop offset="1" stop-color="#74B0F2"/></linearGradient>
-    <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#EBB84C"/><stop offset="1" stop-color="#EFCB7C"/></linearGradient>
-    <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FAE6B2"/><stop offset="1" stop-color="#F4D590"/></linearGradient>
+    <linearGradient id="au" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F2C566"/><stop offset=".45" stop-color="#FBE3A0"/><stop offset="1" stop-color="#D9A23F"/></linearGradient>
+    <linearGradient id="au2" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#F2C566"/><stop offset=".45" stop-color="#FBE3A0"/><stop offset="1" stop-color="#D9A23F"/></linearGradient>
+    <linearGradient id="fd" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#8E5F1A"/><stop offset=".55" stop-color="#C68B2C"/><stop offset="1" stop-color="#F0C468"/></linearGradient>
+    <linearGradient id="fd2" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8E5F1A"/><stop offset=".55" stop-color="#C68B2C"/><stop offset="1" stop-color="#F0C468"/></linearGradient>
+    <linearGradient id="ag" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8C8F95"/><stop offset=".5" stop-color="#6A6D73"/><stop offset="1" stop-color="#45484E"/></linearGradient>
   </defs>
-  <path fill="url(#b1)" d="M502 884V471A285 190 0 0 1 787 281V483H735A46 46 0 0 0 689 529V619A46 46 0 0 0 735 665H787V884Z"/>
-  <path fill="url(#b2)" d="M502 660C545 555 630 505 703 497A46 46 0 0 0 689 529V619A46 46 0 0 0 735 665H787V884H502Z"/>
-  <path fill="url(#g1)" d="M817 281H1098V684C1098 810 990 884 817 884V665H840A46 46 0 0 0 886 619V529A46 46 0 0 0 840 483H817Z"/>
-  <path fill="url(#g2)" d="M1098 458C1062 575 975 645 873 652A46 46 0 0 1 840 665H817V884C990 884 1098 810 1098 684Z"/>
+  <path fill="url(#au)" d="M0 136V38A38 38 0 0 1 38 0H96V58H84A20 20 0 0 0 64 78V136Z"/>
+  <path fill="url(#fd)" d="M0 136V126C14 92 44 64 84 58A20 20 0 0 0 64 78V136Z"/>
+  <path fill="url(#au2)" d="M200 64V162A38 38 0 0 1 162 200H104V142H116A20 20 0 0 0 136 122V64Z"/>
+  <path fill="url(#fd2)" d="M200 64V74C186 108 156 136 116 142A20 20 0 0 0 136 122V64Z"/>
+  <path fill="url(#ag)" d="M107 0H197A3 3 0 0 1 200 3V57A3 3 0 0 1 197 60H107A3 3 0 0 1 104 57V3A3 3 0 0 1 107 0Z"/>
+  <path fill="url(#ag)" d="M3 140H93A3 3 0 0 1 96 143V197A3 3 0 0 1 93 200H3A3 3 0 0 1 0 197V143A3 3 0 0 1 3 140Z"/>
+  <g fill="none" stroke="#FFE7A6" stroke-opacity=".85" stroke-width="1.4">
+    <path d="M0 136V38A38 38 0 0 1 38 0H96V58H84A20 20 0 0 0 64 78V136Z"/>
+    <path d="M200 64V162A38 38 0 0 1 162 200H104V142H116A20 20 0 0 0 136 122V64Z"/>
+  </g>
 </svg>

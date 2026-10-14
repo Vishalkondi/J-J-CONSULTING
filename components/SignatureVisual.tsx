@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { MetalIcon } from "./BrandMark";
 import { services } from "@/data/site";
 import { serviceHeroImages } from "@/data/service-images";
 import { cn } from "@/lib/utils";
@@ -107,8 +108,7 @@ export function SignatureVisual() {
 
         {/* centre: brand mark */}
         <div className="absolute left-1/2 top-1/2 flex h-[32%] w-[32%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-[6%] rounded-full border border-gold/50 bg-midnight text-center shadow-[0_0_60px_-10px_rgba(184,152,90,0.45)]">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/jj-mark.svg" alt="" className="h-[30%] w-auto" />
+          <MetalIcon className="h-[30%] w-auto" />
           <span className="font-display text-[clamp(16px,3vw,28px)] leading-none text-white">
             J<span className="text-gold">&amp;</span>J
           </span>

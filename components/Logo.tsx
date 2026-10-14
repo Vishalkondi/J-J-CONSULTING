@@ -1,4 +1,4 @@
-import { BrandIcon, BrandLockup } from "./BrandMark";
+import { BrandIcon, BrandLockup, MetalIcon } from "./BrandMark";
 import { company } from "@/data/site";
 import { cn } from "@/lib/utils";
 
@@ -6,6 +6,8 @@ type Props = {
   variant?: "compact" | "full";
   tone?: "light" | "dark"; // light = sits on a dark background
   size?: "hero" | "footer" | "default";
+  /** "metal" (default) = the gold-and-silver mark; "brand" = the earlier blue-and-gold mark. */
+  finish?: "brand" | "metal";
   className?: string;
 };
 
@@ -19,10 +21,24 @@ const FULL_SIZES = {
 /**
  * J & J Consulting logo, fully vector (components/BrandMark.tsx): sharp at any size, no image
  * requests. `compact` = icon + "J & J" for the navbar/footer; `full` = the stacked brand lockup.
- * public/brand/jj-mark.svg remains for the favicon and other non-React uses.
+ * public/brand/jj-mark.svg (the metal mark) is for the favicon and other non-React uses.
  */
-export function Logo({ variant = "compact", tone = "light", size = "default", className }: Props) {
+export function Logo({ variant = "compact", tone = "light", size = "default", finish = "metal", className }: Props) {
   const ink = tone === "light" ? "text-white" : "text-navy";
+
+  if (variant === "compact" && finish === "metal") {
+    return (
+      <span className={cn("inline-flex items-center gap-3", ink, className)} aria-label="J & J Consulting">
+        <MetalIcon className="h-10 w-auto sm:h-11" />
+        <span className="flex flex-col items-center font-[Cinzel,serif] leading-none">
+          <span className="text-[22px] font-medium tracking-[0.03em] sm:text-[24px]">
+            J<span className="mx-[4px] text-gold-light">&amp;</span>J
+          </span>
+          <span className="mt-1 text-[9px] font-medium tracking-[0.24em] text-gold-light [margin-right:-0.24em]">CONSULTING</span>
+        </span>
+      </span>
+    );
+  }
 
   if (variant === "compact") {
     return (
@@ -35,5 +51,5 @@ export function Logo({ variant = "compact", tone = "light", size = "default", cl
     );
   }
 
-  return <BrandLockup tone={tone} established={company.established} className={cn(FULL_SIZES[size], className)} />;
+  return <BrandLockup tone={tone} finish={finish} established={company.established} className={cn(FULL_SIZES[size], className)} />;
 }
