@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 // Still sunset photo shown in place of the video (matches the approved hero design). Set to null
 // to go back to the video. To use the exact design photo, save it as public/images/hero-sunset.jpg
 // and point this at it.
-const HERO_STILL: string | null = null;
+const HERO_STILL: string | null = "/images/hero-sunset.jpg";
 
 // One hero video today. To enable the two-video crossfade, add public/videos/hero-video-02.mp4
 // and set NEXT_PUBLIC_HERO_VIDEO_2=1 in .env.local.
@@ -130,8 +130,7 @@ export function HeroVideo() {
           fill
           priority
           sizes="100vw"
-          className="-z-20 object-cover object-[50%_45%]"
-          style={{ filter: DUSK_GRADE }}
+          className="-z-20 object-cover object-center"
           aria-hidden
         />
       )}
@@ -165,42 +164,56 @@ export function HeroVideo() {
         />
       ))}
 
-      {/* Dusk grade: deep blue-violet sky at the top, an amber sun glow upper-right and a warm wash
-          over the city, so the daytime footage reads as golden-hour sunset. */}
-      <div
-        className="absolute inset-0 -z-10 mix-blend-soft-light"
-        aria-hidden
-        style={{
-          background:
-            "radial-gradient(900px 520px at 92% 38%, rgba(255,170,60,0.45), transparent 65%), linear-gradient(180deg, rgba(20,24,70,0.85) 0%, rgba(90,60,50,0.3) 35%, rgba(255,140,40,0.25) 60%, rgba(40,25,20,0.5) 100%)",
-        }}
-      />
-      <div
-        className="absolute inset-0 -z-10 mix-blend-screen"
-        aria-hidden
-        style={{
-          background:
-            "radial-gradient(140px 140px at 99% 42%, rgba(255,214,140,0.6), transparent 70%), radial-gradient(620px 360px at 98% 42%, rgba(255,150,40,0.18), transparent 70%), linear-gradient(180deg, rgba(18,26,66,0.6) 0%, rgba(40,40,90,0.2) 25%, transparent 45%)",
-        }}
-      />
+      {HERO_STILL ? (
+        // The photo already carries its own sunset grade; only a light wash for text legibility.
+        <div
+          className="absolute inset-0 -z-10"
+          aria-hidden
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(8,18,31,0.35) 0%, rgba(8,18,31,0.12) 40%, transparent 60%), linear-gradient(180deg, rgba(0,0,0,0.2) 0%, transparent 18%, transparent 70%, rgba(0,0,0,0.45) 100%)",
+          }}
+        />
+      ) : (
+        <>
+        {/* Dusk grade: deep blue-violet sky at the top, an amber sun glow upper-right and a warm wash
+            over the city, so the daytime footage reads as golden-hour sunset. */}
+        <div
+          className="absolute inset-0 -z-10 mix-blend-soft-light"
+          aria-hidden
+          style={{
+            background:
+              "radial-gradient(900px 520px at 92% 38%, rgba(255,170,60,0.45), transparent 65%), linear-gradient(180deg, rgba(20,24,70,0.85) 0%, rgba(90,60,50,0.3) 35%, rgba(255,140,40,0.25) 60%, rgba(40,25,20,0.5) 100%)",
+          }}
+        />
+        <div
+          className="absolute inset-0 -z-10 mix-blend-screen"
+          aria-hidden
+          style={{
+            background:
+              "radial-gradient(140px 140px at 99% 42%, rgba(255,214,140,0.6), transparent 70%), radial-gradient(620px 360px at 98% 42%, rgba(255,150,40,0.18), transparent 70%), linear-gradient(180deg, rgba(18,26,66,0.6) 0%, rgba(40,40,90,0.2) 25%, transparent 45%)",
+          }}
+        />
 
-      {/* Deep blue dusk sky over the top third, behind the navbar. */}
-      <div
-        className="absolute inset-0 -z-10"
-        aria-hidden
-        style={{ background: "linear-gradient(180deg, rgba(12,18,48,0.7) 0%, rgba(30,30,70,0.35) 22%, transparent 42%)" }}
-      />
+        {/* Deep blue dusk sky over the top third, behind the navbar. */}
+        <div
+          className="absolute inset-0 -z-10"
+          aria-hidden
+          style={{ background: "linear-gradient(180deg, rgba(12,18,48,0.7) 0%, rgba(30,30,70,0.35) 22%, transparent 42%)" }}
+        />
 
-      {/* Cinematic overlay: darker at the top (navbar) and bottom, plus a navy wash on the left so the
-          logo, headline and buttons stay legible over bright footage. */}
-      <div
-        className="absolute inset-0 -z-10"
-        aria-hidden
-        style={{
-          background:
-            "linear-gradient(90deg, rgba(8,18,31,0.62) 0%, rgba(8,18,31,0.32) 42%, rgba(8,18,31,0) 75%), linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.08) 22%, rgba(0,0,0,0.15) 55%, rgba(0,0,0,0.75) 100%)",
-        }}
-      />
+        {/* Cinematic overlay: darker at the top (navbar) and bottom, plus a navy wash on the left so the
+            logo, headline and buttons stay legible over bright footage. */}
+        <div
+          className="absolute inset-0 -z-10"
+          aria-hidden
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(8,18,31,0.62) 0%, rgba(8,18,31,0.32) 42%, rgba(8,18,31,0) 75%), linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.08) 22%, rgba(0,0,0,0.15) 55%, rgba(0,0,0,0.75) 100%)",
+          }}
+        />
+        </>
+      )}
 
       {/* Content */}
       <div className="wrap relative flex w-full flex-1 flex-col justify-end pb-5 pt-28 md:pb-6 xl:max-w-none xl:px-[5vw]">
