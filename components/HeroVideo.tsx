@@ -85,14 +85,13 @@ export function HeroVideo() {
     } else setBlocked(false);
   };
 
-  const fadeIn = (delay: number) =>
-    reduce
-      ? {}
-      : {
-          initial: { opacity: 0, y: 22 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 1, delay, ease: [0.22, 1, 0.36, 1] as const },
-        };
+  // Same initial/animate on server and client (useReducedMotion() is unknown during SSR, so
+  // branching them caused a hydration mismatch); reduced motion only makes the fade instant.
+  const fadeIn = (delay: number) => ({
+    initial: { opacity: 0, y: 22 },
+    animate: { opacity: 1, y: 0 },
+    transition: reduce ? { duration: 0 } : { duration: 1, delay, ease: [0.22, 1, 0.36, 1] as const },
+  });
 
   return (
     <section
