@@ -28,15 +28,12 @@ export type Article = {
   date: string; // ISO. Editable by the site owner.
   readMinutes: number;
   excerpt: string;
-  /** Card + article hero photo (decorative). */
-  image: string;
   body: Block[];
 };
 
 export const articles: Article[] = [
   {
     slug: "why-enterprise-integration-assessments-matter",
-    image: "/images/analyst-video-call-desk.jpg",
     title: "Why Enterprise Integration Assessments Matter",
     type: "Industry Insight",
     category: "Insurance",
@@ -76,7 +73,6 @@ export const articles: Article[] = [
   },
   {
     slug: "from-current-state-architecture-to-actionable-recommendations",
-    image: "/images/boardroom-presentation-large.jpg",
     title: "From Current-State Architecture to Actionable Recommendations",
     type: "Business Analyst Perspective",
     category: "Consulting",
@@ -116,7 +112,6 @@ export const articles: Article[] = [
   },
   {
     slug: "the-role-of-document-management-in-insurance-operations",
-    image: "/images/modern-office-workspace.jpg",
     title: "The Role of Document Management in Insurance Operations",
     type: "Industry Insight",
     category: "Insurance",
@@ -154,7 +149,6 @@ export const articles: Article[] = [
   },
   {
     slug: "five-questions-to-ask-when-reviewing-enterprise-integrations",
-    image: "/images/engineering-team.jpg",
     title: "Five Questions to Ask When Reviewing Enterprise Integrations",
     type: "Technology Insight",
     category: "Technology",
@@ -196,5 +190,4 @@ export const spotlight = {
   excerpt:
     "Business Analyst experience assessing systems architecture, integrations, process flows and ImageRight document storage across Policy & Claims and Finance.",
   href: "/case-studies/renaissance-re",
-  image: "/images/howden/workshop-data-to-decisions.jpg",
 };

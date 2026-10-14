@@ -58,7 +58,7 @@ export function Navbar() {
     };
   }, [open]);
 
-  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`));
+  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
   return (
     <>
@@ -69,7 +69,7 @@ export function Navbar() {
         )}
         style={{ paddingTop: `calc(env(safe-area-inset-top, 0px) + ${scrolled || open ? "0.75rem" : "1.5rem"})` }}
       >
-        <div className="wrap flex items-center justify-between xl:max-w-none xl:px-[5vw]">
+        <div className="wrap flex items-center justify-between">
           <Link href="/" aria-label="J & J Consulting — home" className="relative z-[60]">
             <Logo />
           </Link>
@@ -84,7 +84,7 @@ export function Navbar() {
                       href={n.href}
                       aria-current={isActive(n.href) ? "page" : undefined}
                       className={cn(
-                        "relative py-2 text-[14px] tracking-wide text-white/85 transition-colors hover:text-white",
+                        "relative py-2 text-[13px] tracking-wide text-white/80 transition-colors hover:text-white",
                         isActive(n.href) && "text-white after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:bg-gold",
                       )}
                     >
@@ -96,8 +96,8 @@ export function Navbar() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <Link href="/contact" className="btn btn-gold hidden !py-3 text-[14px] sm:inline-flex">
-              Talk to Us <span aria-hidden>→</span>
+            <Link href="/contact" className="btn btn-gold hidden !py-2.5 sm:inline-flex">
+              Talk to Us
             </Link>
             <button
               ref={toggleRef}
@@ -156,7 +156,7 @@ export function Navbar() {
                   Talk to Us
                 </Link>
                 <p className="mt-6 font-mono text-[11px] leading-relaxed text-white/50">
-                  Hamilton House, 87–89 Bell Street, Reigate, Surrey, England, RH2 7AN
+                  Hamilton House, 87–89 Bell Street, Reigate, Surrey RH2 7AN
                 </p>
               </div>
             </div>

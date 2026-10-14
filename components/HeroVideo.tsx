@@ -1,36 +1,22 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Logo } from "./Logo";
-import { company, heroCategories, stats } from "@/data/site";
+import { company, heroCategories } from "@/data/site";
 import { cn } from "@/lib/utils";
-
-// Still sunset photo shown in place of the video (matches the approved hero design). Set to null
-// to go back to the video. To use the exact design photo, save it as public/images/hero-sunset.jpg
-// and point this at it.
-const HERO_STILL: string | null = "/images/hero-sunset.jpg";
-
-// Softens the photo's sunset: less orange and a gentler sun glow.
-const STILL_GRADE = "saturate(0.72) brightness(0.94) contrast(1.06)";
 
 // One hero video today. To enable the two-video crossfade, add public/videos/hero-video-02.mp4
 // and set NEXT_PUBLIC_HERO_VIDEO_2=1 in .env.local.
 const HAS_SECOND = process.env.NEXT_PUBLIC_HERO_VIDEO_2 === "1";
-const SOURCES: string[] = HERO_STILL
-  ? []
-  : ["/videos/hero-video-01.mp4", ...(HAS_SECOND ? ["/videos/hero-video-02.mp4"] : [])];
-const POSTER = "/images/hero-sunset.jpg";
-// Colour grade applied to the footage and poster: a gentle sunset look, kept restrained (not too orange).
-const DUSK_GRADE = "saturate(1.1) contrast(1.22) brightness(0.88)";
+const SOURCES: string[] = ["/videos/hero-video-01.mp4", ...(HAS_SECOND ? ["/videos/hero-video-02.mp4"] : [])];
+const POSTER = "/images/hero-poster.jpg";
 
 /**
  * Behaviour
  *  - Video 1 autoplays (muted, inline). On end → crossfade into Video 2, then back. Loops forever.
  *  - Never black: a branded gradient sits under the videos and is what visitors see until playback starts.
- *  - Plays for everyone (it is a slow, silent ambient clip) with a Pause control, per WCAG 2.2.2; reduced motion
- *    still disables the other decorative animations. If the browser refuses autoplay: poster + "Play film".
+ *  - If autoplay is refused (or reduced-motion is on): poster/fallback + "Enter Experience".
  *  - If a video file is missing/broken: that slot is skipped; the other loops on its own.
  */
 export function HeroVideo() {
@@ -41,9 +27,8 @@ export function HeroVideo() {
   const [failed, setFailed] = useState([false, false]);
   const [blocked, setBlocked] = useState(false);
   const [muted, setMuted] = useState(true);
-  const [paused, setPaused] = useState(false);
 
-  const allFailed = SOURCES.every((_, i) => failed[i]); // only the configured slots count
+  const allFailed = failed[0] && failed[1];
   const anyPlaying = playing[0] || playing[1];
 
   const tryPlay = useCallback(async (i: number) => {
@@ -57,10 +42,14 @@ export function HeroVideo() {
     }
   }, []);
 
-  // Start video 1 immediately.
+  // Start video 1 immediately (unless the visitor prefers reduced motion).
   useEffect(() => {
+    if (reduce) {
+      setBlocked(true);
+      return;
+    }
     tryPlay(0);
-  }, [tryPlay]);
+  }, [reduce, tryPlay]);
 
   useEffect(() => {
     refs.current.forEach((v) => {
@@ -86,19 +75,6 @@ export function HeroVideo() {
       .catch(() => setBlocked(true));
   };
 
-  const togglePause = () => {
-    const v = refs.current[active];
-    if (!v) return;
-    if (paused) {
-      v.play()
-        .then(() => setPaused(false))
-        .catch(() => {});
-    } else {
-      v.pause();
-      setPaused(true);
-    }
-  };
-
   const enter = () => {
     const v = refs.current[active];
     if (v) {
@@ -109,35 +85,23 @@ export function HeroVideo() {
     } else setBlocked(false);
   };
 
-  // Same initial/animate on server and client (useReducedMotion() is unknown during SSR, so
-  // branching them caused a hydration mismatch); reduced motion only makes the fade instant.
-  const fadeIn = (delay: number) => ({
-    initial: { opacity: 0, y: 22 },
-    animate: { opacity: 1, y: 0 },
-    transition: reduce ? { duration: 0 } : { duration: 1, delay, ease: [0.22, 1, 0.36, 1] as const },
-  });
+  const fadeIn = (delay: number) =>
+    reduce
+      ? {}
+      : {
+          initial: { opacity: 0, y: 22 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 1, delay, ease: [0.22, 1, 0.36, 1] as const },
+        };
 
   return (
     <section
-      className="relative isolate flex min-h-[max(100svh,640px)] w-full flex-col overflow-hidden bg-midnight text-white"
+      className="relative isolate h-[100svh] min-h-[640px] w-full overflow-hidden bg-midnight text-white md:h-screen"
       aria-label="J & J Consulting introduction"
     >
       {/* Fallback layer — always present so the hero is never empty/black. .site-hero-poster is
           dedicated to this one section; see the comment in globals.css for why. */}
-      <div className="hero-fallback blueprint site-hero-poster absolute inset-0 -z-30" style={{ filter: DUSK_GRADE }} aria-hidden />
-
-      {HERO_STILL && (
-        <Image
-          src={HERO_STILL}
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="-z-20 object-cover object-center"
-          style={{ filter: STILL_GRADE }}
-          aria-hidden
-        />
-      )}
+      <div className="hero-fallback blueprint site-hero-poster absolute inset-0 -z-30" aria-hidden />
 
       {SOURCES.map((src, i) => (
         <video
@@ -155,180 +119,95 @@ export function HeroVideo() {
           muted
           loop={SOURCES.length === 1}
           playsInline
-          // Always false here; playback is started by the tryPlay() effect above, which can detect a
-          // refused autoplay and show the "Play film" fallback.
+          // Always false here — deterministic on server and client, avoiding a hydration mismatch
+          // (useReducedMotion() is unknown during SSR). Playback is instead started imperatively
+          // by the tryPlay() effect above, which already knows the real reduced-motion preference.
           autoPlay={false}
           preload="metadata"
           aria-hidden
           tabIndex={-1}
           onPlaying={() => setPlaying((p) => p.map((x, k) => (k === i ? true : x)))}
-          style={{ filter: DUSK_GRADE }}
           onEnded={() => handleEnded(i)}
           onError={() => setFailed((f) => f.map((x, k) => (k === i ? true : x)))}
         />
       ))}
 
-      {HERO_STILL ? (
-        // Light wash for text legibility, plus a cool blue tint that calms the orange sky.
-        <div
-          className="absolute inset-0 -z-10"
-          aria-hidden
-          style={{
-            background:
-              "linear-gradient(90deg, rgba(8,18,31,0.35) 0%, rgba(8,18,31,0.12) 40%, transparent 60%), linear-gradient(180deg, rgba(0,0,0,0.2) 0%, transparent 18%, transparent 70%, rgba(0,0,0,0.45) 100%), linear-gradient(rgba(20,32,64,0.18), rgba(20,32,64,0.18))",
-          }}
-        />
-      ) : (
-        <>
-        {/* Dusk grade: deep blue-violet sky at the top, an amber sun glow upper-right and a warm wash
-            over the city, so the daytime footage reads as golden-hour sunset. */}
-        <div
-          className="absolute inset-0 -z-10 mix-blend-soft-light"
-          aria-hidden
-          style={{
-            background:
-              "radial-gradient(900px 520px at 92% 38%, rgba(255,170,60,0.45), transparent 65%), linear-gradient(180deg, rgba(20,24,70,0.85) 0%, rgba(90,60,50,0.3) 35%, rgba(255,140,40,0.25) 60%, rgba(40,25,20,0.5) 100%)",
-          }}
-        />
-        <div
-          className="absolute inset-0 -z-10 mix-blend-screen"
-          aria-hidden
-          style={{
-            background:
-              "radial-gradient(140px 140px at 99% 42%, rgba(255,214,140,0.6), transparent 70%), radial-gradient(620px 360px at 98% 42%, rgba(255,150,40,0.18), transparent 70%), linear-gradient(180deg, rgba(18,26,66,0.6) 0%, rgba(40,40,90,0.2) 25%, transparent 45%)",
-          }}
-        />
-
-        {/* Deep blue dusk sky over the top third, behind the navbar. */}
-        <div
-          className="absolute inset-0 -z-10"
-          aria-hidden
-          style={{ background: "linear-gradient(180deg, rgba(12,18,48,0.7) 0%, rgba(30,30,70,0.35) 22%, transparent 42%)" }}
-        />
-
-        {/* Cinematic overlay: darker at the top (navbar) and bottom, plus a navy wash on the left so the
-            logo, headline and buttons stay legible over bright footage. */}
-        <div
-          className="absolute inset-0 -z-10"
-          aria-hidden
-          style={{
-            background:
-              "linear-gradient(90deg, rgba(8,18,31,0.62) 0%, rgba(8,18,31,0.32) 42%, rgba(8,18,31,0) 75%), linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.08) 22%, rgba(0,0,0,0.15) 55%, rgba(0,0,0,0.75) 100%)",
-          }}
-        />
-        </>
-      )}
+      {/* Cinematic overlay: 0.20 → 0.30 → 0.75 */}
+      <div
+        className="absolute inset-0 -z-10"
+        aria-hidden
+        style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.20) 0%, rgba(0,0,0,0.30) 45%, rgba(0,0,0,0.75) 100%)" }}
+      />
 
       {/* Content */}
-      <div className="wrap relative flex w-full flex-1 flex-col justify-end pb-5 pt-28 md:pb-6 xl:max-w-none xl:px-[5vw]">
+      <div className="wrap relative flex h-full flex-col justify-end pb-24 pt-32 md:pb-28">
         <motion.h1 {...fadeIn(0.35)} className="!font-sans">
           <span className="sr-only">J &amp; J Consulting</span>
           <span aria-hidden>
-            <Logo variant="full" size="hero" className="drop-shadow-[0_10px_30px_rgba(0,0,0,0.55)]" />
+            <Logo variant="full" size="hero" />
           </span>
         </motion.h1>
 
-        <motion.p {...fadeIn(0.8)} className="mt-3 font-display text-[clamp(28px,3.25vw,50px)] leading-[1.1] tracking-[-0.005em] text-white">
+        <motion.p {...fadeIn(0.8)} className="mt-8 font-display text-[clamp(26px,3.6vw,52px)] leading-[1.1] text-white">
           {company.tagline}
         </motion.p>
 
-        <motion.p {...fadeIn(1.05)} className="mt-3 max-w-xl text-[clamp(16px,1.3vw,18px)] leading-snug text-white/85">
+        <motion.p {...fadeIn(1.05)} className="mt-5 max-w-xl text-[17px] leading-relaxed text-white/80">
           {company.strapline}
         </motion.p>
 
-        <motion.div {...fadeIn(1.3)} className="mt-5 flex flex-wrap gap-4">
-          <Link href="/services" className="btn btn-gold px-6 py-3 text-[14.5px]">
+        <motion.div {...fadeIn(1.3)} className="mt-9 flex flex-wrap gap-4">
+          <Link href="/services" className="btn btn-gold">
             Explore Our Expertise <span aria-hidden>→</span>
           </Link>
-          <Link href="/contact" className="btn btn-ghost px-6 py-3 text-[14.5px]">
+          <Link href="/contact" className="btn btn-ghost">
             Talk to Us <span aria-hidden>→</span>
           </Link>
         </motion.div>
 
-        {/* Floating stat card (desktop): the headline figures, from the same data as the counters. */}
-        <motion.div
-          {...fadeIn(1.5)}
-          className="absolute right-[8%] top-[22%] hidden w-[clamp(280px,21vw,340px)] rounded-2xl border border-white/15 bg-[rgba(22,18,14,0.6)] p-6 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.8)] backdrop-blur-md xl:block"
-        >
-          <p className="pill bg-white/5 text-gold-light">Since {company.established}</p>
-          <dl className="mt-5 space-y-4">
-            {stats.slice(0, 3).map((s) => (
-              <div key={s.label} className="flex items-baseline gap-3 border-b border-white/10 pb-4 last:border-0 last:pb-0">
-                <dd className="w-[4.5rem] shrink-0 font-display text-[clamp(28px,2.2vw,34px)] leading-none text-white">
-                  {s.value}
-                  {s.suffix}
-                </dd>
-                <dt className="order-last text-[clamp(13px,1vw,15px)] leading-snug text-white/75">{s.label}</dt>
-              </div>
-            ))}
-          </dl>
-        </motion.div>
-
-        <motion.div
+        <motion.ul
           {...fadeIn(1.6)}
-          className="mt-7 flex items-end justify-between gap-6 border-t border-white/20 pt-4 md:mt-6"
+          className="mt-12 hidden flex-wrap gap-x-8 gap-y-2 border-t border-white/20 pt-5 font-mono text-[11px] tracking-[0.12em] text-white/70 md:flex"
+          aria-label="What we do"
         >
-          <ul className="hidden min-w-0 flex-wrap items-center gap-y-2 font-mono xl:flex-nowrap text-[11.5px] tracking-[0.1em] text-white/80 md:flex" aria-label="What we do">
-            {heroCategories.map((c) => (
-              <li key={c} className="whitespace-nowrap border-r border-white/30 px-4 leading-none first:pl-0 last:border-0 xl:px-5">
-                {c}
-              </li>
-            ))}
-          </ul>
-
-          <div className="ml-auto flex items-center gap-5">
-            {/* Video controls (only once a video is actually running) */}
-            {anyPlaying && !allFailed && (
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  onClick={togglePause}
-                  aria-label={paused ? "Play background video" : "Pause background video"}
-                  className="flex h-8 w-8 items-center justify-center border border-white/30 bg-black/20 text-white/80 backdrop-blur-sm transition-colors hover:border-white hover:text-white"
-                >
-                  <svg viewBox="0 0 24 24" className="h-3 w-3 fill-current" aria-hidden>
-                    {paused ? <path d="M8 5v14l11-7z" /> : <path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" />}
-                  </svg>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setMuted((m) => !m)}
-                  aria-pressed={!muted}
-                  aria-label={muted ? "Turn video sound on" : "Turn video sound off"}
-                  className="flex h-8 w-8 items-center justify-center border border-white/30 bg-black/20 text-white/80 backdrop-blur-sm transition-colors hover:border-white hover:text-white"
-                >
-                  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 fill-none stroke-current" strokeWidth="2" aria-hidden>
-                    <path d="M4 9v6h4l5 4V5L8 9z" className="fill-current" />
-                    {muted ? <path d="M17 9l5 6M22 9l-5 6" /> : <path d="M17 8.5a5 5 0 0 1 0 7M19.5 6a8.5 8.5 0 0 1 0 12" />}
-                  </svg>
-                </button>
-              </div>
-            )}
-            <a
-              href="#introduction"
-              className="hidden flex-col items-center gap-1.5 whitespace-nowrap font-mono text-[10px] tracking-[0.3em] text-white/75 hover:text-white md:flex"
-            >
-              SCROLL TO EXPLORE{" "}
-              <span className="nudge" aria-hidden>
-                ↓
-              </span>
-            </a>
-          </div>
-        </motion.div>
+          {heroCategories.map((c) => (
+            <li key={c}>{c}</li>
+          ))}
+        </motion.ul>
       </div>
 
-      {/* Autoplay refused by the browser */}
-      {blocked && !allFailed && !anyPlaying && (
+      {/* Scroll cue */}
+      <a
+        href="#introduction"
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 font-mono text-[10px] tracking-[0.3em] text-white/70 hover:text-white md:flex"
+      >
+        SCROLL TO EXPLORE{" "}
+        <span className="nudge" aria-hidden>
+          ↓
+        </span>
+      </a>
+
+      {/* Sound control (only when a video is actually running) */}
+      {anyPlaying && !allFailed && (
         <button
           type="button"
-          onClick={enter}
-          className="absolute bottom-6 right-5 z-10 flex items-center gap-2 border border-white/30 bg-black/20 px-3 py-2 font-mono text-[10px] tracking-[0.18em] text-white/80 backdrop-blur-sm transition-colors hover:border-white hover:text-white sm:right-8 lg:right-14"
+          onClick={() => setMuted((m) => !m)}
+          aria-pressed={!muted}
+          aria-label={muted ? "Turn video sound on" : "Turn video sound off"}
+          className="absolute bottom-6 right-5 flex items-center gap-2 border border-white/30 bg-black/20 px-3 py-2 font-mono text-[10px] tracking-[0.18em] text-white/80 backdrop-blur-sm transition-colors hover:border-white hover:text-white sm:right-8 lg:right-14"
         >
-          <svg viewBox="0 0 24 24" className="h-3 w-3 fill-current" aria-hidden>
-            <path d="M8 5v14l11-7z" />
-          </svg>
-          PLAY FILM
+          <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full" style={{ background: muted ? "#8a8f96" : "#d2b97f" }} />
+          {muted ? "SOUND OFF" : "SOUND ON"}
         </button>
+      )}
+
+      {/* Autoplay blocked / reduced motion */}
+      {blocked && !allFailed && !anyPlaying && (
+        <div className="absolute inset-x-0 top-1/2 z-10 flex -translate-y-1/2 justify-center">
+          <button type="button" onClick={enter} className="btn btn-ghost bg-black/30 backdrop-blur-sm">
+            Enter Experience <span aria-hidden>→</span>
+          </button>
+        </div>
       )}
     </section>
   );

@@ -68,21 +68,10 @@ const jsonLd = [
   },
 ];
 
-const STRIP_EXTENSION_ATTRS = `(function(){var a="bis_skin_checked";function s(n){n.removeAttribute&&n.hasAttribute(a)&&n.removeAttribute(a)}new MutationObserver(function(m){for(var i=0;i<m.length;i++){var r=m[i];if(r.type==="attributes")s(r.target);else for(var j=0;j<r.addedNodes.length;j++){var n=r.addedNodes[j];if(n.nodeType===1){s(n);var q=n.querySelectorAll("["+a+"]");for(var k=0;k<q.length;k++)q[k].removeAttribute(a)}}}}).observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:[a]})})();`;
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    // suppressHydrationWarning: browser extensions add attributes to <html>/<body> before React
-    // loads (e.g. __processed_…). It only ignores attribute differences on these two tags.
-    <html lang="en-GB" suppressHydrationWarning>
-      {process.env.NODE_ENV === "development" && (
-        <head>
-          {/* Dev only: Bitdefender's browser extension stamps bis_skin_checked on every element before
-              React hydrates, which floods the dev overlay with hydration warnings. Strip it as it lands. */}
-          <script dangerouslySetInnerHTML={{ __html: STRIP_EXTENSION_ATTRS }} />
-        </head>
-      )}
-      <body suppressHydrationWarning>
+    <html lang="en-GB">
+      <body>
         <a href="#main" className="skip-link">
           Skip to content
         </a>

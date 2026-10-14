@@ -1,49 +1,38 @@
-import { BrandIcon, BrandLockup, MetalIcon } from "./BrandMark";
-import { company } from "@/data/site";
+"use client";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 type Props = {
   variant?: "compact" | "full";
   tone?: "light" | "dark"; // light = sits on a dark background
   size?: "hero" | "footer" | "default";
-  /** "metal" (default) = the gold-and-silver mark; "brand" = the earlier blue-and-gold mark. */
-  finish?: "brand" | "metal";
   className?: string;
 };
 
-/** Font size drives the whole stacked lockup (it is built in em units). */
 const FULL_SIZES = {
-  hero: "text-[clamp(13px,3.35vh,38px)]",
-  footer: "text-[17px]",
-  default: "text-[16px]",
+  hero: "h-[clamp(130px,24vh,320px)]",
+  footer: "h-44",
+  default: "h-40",
 } as const;
 
 /**
- * J & J Consulting logo, fully vector (components/BrandMark.tsx): sharp at any size, no image
- * requests. `compact` = icon + "J & J" for the navbar/footer; `full` = the stacked brand lockup.
- * public/brand/jj-mark.svg (the metal mark) is for the favicon and other non-React uses.
+ * Supplied J & J Consulting artwork lives in /public/brand:
+ *   jj-mark.svg             vector icon (navbar, favicon)
+ *   jj-consulting.png       full lockup for light backgrounds
+ *   jj-consulting-light.png full lockup for dark backgrounds (white "J & J")
+ * If a file is missing, a typographic placeholder is shown so nothing breaks.
  */
-export function Logo({ variant = "compact", tone = "light", size = "default", finish = "metal", className }: Props) {
+export function Logo({ variant = "compact", tone = "light", size = "default", className }: Props) {
+  const [failed, setFailed] = useState(false);
   const ink = tone === "light" ? "text-white" : "text-navy";
-
-  if (variant === "compact" && finish === "metal") {
-    return (
-      <span className={cn("inline-flex items-center gap-3", ink, className)} aria-label="J & J Consulting">
-        <MetalIcon className="h-10 w-auto sm:h-11" />
-        <span className="flex flex-col items-center font-[Cinzel,serif] leading-none">
-          <span className="text-[22px] font-medium tracking-[0.03em] sm:text-[24px]">
-            J<span className="mx-[4px] text-gold-light">&amp;</span>J
-          </span>
-          <span className="mt-1 text-[9px] font-medium tracking-[0.24em] text-gold-light [margin-right:-0.24em]">CONSULTING</span>
-        </span>
-      </span>
-    );
-  }
 
   if (variant === "compact") {
     return (
       <span className={cn("inline-flex items-center gap-3", ink, className)} aria-label="J & J">
-        <BrandIcon className="h-9 w-auto sm:h-10" />
+        {!failed && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src="/brand/jj-mark.svg" alt="" width={40} height={40} onError={() => setFailed(true)} className="h-9 w-auto sm:h-10" />
+        )}
         <span className="font-display text-[24px] leading-none tracking-[0.04em] sm:text-[26px]">
           J<span className="mx-[3px] text-gold">&amp;</span>J
         </span>
@@ -51,5 +40,28 @@ export function Logo({ variant = "compact", tone = "light", size = "default", fi
     );
   }
 
-  return <BrandLockup tone={tone} finish={finish} established={company.established} className={cn(FULL_SIZES[size], className)} />;
+  if (!failed) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={tone === "light" ? "/brand/jj-consulting-light.png" : "/brand/jj-consulting.png"}
+        alt="J & J Consulting — established 2010"
+        width={625}
+        height={1093}
+        onError={() => setFailed(true)}
+        className={cn("w-auto", FULL_SIZES[size], className)}
+      />
+    );
+  }
+  return (
+    <span className={cn("inline-flex flex-col", ink, className)} aria-label="J & J Consulting">
+      <span className="font-display text-[clamp(56px,9vw,120px)] leading-[0.9]">
+        J<span className="mx-[0.08em] text-gold">&amp;</span>J
+      </span>
+      <span className="mt-3 flex items-center gap-4">
+        <span className="font-mono text-[clamp(12px,1.5vw,18px)] tracking-[0.5em]">CONSULTING</span>
+        <span className="h-px flex-1 bg-gold/70" />
+      </span>
+    </span>
+  );
 }

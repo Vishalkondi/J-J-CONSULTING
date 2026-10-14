@@ -22,11 +22,7 @@ export function Counter({ value, suffix = "" }: { value: number; suffix?: string
   }, [inView, value, reduce]);
 
   return (
-    <span ref={ref}>
-      <span className="sr-only">
-        {value}
-        {suffix}
-      </span>
+    <span ref={ref} aria-label={`${value}${suffix}`}>
       <span aria-hidden>
         {n}
         {suffix}
