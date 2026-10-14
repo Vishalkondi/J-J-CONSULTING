@@ -31,12 +31,22 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
+/* clip (not hidden) stops sideways panning on phones without creating a scroll container. */
+html,
+body {
+  overflow-x: clip;
+}
 ::selection {
   background: var(--gold);
   color: var(--midnight);
 }
 
 @layer base {
+  /* A grid with no explicit columns gets one track that can shrink below its content, so a long
+     word or wide card never pushes the page sideways on phones. Any grid-cols-* utility wins. */
+  :where(.grid) {
+    grid-template-columns: minmax(0, 1fr);
+  }
   h1,
   h2,
   h3 {
@@ -52,6 +62,13 @@ body {
 }
 
 @layer components {
+  /* Metallic gold lettering for the logo (matches the gold of the mark). */
+  .text-gold-metal {
+    background: linear-gradient(180deg, #ffe7a0 0%, #f2bc4e 48%, #c4861f 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
   .wrap {
     @apply mx-auto w-full max-w-page px-5 sm:px-8 lg:px-14;
   }

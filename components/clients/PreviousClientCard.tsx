@@ -8,10 +8,10 @@ type PreviousClient = (typeof previousClients)[number];
 export function PreviousClientCard({ c }: { c: PreviousClient }) {
   return (
     <article className="flex flex-col border border-navy/15 bg-white transition-shadow hover:shadow-[0_18px_40px_-24px_rgba(12,32,56,0.35)]">
-      <div className="flex items-center gap-5 border-b border-navy/10 p-6">
-        <ClientMark name={c.name} logo={c.logo} pad="p-2" className="h-16 w-28 shrink-0" />
+      <div className="flex items-center gap-4 border-b border-navy/10 p-5 sm:gap-5 sm:p-6">
+        <ClientMark name={c.name} logo={c.logo} pad="p-2" className="h-14 w-24 shrink-0 sm:h-16 sm:w-28" />
         <div className="min-w-0">
-          <h3 className="font-display text-[22px] leading-tight text-navy">
+          <h3 className="hyphens-auto break-words font-display text-[20px] leading-tight text-navy sm:text-[22px]">
             {c.website ? (
               <a
                 href={c.website}

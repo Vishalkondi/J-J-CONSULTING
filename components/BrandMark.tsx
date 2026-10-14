@@ -57,11 +57,11 @@ export function BrandIcon({ className }: { className?: string }) {
  * and bottom-left. Geometry is shared with public/brand/jj-mark.svg and app/icon.svg.
  */
 export const METAL_PATHS = {
-  gold: "M0 136V38A38 38 0 0 1 38 0H96V58H84A20 20 0 0 0 64 78V136Z",
-  gold2: "M200 64V162A38 38 0 0 1 162 200H104V142H116A20 20 0 0 0 136 122V64Z",
+  gold: "M0 136V54A54 54 0 0 1 54 0H96V58H90A26 26 0 0 0 64 84V136Z",
+  gold2: "M200 64V146A54 54 0 0 1 146 200H104V142H110A26 26 0 0 0 136 116V64Z",
   // darker lower face of each gold fold, split from the lit face by a curved crease
-  fold: "M0 136V126C14 92 44 64 84 58A20 20 0 0 0 64 78V136Z",
-  fold2: "M200 64V74C186 108 156 136 116 142A20 20 0 0 0 136 122V64Z",
+  fold: "M0 136V126C14 92 44 64 90 58A26 26 0 0 0 64 84V136Z",
+  fold2: "M200 64V74C186 108 156 136 110 142A26 26 0 0 0 136 116V64Z",
   silver: "M107 0H197A3 3 0 0 1 200 3V57A3 3 0 0 1 197 60H107A3 3 0 0 1 104 57V3A3 3 0 0 1 107 0Z",
   silver2: "M3 140H93A3 3 0 0 1 96 143V197A3 3 0 0 1 93 200H3A3 3 0 0 1 0 197V143A3 3 0 0 1 3 140Z",
 } as const;
@@ -74,29 +74,31 @@ export function MetalIcon({ className }: { className?: string }) {
     <svg viewBox="-2 -2 204 204" className={className} aria-hidden>
       <defs>
         <linearGradient id={u("au")} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#F2C566" />
-          <stop offset="0.45" stopColor="#FBE3A0" />
-          <stop offset="1" stopColor="#D9A23F" />
+          <stop offset="0" stopColor="#F4B940" />
+          <stop offset="0.42" stopColor="#FFE08A" />
+          <stop offset="0.7" stopColor="#EDAE36" />
+          <stop offset="1" stopColor="#B9781A" />
         </linearGradient>
         <linearGradient id={u("au2")} x1="1" y1="1" x2="0" y2="0">
-          <stop offset="0" stopColor="#F2C566" />
-          <stop offset="0.45" stopColor="#FBE3A0" />
-          <stop offset="1" stopColor="#D9A23F" />
+          <stop offset="0" stopColor="#F4B940" />
+          <stop offset="0.42" stopColor="#FFE08A" />
+          <stop offset="0.7" stopColor="#EDAE36" />
+          <stop offset="1" stopColor="#B9781A" />
         </linearGradient>
         <linearGradient id={u("fd")} x1="0" y1="1" x2="1" y2="0">
-          <stop offset="0" stopColor="#8E5F1A" />
-          <stop offset="0.55" stopColor="#C68B2C" />
-          <stop offset="1" stopColor="#F0C468" />
+          <stop offset="0" stopColor="#7A4709" />
+          <stop offset="0.55" stopColor="#BD7C1C" />
+          <stop offset="1" stopColor="#F2B847" />
         </linearGradient>
         <linearGradient id={u("fd2")} x1="1" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#8E5F1A" />
-          <stop offset="0.55" stopColor="#C68B2C" />
-          <stop offset="1" stopColor="#F0C468" />
+          <stop offset="0" stopColor="#7A4709" />
+          <stop offset="0.55" stopColor="#BD7C1C" />
+          <stop offset="1" stopColor="#F2B847" />
         </linearGradient>
         <linearGradient id={u("ag")} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#8C8F95" />
-          <stop offset="0.5" stopColor="#6A6D73" />
-          <stop offset="1" stopColor="#45484E" />
+          <stop offset="0" stopColor="#B4B7BC" />
+          <stop offset="0.5" stopColor="#84878D" />
+          <stop offset="1" stopColor="#55585E" />
         </linearGradient>
       </defs>
       <path d={gold} fill={`url(#${u("au")})`} />
@@ -134,7 +136,8 @@ export function BrandLockup({
   finish?: "brand" | "metal";
 }) {
   const ink = tone === "light" ? "text-white" : "text-navy";
-  const gold = tone === "light" ? "text-gold-light" : "text-gold-dark";
+  const gold = tone === "light" ? "text-gold-metal" : "text-gold-dark";
+  const rule = tone === "light" ? "bg-[#E2A93D]" : "bg-gold-dark";
   return (
     <span
       className={cn("inline-flex flex-col items-center font-[Cinzel,serif] leading-none", className)}
@@ -142,7 +145,7 @@ export function BrandLockup({
       aria-label={`J & J Consulting, established ${established}`}
     >
       {finish === "metal" ? (
-        <MetalIcon className="h-[7.6em] w-auto drop-shadow-[0_0_1.5em_rgba(240,180,70,0.6)]" />
+        <MetalIcon className="h-[7.6em] w-auto drop-shadow-[0_0_1.4em_rgba(255,186,60,0.75)]" />
       ) : (
         <BrandIcon className="h-[6.4em] w-auto drop-shadow-[0_0.4em_0.9em_rgba(0,0,0,0.35)]" />
       )}
@@ -162,9 +165,9 @@ export function BrandLockup({
         className={cn("mt-[0.65em] flex w-full items-center gap-[0.6em] font-display text-[0.5em] tracking-[0.24em]", gold)}
         aria-hidden
       >
-        <span className="h-px flex-1 bg-current opacity-80" />
+        <span className={cn("h-px flex-1 opacity-80", rule)} />
         <span className="[margin-right:-0.24em]">EST. {established}</span>
-        <span className="h-px flex-1 bg-current opacity-80" />
+        <span className={cn("h-px flex-1 opacity-80", rule)} />
       </span>
     </span>
   );

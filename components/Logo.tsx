@@ -3,7 +3,7 @@ import { company } from "@/data/site";
 import { cn } from "@/lib/utils";
 
 type Props = {
-  variant?: "compact" | "full" | "wordmark";
+  variant?: "compact" | "full";
   tone?: "light" | "dark"; // light = sits on a dark background
   size?: "hero" | "footer" | "default";
   /** "metal" (default) = the gold-and-silver mark; "brand" = the earlier blue-and-gold mark. */
@@ -20,23 +20,11 @@ const FULL_SIZES = {
 
 /**
  * J & J Consulting logo, fully vector (components/BrandMark.tsx): sharp at any size, no image
- * requests. `compact` = icon + "J & J" for the navbar/footer; `full` = the stacked brand lockup;
- * `wordmark` = "J & J" on its own, large, for the home hero.
+ * requests. `compact` = icon + "J & J" for the navbar/footer; `full` = the stacked brand lockup.
  * public/brand/jj-mark.svg (the metal mark) is for the favicon and other non-React uses.
  */
 export function Logo({ variant = "compact", tone = "light", size = "default", finish = "metal", className }: Props) {
   const ink = tone === "light" ? "text-white" : "text-navy";
-
-  if (variant === "wordmark") {
-    return (
-      <span
-        className={cn("inline-block font-[Cinzel,serif] text-[clamp(56px,11vh,128px)] font-medium leading-none tracking-[0.03em]", ink, className)}
-        aria-label="J & J"
-      >
-        J<span className={cn("mx-[0.22em]", tone === "light" ? "text-gold-light" : "text-gold-dark")}>&amp;</span>J
-      </span>
-    );
-  }
 
   if (variant === "compact" && finish === "metal") {
     return (
@@ -44,9 +32,9 @@ export function Logo({ variant = "compact", tone = "light", size = "default", fi
         <MetalIcon className="h-10 w-auto sm:h-11" />
         <span className="flex flex-col items-center font-[Cinzel,serif] leading-none">
           <span className="text-[22px] font-medium tracking-[0.03em] sm:text-[24px]">
-            J<span className="mx-[4px] text-gold-light">&amp;</span>J
+            J<span className="mx-[4px] text-gold-metal">&amp;</span>J
           </span>
-          <span className="mt-1 text-[9px] font-medium tracking-[0.24em] text-gold-light [margin-right:-0.24em]">CONSULTING</span>
+          <span className="mt-1 text-[9px] font-medium tracking-[0.24em] text-gold-metal [margin-right:-0.24em]">CONSULTING</span>
         </span>
       </span>
     );

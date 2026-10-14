@@ -215,9 +215,9 @@ export default function Industries() {
           </div>
           <ul className="grid grid-cols-2 border-l border-t border-white/15">
             {complexEnvironments.pillars.map((p, i) => (
-              <li key={p} className="flex flex-col gap-6 border-b border-r border-white/15 p-6 md:p-8">
+              <li key={p} className="flex flex-col gap-6 border-b border-r border-white/15 p-5 sm:p-6 md:p-8">
                 <span className="font-mono text-[12px] text-gold-light">{pad(i + 1)}</span>
-                <span className="font-display text-[clamp(22px,2.2vw,30px)] leading-tight">{p}.</span>
+                <span className="hyphens-auto break-words font-display text-[clamp(19px,5.4vw,22px)] leading-tight sm:text-[clamp(22px,2.2vw,30px)]">{p}.</span>
               </li>
             ))}
           </ul>

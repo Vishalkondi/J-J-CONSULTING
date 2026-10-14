@@ -157,7 +157,7 @@ export function HeroVideo() {
         <motion.h1 {...fadeIn(0.35)} className="!font-sans">
           <span className="sr-only">J &amp; J Consulting</span>
           <span aria-hidden>
-            <Logo variant="wordmark" className="drop-shadow-[0_10px_30px_rgba(0,0,0,0.55)]" />
+            <Logo variant="full" size="hero" className="drop-shadow-[0_10px_30px_rgba(0,0,0,0.55)]" />
           </span>
         </motion.h1>
 

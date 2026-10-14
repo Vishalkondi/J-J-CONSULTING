@@ -112,7 +112,7 @@ export function SignatureVisual() {
           <span className="font-display text-[clamp(16px,3vw,28px)] leading-none text-white">
             J<span className="text-gold">&amp;</span>J
           </span>
-          <span className="font-mono text-[clamp(7px,1vw,9px)] tracking-[0.3em] text-white/70">CONSULTING</span>
+          <span className="font-mono text-[clamp(8px,1vw,9px)] tracking-[0.3em] text-white/70">CONSULTING</span>
         </div>
 
         {/* nodes */}
@@ -130,7 +130,7 @@ export function SignatureVisual() {
               aria-label={`${sv.node.charAt(0) + sv.node.slice(1).toLowerCase()}: ${sv.short}`}
               style={{ left: `${p.x}%`, top: `${p.y}%` }}
               className={cn(
-                "absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 rounded-md border px-2 py-1.5 font-mono text-[clamp(9px,1.5vw,11px)] tracking-[0.12em] transition duration-300 sm:gap-2 sm:px-3.5 sm:py-2",
+                "absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 rounded-md border px-2 py-1.5 font-mono text-[clamp(10px,1.5vw,11px)] tracking-[0.12em] transition duration-300 sm:gap-2 sm:px-3.5 sm:py-2",
                 on
                   ? "scale-105 border-gold bg-gold text-midnight shadow-[0_0_30px_-4px_rgba(184,152,90,0.7)]"
                   : "border-white/25 bg-midnight text-white/80 hover:border-gold-light hover:text-white",
