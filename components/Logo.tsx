@@ -13,7 +13,7 @@ type Props = {
 
 /** Font size drives the whole stacked lockup (it is built in em units). */
 const FULL_SIZES = {
-  hero: "text-[clamp(13px,3vh,36px)]",
+  hero: "text-[clamp(13px,3.35vh,38px)]",
   footer: "text-[17px]",
   default: "text-[16px]",
 } as const;

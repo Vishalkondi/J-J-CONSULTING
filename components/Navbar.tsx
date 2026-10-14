@@ -84,7 +84,7 @@ export function Navbar() {
                       href={n.href}
                       aria-current={isActive(n.href) ? "page" : undefined}
                       className={cn(
-                        "relative py-2 text-[13px] tracking-wide text-white/80 transition-colors hover:text-white",
+                        "relative py-2 text-[14px] tracking-wide text-white/85 transition-colors hover:text-white",
                         isActive(n.href) && "text-white after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:bg-gold",
                       )}
                     >

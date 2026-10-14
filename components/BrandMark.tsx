@@ -142,7 +142,7 @@ export function BrandLockup({
       aria-label={`J & J Consulting, established ${established}`}
     >
       {finish === "metal" ? (
-        <MetalIcon className="h-[7.6em] w-auto drop-shadow-[0_0_1.2em_rgba(240,180,70,0.55)]" />
+        <MetalIcon className="h-[7.6em] w-auto drop-shadow-[0_0_1.5em_rgba(240,180,70,0.6)]" />
       ) : (
         <BrandIcon className="h-[6.4em] w-auto drop-shadow-[0_0.4em_0.9em_rgba(0,0,0,0.35)]" />
       )}

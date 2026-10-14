@@ -228,7 +228,7 @@ export function HeroVideo() {
           </span>
         </motion.h1>
 
-        <motion.p {...fadeIn(0.8)} className="mt-3 font-display text-[clamp(28px,3.6vw,56px)] leading-[1.1] text-white">
+        <motion.p {...fadeIn(0.8)} className="mt-3 font-display text-[clamp(28px,3.25vw,50px)] leading-[1.1] tracking-[-0.005em] text-white">
           {company.tagline}
         </motion.p>
 
