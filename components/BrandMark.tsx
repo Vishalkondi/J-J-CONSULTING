@@ -74,26 +74,28 @@ export function MetalIcon({ className }: { className?: string }) {
     <svg viewBox="-2 -2 204 204" className={className} aria-hidden>
       <defs>
         <linearGradient id={u("au")} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#F4B940" />
-          <stop offset="0.42" stopColor="#FFE08A" />
-          <stop offset="0.7" stopColor="#EDAE36" />
-          <stop offset="1" stopColor="#B9781A" />
+          <stop offset="0" stopColor="#E99E1E" />
+          <stop offset="0.36" stopColor="#FFC94F" />
+          <stop offset="0.5" stopColor="#FFE594" />
+          <stop offset="0.66" stopColor="#F6B530" />
+          <stop offset="1" stopColor="#A9650A" />
         </linearGradient>
         <linearGradient id={u("au2")} x1="1" y1="1" x2="0" y2="0">
-          <stop offset="0" stopColor="#F4B940" />
-          <stop offset="0.42" stopColor="#FFE08A" />
-          <stop offset="0.7" stopColor="#EDAE36" />
-          <stop offset="1" stopColor="#B9781A" />
+          <stop offset="0" stopColor="#E99E1E" />
+          <stop offset="0.36" stopColor="#FFC94F" />
+          <stop offset="0.5" stopColor="#FFE594" />
+          <stop offset="0.66" stopColor="#F6B530" />
+          <stop offset="1" stopColor="#A9650A" />
         </linearGradient>
         <linearGradient id={u("fd")} x1="0" y1="1" x2="1" y2="0">
-          <stop offset="0" stopColor="#7A4709" />
-          <stop offset="0.55" stopColor="#BD7C1C" />
-          <stop offset="1" stopColor="#F2B847" />
+          <stop offset="0" stopColor="#663804" />
+          <stop offset="0.55" stopColor="#B06A0C" />
+          <stop offset="1" stopColor="#F4AE2E" />
         </linearGradient>
         <linearGradient id={u("fd2")} x1="1" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#7A4709" />
-          <stop offset="0.55" stopColor="#BD7C1C" />
-          <stop offset="1" stopColor="#F2B847" />
+          <stop offset="0" stopColor="#663804" />
+          <stop offset="0.55" stopColor="#B06A0C" />
+          <stop offset="1" stopColor="#F4AE2E" />
         </linearGradient>
         <linearGradient id={u("ag")} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0" stopColor="#B4B7BC" />
@@ -109,10 +111,10 @@ export function MetalIcon({ className }: { className?: string }) {
       <path d={silver2} fill={`url(#${u("ag")})`} />
       {/* bright metal rim on every piece */}
       {[gold, gold2].map((d) => (
-        <path key={d} d={d} fill="none" stroke="#FFE7A6" strokeOpacity="0.85" strokeWidth="1.4" />
+        <path key={d} d={d} fill="none" stroke="#FFE08A" strokeOpacity="0.95" strokeWidth="1.8" />
       ))}
       {[silver, silver2].map((d) => (
-        <path key={d} d={d} fill="none" stroke="#E9C77A" strokeOpacity="0.55" strokeWidth="1.2" />
+        <path key={d} d={d} fill="none" stroke="#F5BE4A" strokeOpacity="0.9" strokeWidth="1.6" />
       ))}
     </svg>
   );
@@ -145,7 +147,7 @@ export function BrandLockup({
       aria-label={`J & J Consulting, established ${established}`}
     >
       {finish === "metal" ? (
-        <MetalIcon className="h-[7.6em] w-auto drop-shadow-[0_0_1.4em_rgba(255,186,60,0.75)]" />
+        <MetalIcon className="h-[7.6em] w-auto [filter:drop-shadow(0_0_0.5em_rgba(255,190,60,0.7))_drop-shadow(0_0_2em_rgba(255,160,30,0.6))]" />
       ) : (
         <BrandIcon className="h-[6.4em] w-auto drop-shadow-[0_0.4em_0.9em_rgba(0,0,0,0.35)]" />
       )}

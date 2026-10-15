@@ -64,7 +64,7 @@ body {
 @layer components {
   /* Metallic gold lettering for the logo (matches the gold of the mark). */
   .text-gold-metal {
-    background: linear-gradient(180deg, #ffe7a0 0%, #f2bc4e 48%, #c4861f 100%);
+    background: linear-gradient(180deg, #ffe08a 0%, #f6b232 50%, #b56f0c 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;

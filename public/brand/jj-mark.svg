@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 204 204" role="img" aria-label="J &amp; J">
   <defs>
-    <linearGradient id="au" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4B940"/><stop offset=".42" stop-color="#FFE08A"/><stop offset=".7" stop-color="#EDAE36"/><stop offset="1" stop-color="#B9781A"/></linearGradient>
-    <linearGradient id="au2" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#F4B940"/><stop offset=".42" stop-color="#FFE08A"/><stop offset=".7" stop-color="#EDAE36"/><stop offset="1" stop-color="#B9781A"/></linearGradient>
-    <linearGradient id="fd" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#7A4709"/><stop offset=".55" stop-color="#BD7C1C"/><stop offset="1" stop-color="#F2B847"/></linearGradient>
-    <linearGradient id="fd2" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7A4709"/><stop offset=".55" stop-color="#BD7C1C"/><stop offset="1" stop-color="#F2B847"/></linearGradient>
+    <linearGradient id="au" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E99E1E"/><stop offset=".36" stop-color="#FFC94F"/><stop offset=".5" stop-color="#FFE594"/><stop offset=".66" stop-color="#F6B530"/><stop offset="1" stop-color="#A9650A"/></linearGradient>
+    <linearGradient id="au2" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#E99E1E"/><stop offset=".36" stop-color="#FFC94F"/><stop offset=".5" stop-color="#FFE594"/><stop offset=".66" stop-color="#F6B530"/><stop offset="1" stop-color="#A9650A"/></linearGradient>
+    <linearGradient id="fd" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#663804"/><stop offset=".55" stop-color="#B06A0C"/><stop offset="1" stop-color="#F4AE2E"/></linearGradient>
+    <linearGradient id="fd2" x1="1" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#663804"/><stop offset=".55" stop-color="#B06A0C"/><stop offset="1" stop-color="#F4AE2E"/></linearGradient>
     <linearGradient id="ag" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#B4B7BC"/><stop offset=".5" stop-color="#84878D"/><stop offset="1" stop-color="#55585E"/></linearGradient>
   </defs>
   <path fill="url(#au)" d="M0 136V54A54 54 0 0 1 54 0H96V58H90A26 26 0 0 0 64 84V136Z"/>
@@ -12,8 +12,12 @@
   <path fill="url(#fd2)" d="M200 64V74C186 108 156 136 110 142A26 26 0 0 0 136 116V64Z"/>
   <path fill="url(#ag)" d="M107 0H197A3 3 0 0 1 200 3V57A3 3 0 0 1 197 60H107A3 3 0 0 1 104 57V3A3 3 0 0 1 107 0Z"/>
   <path fill="url(#ag)" d="M3 140H93A3 3 0 0 1 96 143V197A3 3 0 0 1 93 200H3A3 3 0 0 1 0 197V143A3 3 0 0 1 3 140Z"/>
-  <g fill="none" stroke="#FFE7A6" stroke-opacity=".85" stroke-width="1.4">
+  <g fill="none" stroke="#FFE08A" stroke-opacity=".95" stroke-width="1.8">
     <path d="M0 136V54A54 54 0 0 1 54 0H96V58H90A26 26 0 0 0 64 84V136Z"/>
     <path d="M200 64V146A54 54 0 0 1 146 200H104V142H110A26 26 0 0 0 136 116V64Z"/>
+  </g>
+  <g fill="none" stroke="#F5BE4A" stroke-opacity=".9" stroke-width="1.6">
+    <path d="M107 0H197A3 3 0 0 1 200 3V57A3 3 0 0 1 197 60H107A3 3 0 0 1 104 57V3A3 3 0 0 1 107 0Z"/>
+    <path d="M3 140H93A3 3 0 0 1 96 143V197A3 3 0 0 1 93 200H3A3 3 0 0 1 0 197V143A3 3 0 0 1 3 140Z"/>
   </g>
 </svg>
