@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
 
@@ -7,6 +8,8 @@ const shortcuts = [
   { href: "/insights", label: "Insights" },
   { href: "/contact", label: "Contact" },
 ];
+
+export const metadata: Metadata = { title: "Page not found", robots: { index: false } };
 
 export default function NotFound() {
   return (

@@ -74,7 +74,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     // suppressHydrationWarning: browser extensions add attributes to <html>/<body> before React
     // loads (e.g. __processed_…). It only ignores attribute differences on these two tags.
-    <html lang="en-GB" suppressHydrationWarning>
+    // data-scroll-behavior: lets Next.js turn off the smooth scrolling (globals.css) during route changes.
+    <html lang="en-GB" data-scroll-behavior="smooth" suppressHydrationWarning>
       {process.env.NODE_ENV === "development" && (
         <head>
           {/* Dev only: Bitdefender's browser extension stamps bis_skin_checked on every element before
