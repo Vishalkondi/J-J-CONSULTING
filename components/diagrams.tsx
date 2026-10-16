@@ -42,7 +42,7 @@ export function FlowChain({ steps, tone = "light", numbered = true }: { steps: s
           {i < steps.length - 1 && (
             <span aria-hidden className="flex items-center justify-center py-1 text-gold lg:self-center lg:px-1.5 lg:py-0">
               <span className="lg:hidden">↓</span>
-              <span className="hidden lg:inline">→</span>
+              <span className="is-hidden lg:inline">→</span>
             </span>
           )}
         </li>
@@ -150,7 +150,7 @@ export function GapAnalysis({ existing, gaps, recommendations }: { existing: str
               className="absolute left-1/2 top-full z-10 flex h-8 w-8 -translate-x-1/2 translate-y-1 items-center justify-center rounded-full border border-gold bg-bone text-[14px] text-gold-dark md:left-full md:top-1/2 md:-translate-y-1/2 md:translate-x-[calc(-50%+12px)] lg:translate-x-[calc(-50%+16px)]"
             >
               <span className="md:hidden">↓</span>
-              <span className="hidden md:inline">→</span>
+              <span className="is-hidden md:inline">→</span>
             </span>
           )}
         </motion.li>

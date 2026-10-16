@@ -136,7 +136,7 @@ export function SignatureVisual() {
                   : "border-white/25 bg-midnight text-white/80 hover:border-gold-light hover:text-white",
               )}
             >
-              <span className="hidden sm:inline-flex">{nodeIcons[sv.slug]}</span>
+              <span className="is-hidden sm:inline-flex">{nodeIcons[sv.slug]}</span>
               {sv.node}
             </button>
           );

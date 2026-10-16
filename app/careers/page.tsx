@@ -82,7 +82,7 @@ export default function Careers() {
               alt="A developer working at a dual-monitor desk in an open-plan office"
               className="aspect-[3/2] w-full"
             />
-            <div className="absolute -bottom-6 right-6 hidden bg-navy px-6 py-5 text-white shadow-[0_24px_50px_-24px_rgba(12,32,56,0.6)] sm:block">
+            <div className="absolute -bottom-6 right-6 is-hidden bg-navy px-6 py-5 text-white shadow-[0_24px_50px_-24px_rgba(12,32,56,0.6)] sm:block">
               <p className="font-display text-[34px] leading-none">16+</p>
               <p className="mt-1.5 font-mono text-[11px] tracking-[0.1em] text-white/65">YEARS IN BUSINESS</p>
             </div>

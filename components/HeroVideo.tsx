@@ -106,7 +106,7 @@ export function HeroVideo() {
 
   return (
     <section
-      className="relative isolate h-[100svh] min-h-[640px] w-full overflow-hidden bg-midnight text-white md:h-screen"
+      className="relative isolate min-h-[max(100svh,640px)] w-full overflow-hidden bg-midnight text-white md:min-h-screen"
       aria-label="J & J Consulting introduction"
     >
       {/* Fallback layer — always present so the hero is never empty/black. .site-hero-poster is
@@ -153,7 +153,7 @@ export function HeroVideo() {
       />
 
       {/* Content */}
-      <div className="wrap relative flex h-full flex-col justify-end pb-24 pt-32 md:pb-28">
+      <div className="wrap relative flex min-h-[inherit] flex-col justify-end pb-24 pt-32 md:pb-28">
         <motion.h1 {...fadeIn(0.35)} className="!font-sans">
           <span className="sr-only">J &amp; J Consulting</span>
           <span aria-hidden>
@@ -181,7 +181,7 @@ export function HeroVideo() {
         {/* Floating stat card (desktop): the headline figures, from the same data as the counters. */}
         <motion.div
           {...fadeIn(1.5)}
-          className="absolute right-14 top-[30%] hidden w-[300px] rounded-2xl border border-white/15 bg-midnight/55 p-6 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.8)] backdrop-blur-md xl:block"
+          className="absolute right-14 top-[30%] is-hidden w-[300px] rounded-2xl border border-white/15 bg-midnight/55 p-6 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.8)] backdrop-blur-md xl:block"
         >
           <p className="pill bg-white/5 text-gold-light">Since {company.established}</p>
           <dl className="mt-5 space-y-4">
@@ -199,7 +199,7 @@ export function HeroVideo() {
 
         <motion.ul
           {...fadeIn(1.6)}
-          className="mt-12 hidden flex-wrap gap-x-8 gap-y-2 border-t border-white/20 pt-5 font-mono text-[11px] tracking-[0.12em] text-white/70 md:flex"
+          className="mt-12 is-hidden flex-wrap gap-x-8 gap-y-2 border-t border-white/20 pt-5 font-mono text-[11px] tracking-[0.12em] text-white/70 md:flex"
           aria-label="What we do"
         >
           {heroCategories.map((c) => (
@@ -211,7 +211,7 @@ export function HeroVideo() {
       {/* Scroll cue */}
       <a
         href="#introduction"
-        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 font-mono text-[10px] tracking-[0.3em] text-white/70 hover:text-white md:flex"
+        className="absolute bottom-6 left-1/2 is-hidden -translate-x-1/2 flex-col items-center gap-2 font-mono text-[10px] tracking-[0.3em] text-white/70 hover:text-white md:flex"
       >
         SCROLL TO EXPLORE{" "}
         <span className="nudge" aria-hidden>

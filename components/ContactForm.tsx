@@ -112,7 +112,7 @@ export function ContactForm() {
       </Field>
 
       {/* honeypot */}
-      <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
+      <input type="text" name="website" tabIndex={-1} autoComplete="off" className="is-hidden" aria-hidden />
 
       <div className="flex flex-col gap-4 border-t border-navy/10 pt-6 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-sm text-[13px] leading-relaxed text-graphite">

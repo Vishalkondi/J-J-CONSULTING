@@ -63,11 +63,11 @@ export function EngagementExplorer({ items, panels }: { items: Item[]; panels: R
                     <span className="block whitespace-nowrap font-display text-[17px] leading-tight lg:whitespace-normal lg:text-[19px]">
                       {it.client}
                     </span>
-                    <span className={cn("mt-1 hidden text-[13px] leading-snug lg:block", on ? "text-white/65" : "text-graphite")}>
+                    <span className={cn("mt-1 is-hidden text-[13px] leading-snug lg:block", on ? "text-white/65" : "text-graphite")}>
                       {it.title}
                     </span>
                   </span>
-                  <span className={cn("hidden shrink-0 font-mono text-[11px] lg:block", on ? "text-gold-light" : "text-gold-dark")}>
+                  <span className={cn("is-hidden shrink-0 font-mono text-[11px] lg:block", on ? "text-gold-light" : "text-gold-dark")}>
                     {it.period}
                   </span>
                 </button>

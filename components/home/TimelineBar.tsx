@@ -26,7 +26,7 @@ export function TimelineBar() {
           <p className="font-display text-[clamp(40px,6vw,72px)] leading-none text-navy">2010</p>
           <p className="label mt-2 text-graphite">Established</p>
         </div>
-        <div className="hidden pt-4 text-center sm:block">
+        <div className="is-hidden pt-4 text-center sm:block">
           <p className="label text-gold-dark">16+ years</p>
         </div>
         <div className="text-right">

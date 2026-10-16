@@ -11,6 +11,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Our own "hidden" toggle. Some browser extensions (job-search and email-finder tools) inject
+   `.hidden { display: none !important }` into every page, which would beat `xl:block` and friends
+   and hide the navbar links. Use `is-hidden` with a responsive display class instead of `hidden`. */
+@layer utilities {
+  .is-hidden {
+    display: none;
+  }
+}
+
 :root {
   --midnight: #08121f;
   --navy: #0c2038;

@@ -38,7 +38,7 @@ export function NetworkOverlay() {
   return (
     <svg
       aria-hidden
-      className="pointer-events-none absolute inset-y-0 right-0 hidden h-full w-[62%] opacity-[0.35] md:block"
+      className="pointer-events-none absolute inset-y-0 right-0 is-hidden h-full w-[62%] opacity-[0.35] md:block"
       viewBox="560 0 660 460"
       preserveAspectRatio="xMaxYMid slice"
     >

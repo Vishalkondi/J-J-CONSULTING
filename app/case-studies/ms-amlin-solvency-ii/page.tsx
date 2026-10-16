@@ -43,7 +43,7 @@ export default function MsAmlinSolvencyPage() {
           style={{ background: "linear-gradient(180deg, rgba(8,18,31,0.9) 0%, rgba(8,18,31,0.94) 100%)" }}
         />
         <div
-          className="absolute inset-0 -z-10 hidden lg:block"
+          className="absolute inset-0 -z-10 is-hidden lg:block"
           aria-hidden
           style={{
             background:

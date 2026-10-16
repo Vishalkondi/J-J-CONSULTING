@@ -74,7 +74,7 @@ export function Navbar() {
             <Logo />
           </Link>
 
-          <nav aria-label="Primary" className="hidden xl:block">
+          <nav aria-label="Primary" className="is-hidden xl:block">
             <ul className="flex items-center gap-6 2xl:gap-8">
               {nav
                 .filter((n) => n.href !== "/")
@@ -96,7 +96,7 @@ export function Navbar() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <Link href="/contact" className="btn btn-gold hidden !py-2.5 sm:inline-flex">
+            <Link href="/contact" className="btn btn-gold is-hidden !py-2.5 sm:inline-flex">
               Talk to Us
             </Link>
             <button
@@ -124,7 +124,7 @@ export function Navbar() {
             role="dialog"
             aria-modal="true"
             aria-label="Site menu"
-            className="blueprint fixed inset-0 z-40 overflow-y-auto bg-midnight xl:hidden"
+            className="blueprint fixed inset-0 z-[48] overflow-y-auto bg-midnight xl:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

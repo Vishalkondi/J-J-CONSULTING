@@ -11,7 +11,7 @@ export function Timeline({ stages }: { stages: readonly string[] }) {
         <li key={s} className="relative pb-10 md:pb-0">
           <Reveal delay={i * 0.06} y={14}>
             <span aria-hidden className="absolute -left-[37px] top-1.5 h-2.5 w-2.5 rounded-full border border-navy bg-paper md:hidden" />
-            <div className="hidden items-center gap-3 md:flex" aria-hidden>
+            <div className="is-hidden items-center gap-3 md:flex" aria-hidden>
               <span className="h-2.5 w-2.5 shrink-0 rounded-full border border-navy bg-paper" />
               <span className="h-px flex-1 bg-navy/20" />
             </div>

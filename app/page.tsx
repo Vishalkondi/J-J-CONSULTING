@@ -1,4 +1,5 @@
 import { HeroVideo } from "@/components/HeroVideo";
+import { LogoIntro } from "@/components/LogoIntro";
 import { Introduction, ExperienceCounters } from "@/components/home/Intro";
 import { WhatWeDo } from "@/components/home/Services";
 import { InsuranceYears, InsuranceFinancial, Capabilities, TechEcosystem } from "@/components/home/Expertise";
@@ -10,6 +11,7 @@ import { NewsInsights, ContactSection } from "@/components/home/Closing";
 export default function Home() {
   return (
     <>
+      <LogoIntro />
       <HeroVideo /> {/* 01 */}
       <Introduction /> {/* 02 */}
       <ExperienceCounters /> {/* 03 */}

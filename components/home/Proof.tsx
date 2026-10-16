@@ -428,7 +428,7 @@ export function ProjectSpotlight() {
         {/* four steps as a connected sequence */}
         <ol className="relative mt-20 grid gap-x-5 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
           <span
-            className="absolute left-[12.5%] right-[12.5%] top-0 hidden h-px bg-gradient-to-r from-gold/0 via-gold/50 to-gold/0 lg:block"
+            className="absolute left-[12.5%] right-[12.5%] top-0 is-hidden h-px bg-gradient-to-r from-gold/0 via-gold/50 to-gold/0 lg:block"
             aria-hidden
           />
           {rre.achievements.map((a, i) => (

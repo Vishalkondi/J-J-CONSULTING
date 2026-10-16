@@ -20,8 +20,8 @@ export function ArrowButton({
       aria-label={label ?? (dir === "left" ? "Scroll left" : "Scroll right")}
       className={
         tone === "dark"
-          ? "hidden h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-white hover:bg-white/10 disabled:pointer-events-none disabled:opacity-30 sm:flex"
-          : "hidden h-11 w-11 shrink-0 items-center justify-center rounded-full border border-navy/15 bg-white text-navy shadow-[0_8px_20px_-10px_rgba(12,32,56,0.4)] transition hover:border-navy hover:bg-navy hover:text-white disabled:pointer-events-none disabled:opacity-30 sm:flex"
+          ? "is-hidden h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:border-white hover:bg-white/10 disabled:pointer-events-none disabled:opacity-30 sm:flex"
+          : "is-hidden h-11 w-11 shrink-0 items-center justify-center rounded-full border border-navy/15 bg-white text-navy shadow-[0_8px_20px_-10px_rgba(12,32,56,0.4)] transition hover:border-navy hover:bg-navy hover:text-white disabled:pointer-events-none disabled:opacity-30 sm:flex"
       }
     >
       <svg
