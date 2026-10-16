@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
-import { FeaturedCaseStudies } from "@/components/home/Proof";
+import { CaseStudyIndex } from "@/components/case-studies/CaseStudyIndex";
 import { CtaBand } from "@/components/CtaBand";
 import { pageMeta } from "@/lib/seo";
 import { images } from "@/data/howden-hx";
@@ -21,7 +21,7 @@ export default function CaseStudies() {
         intro="Selected project experience, described only as documented."
         image={images.teamDeskDashboards}
       />
-      <FeaturedCaseStudies />
+      <CaseStudyIndex />
       <CtaBand />
     </>
   );

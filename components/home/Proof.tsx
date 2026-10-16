@@ -7,7 +7,7 @@ import { CaseVisual } from "../marketing/CaseVisual";
 import { rreVisualData } from "../marketing/rre-visual";
 import { currentClients, previousClients } from "@/data/site";
 import { rre } from "@/data/renaissance-re";
-import { featuredCases } from "@/data/case-studies";
+import { featuredCases, type FeaturedCase } from "@/data/case-studies";
 
 export function CurrentClients() {
   const [w, l] = currentClients;
@@ -300,6 +300,57 @@ export function PreviousClients() {
   );
 }
 
+/**
+ * A case study's visual: its image (RenaissanceRe falls back to the drawn banner), or for logo-only
+ * case studies a branded navy panel with the client logo. `compact` = the smaller card version used
+ * in the /case-studies grid, where every visual shares one 16:10 frame.
+ */
+export function CaseThumb({ c, compact = false }: { c: FeaturedCase; compact?: boolean }) {
+  const v = c.visual;
+  if (v.kind === "image") {
+    return (
+      <SlotImage
+        src={v.src}
+        alt={v.alt}
+        className={`${compact ? "aspect-[16/10]" : (v.aspect ?? "aspect-[16/9]")} w-full transition-transform duration-700 group-hover:scale-[1.03]`}
+        fallback={
+          v.rreFallback ? (
+            <div className="absolute inset-0">
+              <CaseVisual variant="banner" data={rreVisualData} />
+            </div>
+          ) : undefined
+        }
+      />
+    );
+  }
+  return (
+    // Logo-only case studies get a branded panel (matching the RenaissanceRe banner) instead of a bare white box.
+    <div
+      className={`relative flex w-full flex-col justify-between overflow-hidden bg-gradient-to-br from-navy-700 via-navy to-midnight text-white ${
+        compact ? "aspect-[16/10] p-5" : "aspect-[16/9] rounded-2xl p-7 sm:p-10"
+      }`}
+    >
+      {/* Grid on its own layer: .blueprint is a background-image and would replace the gradient. */}
+      <div className="blueprint pointer-events-none absolute inset-0" aria-hidden />
+      <p className="label relative text-gold-light">Selected project experience</p>
+      <ClientMark
+        name={v.name}
+        logo={v.logo}
+        pad={compact ? "p-3" : "p-4"}
+        className={`relative self-center shadow-[0_20px_50px_-20px_rgba(0,0,0,0.6)] transition-transform duration-700 group-hover:scale-[1.03] ${
+          compact ? "h-16 w-40" : "h-24 w-56 sm:h-28 sm:w-64"
+        }`}
+      />
+      <div className={`relative flex items-end justify-between gap-4 border-t border-white/15 ${compact ? "pt-3" : "pt-4"}`}>
+        <span className={`font-display leading-tight ${compact ? "text-[17px]" : "text-[22px]"}`}>{v.name}</span>
+        <span className="shrink-0 font-mono text-[11px] tracking-[0.2em] text-white/60">
+          J<span className="text-gold">&amp;</span>J CONSULTING
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export function FeaturedCaseStudies({ limit }: { limit?: number }) {
   const cases = limit ? featuredCases.slice(0, limit) : featuredCases;
   return (
@@ -311,52 +362,19 @@ export function FeaturedCaseStudies({ limit }: { limit?: number }) {
         <div className="mt-16 space-y-20">
           {cases.map((c, i) => {
             const flip = i % 2 === 1;
-            const v = c.visual;
             return (
               <article
                 key={c.href}
-                className={`grid items-center gap-10 lg:grid-cols-[1.25fr_1fr] lg:gap-16 ${i > 0 ? "border-t border-navy/20 pt-16" : ""}`}
+                className={`grid items-center gap-10 lg:gap-16 ${flip ? "lg:grid-cols-[1fr_1.25fr]" : "lg:grid-cols-[1.25fr_1fr]"} ${i > 0 ? "border-t border-navy/20 pt-16" : ""}`}
               >
                 <Link
                   href={c.href}
-                  className={`group block overflow-hidden rounded-2xl ${flip ? "lg:order-1" : ""}`}
+                  className={`group block overflow-hidden rounded-2xl ${flip ? "lg:order-2" : ""}`}
                   aria-label={`${c.client} case study`}
                 >
-                  {v.kind === "image" ? (
-                    <SlotImage
-                      src={v.src}
-                      alt={v.alt}
-                      className={`${v.aspect ?? "aspect-[16/9]"} w-full transition-transform duration-700 group-hover:scale-[1.02]`}
-                      fallback={
-                        v.rreFallback ? (
-                          <div className="absolute inset-0">
-                            <CaseVisual variant="banner" data={rreVisualData} />
-                          </div>
-                        ) : undefined
-                      }
-                    />
-                  ) : (
-                    // Logo-only case studies get a branded panel (matching the RenaissanceRe banner) instead of a bare white box.
-                    <div className="relative flex aspect-[16/9] w-full flex-col justify-between overflow-hidden rounded-2xl bg-gradient-to-br from-navy-700 via-navy to-midnight p-7 text-white sm:p-10">
-                      {/* Grid on its own layer: .blueprint is a background-image and would replace the gradient. */}
-                      <div className="blueprint pointer-events-none absolute inset-0" aria-hidden />
-                      <p className="label relative text-gold-light">Selected project experience</p>
-                      <ClientMark
-                        name={v.name}
-                        logo={v.logo}
-                        pad="p-4"
-                        className="relative h-24 w-56 self-center shadow-[0_20px_50px_-20px_rgba(0,0,0,0.6)] transition-transform duration-700 group-hover:scale-[1.03] sm:h-28 sm:w-64"
-                      />
-                      <div className="relative flex items-end justify-between gap-4 border-t border-white/15 pt-4">
-                        <span className="font-display text-[22px] leading-tight">{v.name}</span>
-                        <span className="font-mono text-[11px] tracking-[0.2em] text-white/60">
-                          J<span className="text-gold">&amp;</span>J CONSULTING
-                        </span>
-                      </div>
-                    </div>
-                  )}
+                  <CaseThumb c={c} />
                 </Link>
-                <div className={flip ? "lg:order-2" : ""}>
+                <div className={flip ? "lg:order-1" : ""}>
                   <p className="label text-gold-dark">{c.label}</p>
                   <h3 className="mt-4 text-[clamp(30px,3.4vw,48px)] leading-[1.08] text-navy">
                     <span className="block">{c.client}</span>
