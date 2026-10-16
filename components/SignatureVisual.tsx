@@ -107,12 +107,18 @@ export function SignatureVisual() {
         </svg>
 
         {/* centre: brand mark */}
-        <div className="absolute left-1/2 top-1/2 flex h-[32%] w-[32%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-[6%] rounded-full border border-gold/50 bg-midnight text-center shadow-[0_0_60px_-10px_rgba(184,152,90,0.45)]">
-          <MetalIcon className="h-[30%] w-auto" />
-          <span className="font-display text-[clamp(16px,3vw,28px)] leading-none text-white">
-            J<span className="text-gold">&amp;</span>J
+        {/* Same side-by-side lockup as the navbar logo, sized in em so a font size in container units
+            (cqw) scales it with the circle. */}
+        <div className="absolute left-1/2 top-1/2 flex h-[32%] w-[32%] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-gold/50 bg-midnight shadow-[0_0_60px_-10px_rgba(184,152,90,0.45)] [container-type:size]">
+          <span className="inline-flex items-center gap-[0.5em] text-[12.5cqw] text-white" role="img" aria-label="J & J Consulting">
+            <MetalIcon className="h-[1.85em] w-auto drop-shadow-[0_0_0.5em_rgba(255,176,40,0.4)]" />
+            <span className="flex flex-col items-center font-[Cinzel,serif] leading-none" aria-hidden>
+              <span className="font-medium tracking-[0.03em]">
+                J<span className="mx-[0.17em] text-gold-metal">&amp;</span>J
+              </span>
+              <span className="mt-[0.2em] text-[0.375em] font-medium tracking-[0.24em] text-gold-metal [margin-right:-0.24em]">CONSULTING</span>
+            </span>
           </span>
-          <span className="font-mono text-[clamp(8px,1vw,9px)] tracking-[0.3em] text-white/70">CONSULTING</span>
         </div>
 
         {/* nodes */}
