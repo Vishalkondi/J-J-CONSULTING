@@ -29,7 +29,7 @@ export function Logo({ variant = "compact", tone = "light", size = "default", fi
   if (variant === "compact" && finish === "metal") {
     return (
       <span className={cn("inline-flex items-center gap-3", ink, className)} aria-label="J & J Consulting">
-        <MetalIcon className="h-10 w-auto drop-shadow-[0_0_0.6em_rgba(255,176,40,0.55)] sm:h-11" />
+        <MetalIcon className="h-10 w-auto drop-shadow-[0_0_0.5em_rgba(255,176,40,0.4)] sm:h-11" />
         <span className="flex flex-col items-center font-[Cinzel,serif] leading-none">
           <span className="text-[22px] font-medium tracking-[0.03em] sm:text-[24px]">
             J<span className="mx-[4px] text-gold-metal">&amp;</span>J

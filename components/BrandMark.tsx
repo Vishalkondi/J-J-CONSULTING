@@ -66,57 +66,25 @@ export const METAL_PATHS = {
   silver2: "M3 140H93A3 3 0 0 1 96 143V197A3 3 0 0 1 93 200H3A3 3 0 0 1 0 197V143A3 3 0 0 1 3 140Z",
 } as const;
 
+/**
+ * The gold-and-silver mark used site-wide: a cut-out of the photo-real logo artwork
+ * (assets-source/jj-mark-metal-source.png), so it carries the real brushed-metal finish.
+ * METAL_PATHS above is the matching vector outline, kept for the favicon and app/icon.svg.
+ */
 export function MetalIcon({ className }: { className?: string }) {
-  const id = useId().replace(/:/g, "");
-  const u = (n: string) => `${n}-${id}`;
-  const { gold, gold2, fold, fold2, silver, silver2 } = METAL_PATHS;
   return (
-    <svg viewBox="-2 -2 204 204" className={className} aria-hidden>
-      <defs>
-        <linearGradient id={u("au")} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#E99E1E" />
-          <stop offset="0.36" stopColor="#FFC94F" />
-          <stop offset="0.5" stopColor="#FFE594" />
-          <stop offset="0.66" stopColor="#F6B530" />
-          <stop offset="1" stopColor="#A9650A" />
-        </linearGradient>
-        <linearGradient id={u("au2")} x1="1" y1="1" x2="0" y2="0">
-          <stop offset="0" stopColor="#E99E1E" />
-          <stop offset="0.36" stopColor="#FFC94F" />
-          <stop offset="0.5" stopColor="#FFE594" />
-          <stop offset="0.66" stopColor="#F6B530" />
-          <stop offset="1" stopColor="#A9650A" />
-        </linearGradient>
-        <linearGradient id={u("fd")} x1="0" y1="1" x2="1" y2="0">
-          <stop offset="0" stopColor="#663804" />
-          <stop offset="0.55" stopColor="#B06A0C" />
-          <stop offset="1" stopColor="#F4AE2E" />
-        </linearGradient>
-        <linearGradient id={u("fd2")} x1="1" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#663804" />
-          <stop offset="0.55" stopColor="#B06A0C" />
-          <stop offset="1" stopColor="#F4AE2E" />
-        </linearGradient>
-        <linearGradient id={u("ag")} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#B4B7BC" />
-          <stop offset="0.5" stopColor="#84878D" />
-          <stop offset="1" stopColor="#55585E" />
-        </linearGradient>
-      </defs>
-      <path d={gold} fill={`url(#${u("au")})`} />
-      <path d={fold} fill={`url(#${u("fd")})`} />
-      <path d={gold2} fill={`url(#${u("au2")})`} />
-      <path d={fold2} fill={`url(#${u("fd2")})`} />
-      <path d={silver} fill={`url(#${u("ag")})`} />
-      <path d={silver2} fill={`url(#${u("ag")})`} />
-      {/* bright metal rim on every piece */}
-      {[gold, gold2].map((d) => (
-        <path key={d} d={d} fill="none" stroke="#FFE08A" strokeOpacity="0.95" strokeWidth="1.8" />
-      ))}
-      {[silver, silver2].map((d) => (
-        <path key={d} d={d} fill="none" stroke="#F5BE4A" strokeOpacity="0.9" strokeWidth="1.6" />
-      ))}
-    </svg>
+    // eslint-disable-next-line @next/next/no-img-element -- tiny static brand image, sized by CSS
+    <img
+      src="/brand/jj-mark-metal.webp"
+      srcSet="/brand/jj-mark-metal-sm.webp 160w, /brand/jj-mark-metal.webp 560w"
+      sizes="(min-width: 640px) 240px, 120px"
+      width={560}
+      height={537}
+      alt=""
+      aria-hidden
+      decoding="async"
+      className={className}
+    />
   );
 }
 
@@ -147,7 +115,7 @@ export function BrandLockup({
       aria-label={`J & J Consulting, established ${established}`}
     >
       {finish === "metal" ? (
-        <MetalIcon className="h-[7.6em] w-auto [filter:drop-shadow(0_0_0.5em_rgba(255,190,60,0.7))_drop-shadow(0_0_2em_rgba(255,160,30,0.6))]" />
+        <MetalIcon className="h-[7.6em] w-auto [filter:drop-shadow(0_0_0.6em_rgba(255,180,50,0.45))]" />
       ) : (
         <BrandIcon className="h-[6.4em] w-auto drop-shadow-[0_0.4em_0.9em_rgba(0,0,0,0.35)]" />
       )}

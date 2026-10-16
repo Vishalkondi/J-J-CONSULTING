@@ -1,4 +1,5 @@
 import { HeroVideo } from "@/components/HeroVideo";
+import { LogoBanner } from "@/components/home/LogoBanner";
 import { LogoIntro } from "@/components/LogoIntro";
 import { Introduction, ExperienceCounters } from "@/components/home/Intro";
 import { WhatWeDo } from "@/components/home/Services";
@@ -13,6 +14,7 @@ export default function Home() {
     <>
       <LogoIntro />
       <HeroVideo /> {/* 01 */}
+      <LogoBanner />
       <Introduction /> {/* 02 */}
       <ExperienceCounters /> {/* 03 */}
       <WhatWeDo /> {/* 04 */}
