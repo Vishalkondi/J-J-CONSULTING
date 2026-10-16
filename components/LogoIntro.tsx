@@ -2,7 +2,8 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
-const LANDSCAPE = "/videos/logo-intro.mp4";
+const LANDSCAPE = "/videos/logo-intro.mp4"; // 1.5 MB, fast-start; logo-intro.webm (VP9) is offered first
+const LANDSCAPE_WEBM = "/videos/logo-intro.webm";
 const PORTRAIT = "/videos/logo-intro-portrait.mp4";
 const SEEN_KEY = "jj-logo-intro-seen";
 const HOLD_MS = 900; // keep the finished lockup on screen before fading
@@ -78,7 +79,7 @@ export function LogoIntro() {
       {src && (
         <video
           ref={ref}
-          src={src}
+          src={src === PORTRAIT ? src : undefined}
           className="h-full w-full object-cover"
           muted
           playsInline
@@ -86,7 +87,15 @@ export function LogoIntro() {
           aria-label="J & J Consulting logo reveal"
           onEnded={() => window.setTimeout(dismiss, HOLD_MS)}
           onError={dismiss}
-        />
+        >
+          {src === LANDSCAPE && (
+            <>
+              <source src={LANDSCAPE_WEBM} type="video/webm" />
+              {/* Errors on <source> don't reach the video element; the last one failing means none could play. */}
+              <source src={LANDSCAPE} type="video/mp4" onError={dismiss} />
+            </>
+          )}
+        </video>
       )}
       <button
         type="button"
