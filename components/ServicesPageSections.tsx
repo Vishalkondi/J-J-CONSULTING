@@ -21,7 +21,7 @@ const principleIcons = [
 /** Five-step approach (Discover → Transform) and the four principles behind it. */
 export function ServicesApproachSteps() {
   return (
-    <section id="how-we-work" className="scroll-mt-20 bg-white py-24 md:py-32" aria-labelledby="approach-title">
+    <section id="how-we-work" className="scroll-mt-32 bg-white py-24 md:py-32" aria-labelledby="approach-title">
       <div className="wrap">
         <div id="approach-title">
           <SectionHeading
@@ -76,7 +76,7 @@ export function ServicesIndustries() {
     { label: "Insurance expertise", title: "Where we go deepest", items: insuranceExpertise },
   ];
   return (
-    <section className="blueprint relative bg-navy py-24 text-white md:py-32" aria-labelledby="industries-title">
+    <section id="industries" className="blueprint relative scroll-mt-32 bg-navy py-24 text-white md:py-32" aria-labelledby="industries-title">
       <div className="wrap">
         <div id="industries-title">
           <SectionHeading
@@ -116,7 +116,7 @@ export function ServicesIndustries() {
 /** Technology groups as cards, then the confirmed partner badges. */
 export function ServicesTechnology() {
   return (
-    <section className="bg-paper py-24 md:py-32" aria-labelledby="tech-title">
+    <section id="technology" className="scroll-mt-32 bg-paper py-24 md:py-32" aria-labelledby="tech-title">
       <div className="wrap">
         <div id="tech-title">
           <SectionHeading
@@ -152,7 +152,7 @@ export function ServicesTechnology() {
 /** The first three case studies as cards, linking through to /case-studies. */
 export function ServicesCaseStudies() {
   return (
-    <section className="bg-white py-24 md:py-32" aria-labelledby="svc-cases-title">
+    <section id="case-studies" className="scroll-mt-32 bg-white py-24 md:py-32" aria-labelledby="svc-cases-title">
       <div className="wrap">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div id="svc-cases-title">
@@ -220,7 +220,7 @@ export function ServicesStats() {
 /** The twelve business analysis and consulting capabilities that sit behind every service. */
 export function ServicesCapabilities() {
   return (
-    <section className="bg-white py-24 md:py-32" aria-labelledby="svc-cap-title">
+    <section id="capabilities" className="scroll-mt-32 bg-white py-24 md:py-32" aria-labelledby="svc-cap-title">
       <div className="wrap">
         <div id="svc-cap-title">
           <SectionHeading

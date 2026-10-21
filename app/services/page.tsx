@@ -14,7 +14,9 @@ import {
   ServicesTechnology,
 } from "@/components/ServicesPageSections";
 import { ExperienceMarquee } from "@/components/home/ExperienceMarquee";
-import { DeliveryNetwork } from "@/components/home/World";
+import { DeliveryNetwork, GlobalHubs } from "@/components/home/World";
+import { CorporateVideoSection, NewsInsights } from "@/components/home/Closing";
+import { SectionSubnav } from "@/components/SectionSubnav";
 import { pageMeta } from "@/lib/seo";
 import { services } from "@/data/site";
 import { nodeIcons } from "@/components/ServiceIcons";
@@ -26,6 +28,19 @@ export const metadata: Metadata = pageMeta({
   path: "/services",
 });
 
+
+/** Sticky in-page menu, in page order. */
+const subnav = [
+  { id: "how-we-work", label: "Approach" },
+  { id: "disciplines", label: "Services" },
+  { id: "capabilities", label: "Capabilities" },
+  { id: "industries", label: "Industries" },
+  { id: "technology", label: "Technology" },
+  { id: "case-studies", label: "Case studies" },
+  { id: "video", label: "Video" },
+  { id: "hubs", label: "Global hubs" },
+  { id: "insights", label: "Insights" },
+];
 
 const label = (node: string) => node.charAt(0) + node.slice(1).toLowerCase();
 
@@ -76,6 +91,8 @@ export default function Services() {
         </nav>
       </PageHero>
 
+      <SectionSubnav items={subnav} />
+
       <section className="blueprint relative bg-midnight py-24 text-white md:py-32">
         <div className="wrap">
           <SignatureVisual />
@@ -85,12 +102,12 @@ export default function Services() {
       <ServicesApproachSteps />
       <ServicesStats />
 
-      <section className="bg-paper py-24 md:py-32">
+      <section id="disciplines" className="scroll-mt-32 bg-paper py-24 md:py-32">
         <div className="wrap space-y-24 md:space-y-32">
           {services.map((s, i) => {
             const img = serviceHeroImages[s.slug];
             return (
-              <article key={s.slug} id={s.slug} className="grid scroll-mt-28 items-center gap-10 lg:grid-cols-2 lg:gap-20">
+              <article key={s.slug} id={s.slug} className="grid scroll-mt-36 items-center gap-10 lg:grid-cols-2 lg:gap-20">
                 <Link
                   href={`/services/${s.slug}`}
                   className={`group relative block aspect-[4/3] overflow-hidden rounded-2xl shadow-[0_30px_60px_-30px_rgba(12,32,56,0.45)] ${i % 2 ? "lg:order-2" : ""}`}
@@ -142,8 +159,17 @@ export default function Services() {
       <ServicesIndustries />
       <ServicesTechnology />
       <ServicesCaseStudies />
+      <div id="video" className="scroll-mt-32">
+        <CorporateVideoSection />
+      </div>
       <ExperienceMarquee />
+      <div id="hubs" className="scroll-mt-32">
+        <GlobalHubs />
+      </div>
       <DeliveryNetwork />
+      <div id="insights" className="scroll-mt-32">
+        <NewsInsights />
+      </div>
       <CtaBand />
     </>
   );
