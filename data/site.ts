@@ -587,37 +587,44 @@ export const experienceTimeline = [
 ];
 
 /** `video: true` once /public/videos/cities/<city>.mp4 exists — only flagged cities are requested, so no 404s. */
-export const cities: { name: string; note: string; compulsory?: boolean; video?: boolean }[] = [
+export const cities: { name: string; country: string; note: string; compulsory?: boolean; video?: boolean }[] = [
   {
     name: "London",
+    country: "United Kingdom",
     note: "The centre of the London Market and the home ground for much of our insurance and financial-services experience.",
     compulsory: true,
     video: true,
   },
   {
     name: "Frankfurt",
+    country: "Germany",
     note: "A leading European banking and insurance centre.",
   },
   {
     name: "Paris",
+    country: "France",
     note: "One of Europe's principal corporate and financial capitals.",
   },
   {
     // Photo: Patrick Federi on Unsplash (Unsplash License), https://unsplash.com/photos/DtJSERJmtDc
     name: "Zurich",
+    country: "Switzerland",
     note: "A global centre for insurance, reinsurance and private banking.",
   },
   {
     name: "Geneva",
+    country: "Switzerland",
     note: "An international hub for finance, trade and professional services.",
   },
   {
     name: "Dublin",
+    country: "Ireland",
     note: "A European centre for financial services and technology.",
   },
   {
     // Photo: mana5280 on Unsplash (Unsplash License), https://unsplash.com/photos/Ut5cOTszz_A
     name: "Amsterdam",
+    country: "Netherlands",
     note: "A financial and technology gateway to continental Europe.",
   },
 ];

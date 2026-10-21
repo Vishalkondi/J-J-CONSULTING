@@ -7,6 +7,7 @@ import { InsuranceYears, InsuranceFinancial, Capabilities, TechEcosystem } from 
 import { CurrentClients, PreviousClients, FeaturedCaseStudies, ProjectSpotlight } from "@/components/home/Proof";
 import { GlobalHubs, DeliveryNetwork, InternationalExperience } from "@/components/home/World";
 import { ExperienceMarquee } from "@/components/home/ExperienceMarquee";
+import { OldClients } from "@/components/home/OldClients";
 import { NewsInsights, ContactSection } from "@/components/home/Closing";
 
 export default function Home() {
@@ -24,6 +25,7 @@ export default function Home() {
       <Capabilities /> {/* 06 */}
       <GlobalHubs /> {/* 07 */}
       <CurrentClients /> {/* 08 */}
+      <OldClients />
       <PreviousClients /> {/* 09 */}
       <FeaturedCaseStudies limit={3} /> {/* 10 */}
       <ProjectSpotlight /> {/* 11 */}
