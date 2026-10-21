@@ -5,6 +5,7 @@ import { serviceHeroImages } from "@/data/service-images";
 import { PageHero } from "@/components/PageHero";
 import { SignatureVisual } from "@/components/SignatureVisual";
 import { CtaBand } from "@/components/CtaBand";
+import { ServicesApproachSteps, ServicesCaseStudies, ServicesIndustries, ServicesTechnology } from "@/components/ServicesPageSections";
 import { pageMeta } from "@/lib/seo";
 import { services } from "@/data/site";
 import { nodeIcons } from "@/components/ServiceIcons";
@@ -66,11 +67,13 @@ export default function Services() {
         </nav>
       </PageHero>
 
-      <section id="how-we-work" className="blueprint relative scroll-mt-20 bg-midnight py-24 text-white md:py-32">
+      <section className="blueprint relative bg-midnight py-24 text-white md:py-32">
         <div className="wrap">
           <SignatureVisual />
         </div>
       </section>
+
+      <ServicesApproachSteps />
 
       <section className="bg-paper py-24 md:py-32">
         <div className="wrap space-y-24 md:space-y-32">
@@ -125,6 +128,9 @@ export default function Services() {
           })}
         </div>
       </section>
+      <ServicesIndustries />
+      <ServicesTechnology />
+      <ServicesCaseStudies />
       <CtaBand />
     </>
   );
