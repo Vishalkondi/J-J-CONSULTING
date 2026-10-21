@@ -5,7 +5,16 @@ import { serviceHeroImages } from "@/data/service-images";
 import { PageHero } from "@/components/PageHero";
 import { SignatureVisual } from "@/components/SignatureVisual";
 import { CtaBand } from "@/components/CtaBand";
-import { ServicesApproachSteps, ServicesCaseStudies, ServicesIndustries, ServicesTechnology } from "@/components/ServicesPageSections";
+import {
+  ServicesApproachSteps,
+  ServicesCapabilities,
+  ServicesCaseStudies,
+  ServicesIndustries,
+  ServicesStats,
+  ServicesTechnology,
+} from "@/components/ServicesPageSections";
+import { ExperienceMarquee } from "@/components/home/ExperienceMarquee";
+import { DeliveryNetwork } from "@/components/home/World";
 import { pageMeta } from "@/lib/seo";
 import { services } from "@/data/site";
 import { nodeIcons } from "@/components/ServiceIcons";
@@ -74,6 +83,7 @@ export default function Services() {
       </section>
 
       <ServicesApproachSteps />
+      <ServicesStats />
 
       <section className="bg-paper py-24 md:py-32">
         <div className="wrap space-y-24 md:space-y-32">
@@ -128,9 +138,12 @@ export default function Services() {
           })}
         </div>
       </section>
+      <ServicesCapabilities />
       <ServicesIndustries />
       <ServicesTechnology />
       <ServicesCaseStudies />
+      <ExperienceMarquee />
+      <DeliveryNetwork />
       <CtaBand />
     </>
   );

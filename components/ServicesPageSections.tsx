@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { Reveal } from "./Reveal";
+import { Counter } from "./Counter";
+import { CapabilityCards } from "./CapabilityCards";
 import { SectionHeading } from "./SectionHeading";
 import { CaseThumb } from "./home/Proof";
 import { TechnologyPartners } from "./home/Expertise";
-import { approach, why } from "@/data/services-page";
-import { industries, insuranceExpertise, techGroups } from "@/data/site";
+import { approach, servicesHero, why } from "@/data/services-page";
+import { industries, insuranceExpertise, stats, techGroups } from "@/data/site";
 import { featuredCases } from "@/data/case-studies";
 
 /** Extra sections for /services, in the J & J navy-and-gold palette. All copy comes from data/. */
@@ -186,6 +188,48 @@ export function ServicesCaseStudies() {
             </li>
           ))}
         </ul>
+      </div>
+    </section>
+  );
+}
+
+/**
+ * Track-record figures for /services: the `stats` flagged servicesHero, with the per-page overrides
+ * from data/services-page.ts (e.g. 10+ years of professional experience on the services pages).
+ */
+export function ServicesStats() {
+  const figures = stats.filter((s) => s.servicesHero).map((s) => ({ ...s, ...servicesHero.statOverrides[s.label] }));
+  return (
+    <section className="blueprint relative bg-navy py-16 text-white md:py-20" aria-label="Track record">
+      <div className="wrap">
+        <dl className="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-3">
+          {figures.map((s) => (
+            <div key={s.label} className="flex flex-col bg-navy p-7 md:p-9">
+              <dt className="order-2 mt-3 text-[14.5px] leading-snug text-white/70">{s.label}</dt>
+              <dd className="order-1 font-display text-[clamp(44px,5vw,72px)] leading-none">
+                <Counter value={s.value} suffix={s.suffix} />
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  );
+}
+
+/** The twelve business analysis and consulting capabilities that sit behind every service. */
+export function ServicesCapabilities() {
+  return (
+    <section className="bg-white py-24 md:py-32" aria-labelledby="svc-cap-title">
+      <div className="wrap">
+        <div id="svc-cap-title">
+          <SectionHeading
+            eyebrow="Capabilities"
+            title="The skills behind every service"
+            intro="Clear requirements, well-understood processes, governed data and aligned stakeholders: what sits behind successful change."
+          />
+        </div>
+        <CapabilityCards className="mt-14" />
       </div>
     </section>
   );
