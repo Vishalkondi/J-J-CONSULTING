@@ -7,6 +7,7 @@ import { SignatureVisual } from "@/components/SignatureVisual";
 import { CtaBand } from "@/components/CtaBand";
 import { pageMeta } from "@/lib/seo";
 import { services } from "@/data/site";
+import { nodeIcons } from "@/components/ServiceIcons";
 
 export const metadata: Metadata = pageMeta({
   title: "Services",
@@ -31,22 +32,41 @@ export default function Services() {
         intro="Five disciplines that work together around one client need."
         image={{ src: "/images/city-skyline-dusk.jpg", alt: "" }}
       >
+        <div className="mt-10 flex flex-wrap gap-3">
+          <Link href="/contact" className="btn btn-gold">
+            Talk to us <span aria-hidden>→</span>
+          </Link>
+          <a href="#how-we-work" className="btn btn-ghost">
+            How we work <span aria-hidden>↓</span>
+          </a>
+        </div>
+
         {/* Jump straight to a discipline further down the page */}
-        <nav aria-label="Our services" className="mt-10 flex flex-wrap gap-3">
-          {services.map((s) => (
-            <a
-              key={s.slug}
-              href={`#${s.slug}`}
-              className="group inline-flex items-center gap-2.5 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-[13.5px] text-white/85 backdrop-blur-sm transition-colors hover:border-gold-light hover:text-white"
-            >
-              <span className="font-mono text-[11px] text-gold-light">{s.index}</span>
-              {label(s.node)}
-            </a>
-          ))}
+        <nav aria-label="Our services" className="mt-14 md:mt-20">
+          <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/15 bg-white/15 sm:grid-cols-3 lg:grid-cols-5">
+            {services.map((s, i) => (
+              <li key={s.slug} className={i === services.length - 1 ? "col-span-2 sm:col-span-1" : undefined}>
+                <a
+                  href={`#${s.slug}`}
+                  className="group flex h-full flex-col bg-midnight/70 p-5 backdrop-blur-sm transition-colors duration-300 hover:bg-navy/90 sm:p-6"
+                >
+                  <span className="flex items-center justify-between">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full border border-gold/40 text-gold-light transition-colors group-hover:border-gold [&_svg]:h-[18px] [&_svg]:w-[18px]" aria-hidden>
+                      {nodeIcons[s.slug]}
+                    </span>
+                    <span className="font-mono text-[11px] text-gold-light">{s.index}</span>
+                  </span>
+                  <span className="mt-5 font-display text-[19px] leading-tight text-white">{label(s.node)}</span>
+                  <span className="mt-1.5 text-[13.5px] leading-snug text-white/65">{s.short}</span>
+                  <span aria-hidden className="mt-4 block h-px w-6 bg-gold transition-all duration-500 group-hover:w-12" />
+                </a>
+              </li>
+            ))}
+          </ul>
         </nav>
       </PageHero>
 
-      <section className="blueprint relative bg-midnight py-24 text-white md:py-32">
+      <section id="how-we-work" className="blueprint relative scroll-mt-20 bg-midnight py-24 text-white md:py-32">
         <div className="wrap">
           <SignatureVisual />
         </div>

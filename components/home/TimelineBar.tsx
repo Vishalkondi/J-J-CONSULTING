@@ -5,7 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 export function TimelineBar() {
   const reduce = useReducedMotion();
   return (
-    <div className="relative mt-16" aria-label="Timeline from 2010 to today">
+    <div className="relative mt-20" aria-label="Timeline from 2010 to today">
       <div className="relative h-px bg-navy/15">
         <span
           aria-hidden
@@ -23,14 +23,14 @@ export function TimelineBar() {
       </div>
       <div className="mt-5 flex items-start justify-between">
         <div>
-          <p className="font-display text-[clamp(40px,6vw,72px)] leading-none text-navy">2010</p>
+          <p className="font-display text-[clamp(34px,4.4vw,56px)] leading-none text-navy">2010</p>
           <p className="label mt-2 text-graphite">Established</p>
         </div>
         <div className="is-hidden pt-4 text-center sm:block">
           <p className="label text-gold-dark">16+ years</p>
         </div>
         <div className="text-right">
-          <p className="font-display text-[clamp(40px,6vw,72px)] leading-none text-navy">Today</p>
+          <p className="font-display text-[clamp(34px,4.4vw,56px)] leading-none text-navy">Today</p>
           <p className="label mt-2 text-graphite">Technology · Transformation · Talent</p>
         </div>
       </div>

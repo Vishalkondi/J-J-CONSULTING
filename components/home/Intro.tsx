@@ -30,26 +30,28 @@ const why = [
 
 export function Introduction() {
   return (
-    <section id="introduction" className="scroll-mt-20 bg-paper py-24 md:py-36">
+    <section id="introduction" className="scroll-mt-20 bg-paper py-24 md:py-32">
       <div className="wrap">
         <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
           <div>
             <Reveal>
               <p className="pill bg-white text-gold-dark">Why J &amp; J Consulting</p>
-              <h2 className="mt-6 text-[clamp(38px,5vw,72px)] leading-[1.02] text-navy">Established Experience. Forward Thinking.</h2>
-              <p className="mt-7 max-w-lg text-[18px] leading-[1.7] text-graphite">
+              <h2 className="mt-6 text-[clamp(38px,5vw,68px)] leading-[1.02] text-navy">
+                Established Experience. <span className="text-gold-dark">Forward Thinking.</span>
+              </h2>
+              <p className="mt-7 max-w-xl text-[18px] leading-[1.7] text-graphite">
                 Established in 2010, J &amp; J Consulting combines technology consultancy, management consulting, specialist recruitment,
                 technology training and workforce solutions.
               </p>
             </Reveal>
-            <ul className="mt-10 space-y-5">
+            <ul className="mt-10 divide-y divide-navy/10 border-y border-navy/10">
               {why.map((w, i) => (
                 <li key={w.title}>
-                  <Reveal delay={0.08 + i * 0.06} className="flex gap-5">
-                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-navy text-gold-light">
+                  <Reveal delay={0.08 + i * 0.06} className="group flex gap-5 py-5">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gold/50 bg-white text-gold-dark transition-colors duration-300 group-hover:border-gold group-hover:bg-navy group-hover:text-gold-light">
                       <svg
-                        width="22"
-                        height="22"
+                        width="20"
+                        height="20"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -69,13 +71,23 @@ export function Introduction() {
                 </li>
               ))}
             </ul>
-            <Link href="/about" className="btn btn-navy mt-10">
-              Discover J &amp; J <span aria-hidden>→</span>
-            </Link>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Link href="/about" className="btn btn-navy">
+                Discover J &amp; J <span aria-hidden>→</span>
+              </Link>
+              <Link href="/services" className="btn btn-line">
+                Our services <span aria-hidden>→</span>
+              </Link>
+            </div>
           </div>
           <Reveal delay={0.08}>
-            <div className="relative">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl sm:aspect-[5/4] lg:aspect-[4/5]">
+            <div className="relative pb-8 lg:pb-0">
+              {/* gold offset frame behind the photo */}
+              <div
+                aria-hidden
+                className="absolute -right-3 -top-3 bottom-11 left-3 rounded-2xl border border-gold/40 sm:-right-4 sm:-top-4 lg:bottom-3"
+              />
+              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-[0_40px_80px_-40px_rgba(12,32,56,0.55)] sm:aspect-[5/4] lg:aspect-[4/5]">
                 <Image
                   src="/images/team-launch-meeting.jpg"
                   alt="A project team meeting around a launch-plan dashboard, with the City of London skyline behind"
@@ -83,9 +95,10 @@ export function Introduction() {
                   sizes="(min-width: 1024px) 45vw, 100vw"
                   className="object-cover object-[62%_center]"
                 />
+                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-midnight/45 to-transparent" aria-hidden />
               </div>
               {/* floating badge */}
-              <div className="absolute -bottom-6 left-4 flex items-center gap-4 rounded-2xl border border-navy/10 bg-white px-5 py-4 shadow-[0_20px_50px_-20px_rgba(12,32,56,0.45)] sm:left-8">
+              <div className="absolute bottom-0 left-4 flex items-center gap-4 rounded-2xl border border-navy/10 bg-white px-5 py-4 shadow-[0_20px_50px_-20px_rgba(12,32,56,0.45)] sm:left-8 lg:-bottom-6">
                 <span className="flex h-11 w-11 items-center justify-center rounded-full bg-gold/15 text-gold-dark">
                   <svg
                     width="20"
@@ -164,7 +177,7 @@ export function ExperienceCounters() {
               Experience in numbers
             </h2>
           </div>
-          <p className="max-w-sm text-[15px] leading-relaxed text-white/60">
+          <p className="max-w-sm text-[15px] leading-relaxed text-white/65">
             Built across insurance, financial services and enterprise technology since 2001.
           </p>
         </div>
@@ -172,33 +185,43 @@ export function ExperienceCounters() {
         {/* gap-px over a tinted background draws even 1px dividers with no overhanging borders */}
         <dl className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 lg:grid-cols-3">
           {stats.map((s, i) => (
-            <div key={s.label} className="group flex flex-col bg-navy p-5 transition-colors duration-300 hover:bg-navy-800 sm:p-7 md:p-9">
-              <span className="flex h-9 w-9 items-center justify-center rounded-full border border-gold/40 text-gold-light transition-colors group-hover:border-gold sm:h-11 sm:w-11">
+            <div
+              key={s.label}
+              className="group relative flex flex-col bg-navy p-5 transition-colors duration-300 hover:bg-navy-800 sm:p-7 lg:p-8"
+            >
+              <span className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-gold/40 text-gold-light transition-colors group-hover:border-gold sm:right-7 sm:top-7 sm:h-10 sm:w-10">
                 {statIcons[i]}
               </span>
-              <dt className="order-last mt-3 max-w-[260px] text-[13px] leading-snug text-white/65 sm:text-[14px]">{s.label}</dt>
-              <dd className="mt-5 font-display text-[clamp(40px,6.5vw,96px)] leading-none text-white sm:mt-7">
+              {/* Label first in the markup (dt before dd); order-* puts the figure on top visually. */}
+              <dt className="order-3 mt-3 max-w-[260px] text-[13px] leading-snug text-white/70 sm:text-[14.5px]">{s.label}</dt>
+              <dd className="order-1 pr-10 font-display text-[clamp(44px,5.4vw,80px)] leading-none text-white">
                 <Counter value={s.value} suffix={s.suffix} />
               </dd>
-              <span aria-hidden className="mt-5 block h-px w-8 bg-gold transition-all duration-500 group-hover:w-16" />
+              <span aria-hidden className="order-2 mt-4 block h-px w-8 bg-gold transition-all duration-500 group-hover:w-16 sm:mt-5" />
+              {/* The countries stat lists the country names in its own cell. */}
+              {i === stats.length - 1 && (
+                <dd className="order-4 mt-4">
+                  <span className="sr-only">Countries: </span>
+                  {/* Phones: one compact line; the chips only fit once the cells are wider. */}
+                  <p className="text-[12px] leading-relaxed text-white/80 sm:is-hidden">
+                    {countries.map((c) => c.name).join(" · ")}
+                  </p>
+                  <ul className="is-hidden flex-wrap gap-1.5 sm:flex">
+                    {countries.map((c) => (
+                      <li
+                        key={c.name}
+                        className="flex items-center gap-1.5 rounded-full border border-white/15 px-2.5 py-1 text-[11.5px] text-white/85 sm:text-[12.5px]"
+                      >
+                        <span aria-hidden className="h-1 w-1 rounded-full bg-gold" />
+                        {c.name}
+                      </li>
+                    ))}
+                  </ul>
+                </dd>
+              )}
             </div>
           ))}
         </dl>
-
-        <div className="mt-10 flex flex-col gap-5 border border-white/10 bg-white/[0.03] p-6 md:flex-row md:items-center md:gap-10 md:px-9">
-          <p className="label shrink-0 text-gold-light">International experience</p>
-          <ul className="flex flex-wrap gap-2.5">
-            {countries.map((c) => (
-              <li
-                key={c.name}
-                className="flex items-center gap-2.5 rounded-full border border-white/15 px-4 py-2 font-display text-[18px] text-white/90"
-              >
-                <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-gold" />
-                {c.name}
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
     </section>
   );
